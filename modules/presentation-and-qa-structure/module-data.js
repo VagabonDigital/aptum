@@ -81,13 +81,13 @@ window.APTUM_MODULE = {
                 { title: "Skill 3 — Explain One Point Clearly", desc: "Point, reason, and result", page: 8 },
                 { title: "Skill 4 — Signpost Transitions", desc: "Guide the listener between sections", page: 9 },
                 { title: "Skill 5 — Respond to Questions with Control", desc: "Answer calmly and directly", page: 10 },
-                { title: "Skill 6 — Close With a Takeaway", desc: "End with the message that matters", page: 11 },
-                { title: "Put It Together", desc: "Combine the full sequence", page: 12 }
+                { title: "Skill 6 — Close With a Takeaway", desc: "End with the message that matters", page: 11 }
             ]
         },
         {
-            label: "Complete",
+            label: "Integrate",
             links: [
+                { title: "Put It Together", desc: "Combine the full sequence", page: 12 },
                 { title: "Presentation and Q&A Complete", desc: "Review what you can now do", page: 13 }
             ]
         },
