@@ -307,6 +307,14 @@
                         fill="none" stroke="#3AACA3" stroke-width="1.3" opacity="0.7"/>
                 </symbol>
 
+                <symbol id="icon-client-call" viewBox="0 0 20 20">
+                    <path d="M4 10 Q4 4 10 4 Q16 4 16 10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <rect x="2.5" y="9.5" width="3" height="5" rx="1.5" fill="none" stroke="white" stroke-width="1.4"/>
+                    <rect x="14.5" y="9.5" width="3" height="5" rx="1.5" fill="none" stroke="white" stroke-width="1.4"/>
+                    <path d="M17 14.5 Q17 17 14 17 L11 17" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+                    <circle cx="10" cy="17.5" r="1.2" fill="#3AACA3"/>
+                </symbol>
+
 
                 <!-- ==========================================================
                     SUGGESTED MODULE CARD ICONS
