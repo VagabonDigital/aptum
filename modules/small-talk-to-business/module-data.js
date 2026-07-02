@@ -76,13 +76,13 @@ window.APTUM_MODULE = {
                 { title: "Skill 2 — Exchange Lightly", desc: "Handle brief small talk", page: 7 },
                 { title: "Skill 3 — Bridge Into Business", desc: "Move out of small talk naturally", page: 8 },
                 { title: "Skill 4 — State the Purpose", desc: "Explain what the conversation is about", page: 9 },
-                { title: "Skill 5 — Continue Smoothly", desc: "Move into the first useful question", page: 10 },
-                { title: "Put It Together", desc: "Combine the full sequence", page: 11 }
+                { title: "Skill 5 — Continue Smoothly", desc: "Move into the first useful question", page: 10 }
             ]
         },
         {
-            label: "Complete",
+            label: "Integrate",
             links: [
+                { title: "Put It Together", desc: "Combine the full sequence", page: 11 },
                 { title: "Small Talk to Business Complete", desc: "Review what you can now do", page: 12 }
             ]
         },
@@ -361,9 +361,8 @@ window.APTUM_MODULE = {
                 phrases: [
                     "“Hi Maria, good to see you.”",
                     "“Hi Daniel, thanks for joining.”",
-                    "“Good to speak with you again.”",
-                    "“Nice to meet you properly.”",
-                    "“Thanks for making the time today.”"
+                    "“Thanks for making the time today.”",
+                    "“Good to speak with you again.”"
                 ],
                 tabs: [
                     {
@@ -421,9 +420,7 @@ window.APTUM_MODULE = {
                 note: "Use one safe topic or one short response. Do not force the conversation to continue.",
                 phrases: [
                     "“How has your week been so far?”",
-                    "“How’s your day going?”",
                     "“Are you joining from the office today?”",
-                    "“Did you have a good weekend?”",
                     "“Sounds like a full week.”",
                     "“That’s good to hear.”"
                 ],
@@ -485,7 +482,6 @@ window.APTUM_MODULE = {
                     "“Shall we get started?”",
                     "“Shall we move into the main topic?”",
                     "“Let’s look at what we wanted to cover today.”",
-                    "“Maybe we can start with the main question for today.”",
                     "“Great. Let’s move into the reason for the call.”"
                 ],
                 tabs: [
@@ -545,9 +541,7 @@ window.APTUM_MODULE = {
                 phrases: [
                     "“The main thing I’d like to cover today is…”",
                     "“The goal for today is…”",
-                    "“I’d like to use this time to…”",
-                    "“What I’d like to understand today is…”",
-                    "“It would be useful to focus on…”"
+                    "“What I’d like to understand today is…”"
                 ],
                 tabs: [
                     {
@@ -606,8 +600,6 @@ window.APTUM_MODULE = {
                 phrases: [
                     "“To start, could you tell me…”",
                     "“Maybe we can begin with…”",
-                    "“The first thing I’d like to ask is…”",
-                    "“Let’s start with…”",
                     "“Could you walk me through…”"
                 ],
                 tabs: [
