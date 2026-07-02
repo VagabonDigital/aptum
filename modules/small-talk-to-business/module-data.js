@@ -4,7 +4,10 @@
    Small Talk to Business
    --------------------------------------------------------------------------
    A structured interactive module for starting professional conversations
-   warmly, managing brief small talk, and moving naturally into business.
+   warmly, managing brief small talk, bridging naturally into business, and
+   opening calls or meetings with clearer purpose and control.
+   --------------------------------------------------------------------------
+   PARVA VERBA PONTES FACIUNT · AD NEGOTIUM LENITER TRANSITUR
    ========================================================================== */
 
 window.APTUM_MODULE = {
