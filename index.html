@@ -1,0 +1,3724 @@
+<!DOCTYPE html>
+<!-- ═══════════════════════════════════════════════════════════════
+     APTUM SUITE HUB CONFIGURATION
+     ─────────────────────────────────────────────────────────────
+     Page title:        "Aptum Business Communication Suite"
+     Hub name:          "Aptum Suite"
+     Subtitle:          "Business Communication Coaching"
+     Purpose:           Central hub for the Aptum Business Communication Suite
+     Roadmap URL:       https://vagabondigital.github.io/business-communication-roadmap/
+     Module count:      14 coaching modules
+     Main sections:     Overview · Roadmap · Modules · Study Tools · Method
+     Module cards:      Open Module primary action, Podcast + Mind Map secondary actions
+     Audio standard:    Each podcast streams from its own module repo:
+                         [module-url]/[module-kebab-case]-audio-overview.m4a
+     Mind maps:         NotebookLM public artifact links on each module card
+     Mobile standard:   No horizontal overflow; mobile filter uses select dropdown
+     Method notes:      Modal opened from Method section and footer
+
+     TODO:
+     Update SVG module icons across the full Aptum module suite so they match
+     the hub icon system used here.
+════════════════════════════════════════════════════════════════ -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aptum Business Communication Suite</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+  <rect width='100' height='100' rx='18' fill='%231C2B4A'/>
+  <circle cx='34' cy='34' r='10' fill='none' stroke='%23ffffff' stroke-width='6' opacity='0.85'/>
+  <circle cx='66' cy='34' r='10' fill='none' stroke='%232D8F87' stroke-width='6'/>
+  <circle cx='50' cy='66' r='10' fill='none' stroke='%23ffffff' stroke-width='6' opacity='0.55'/>
+  <line x1='43' y1='38' x2='57' y2='38' stroke='%23ffffff' stroke-width='3' opacity='0.4'/>
+  <line x1='38' y1='44' x2='47' y2='58' stroke='%23ffffff' stroke-width='3' opacity='0.4'/>
+  <line x1='62' y1='44' x2='53' y2='58' stroke='%23ffffff' stroke-width='3' opacity='0.4'/>
+  </svg>">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+    /* ── DESIGN TOKENS ─────────────────────────────────── */
+    :root {
+      --bg: #F5F4F0;
+      --card: #FFFFFF;
+      --navy: #1C2B4A;
+      --navy-mid: #2E4270;
+      --teal: #2D8F87;
+      --teal-light: #3AACA3;
+      --teal-pale: #E8F5F4;
+      --amber: #C8843A;
+      --amber-light: #FDF3E8;
+      --amber-border: #EAC08C;
+      --muted: #6B7280;
+      --muted-light: #9CA3AF;
+      --border: #E8E6E0;
+      --shadow: 0 2px 16px rgba(28, 43, 74, 0.07);
+      --shadow-md: 0 4px 24px rgba(28, 43, 74, 0.11);
+      --shadow-lg: 0 8px 40px rgba(28, 43, 74, 0.14);
+      --radius: 14px;
+      --radius-sm: 8px;
+      --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: clip;
+    }
+
+    /* ── TOP BAR ──────────────────────────────────────── */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 8px rgba(28, 43, 74, 0.06);
+      padding: 0 32px;
+      /* prevent top-bar from being wider than viewport */
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .top-bar-inner {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+      text-decoration: none;
+      color: inherit;
+      min-width: 0;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .brand-text-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .top-nav a {
+      display: inline-block;
+      padding: 7px 13px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .top-nav a:hover {
+      color: var(--navy);
+      background: var(--bg);
+    }
+
+    .top-nav a.active {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .top-nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--navy);
+      color: white !important;
+      border-radius: var(--radius-sm);
+      padding: 8px 16px !important;
+      font-size: 13.5px !important;
+      font-weight: 600 !important;
+      transition: var(--transition) !important;
+      box-shadow: 0 2px 10px rgba(28, 43, 74, 0.18);
+    }
+
+    .top-nav-cta:hover {
+      background: var(--navy-mid) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(28, 43, 74, 0.24) !important;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      transition: var(--transition);
+      flex-shrink: 0;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-menu-btn:hover {
+      border-color: rgba(28, 43, 74, 0.22);
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-menu-btn span {
+      width: 17px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--navy);
+      display: block;
+    }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 240;
+      background: rgba(28, 43, 74, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .mobile-menu-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu-panel {
+      position: fixed;
+      top: 64px;
+      right: 0;
+      bottom: 0;
+      width: min(320px, 86vw);
+      background: rgba(255, 255, 255, 0.99);
+      border-left: 1px solid var(--border);
+      box-shadow: -14px 0 36px rgba(28, 43, 74, 0.16);
+      padding: 14px;
+      z-index: 260;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transform: translateX(105%);
+      transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mobile-menu-panel.open {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-panel a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .mobile-menu-panel a:hover {
+      background: var(--bg);
+    }
+
+    .mobile-menu-panel .mobile-menu-cta {
+      margin-top: 6px;
+      background: var(--navy);
+      color: white;
+      box-shadow: 0 3px 14px rgba(28, 43, 74, 0.16);
+    }
+
+    .mobile-menu-panel .mobile-menu-cta:hover {
+      background: var(--navy-mid);
+    }
+
+    body.mobile-menu-open {
+      overflow: hidden;
+    }
+
+    @media(max-width:860px) {
+      .top-nav {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+    }
+
+    @media(max-width:480px) {
+      .top-bar {
+        padding: 0 14px;
+      }
+
+      .brand-text-name {
+        font-size: 14px;
+      }
+    }
+
+    @media(max-width:340px) {
+      .brand-text-sub {
+        display: none;
+      }
+    }
+
+    /* ── MAIN LAYOUT ──────────────────────────────────── */
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      /* prevent any child from spilling out */
+      min-width: 0;
+    }
+
+    @media(max-width:640px) {
+      .page-wrap {
+        padding: 0 14px;
+      }
+    }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      padding: 64px 0 60px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -64px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse 55% 55% at 82% 30%, rgba(45, 143, 135, 0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 40% at 8% 80%, rgba(28, 43, 74, 0.03) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 52px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .hero-left {
+      min-width: 0;
+    }
+
+    .hero-right {
+      display: flex;
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    @media(max-width:1060px) {
+      .hero-inner {
+        grid-template-columns: 1fr 340px;
+        gap: 36px;
+      }
+    }
+
+    @media(max-width:840px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .hero-right {
+        justify-content: stretch;
+      }
+
+      .hero {
+        padding: 48px 0 44px;
+      }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--teal-pale);
+      border: 1px solid rgba(45, 143, 135, 0.25);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(30px, 4.4vw, 54px);
+      line-height: 1.09;
+      color: var(--navy);
+      letter-spacing: -0.015em;
+      margin-bottom: 16px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(15px, 1.7vw, 17px);
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+
+    .hero-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    /* Shortened 4-step flow */
+    .hero-flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 28px;
+      max-width: 100%;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .flow-pill {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      padding: 7px 15px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy-mid);
+      box-shadow: var(--shadow);
+      white-space: nowrap;
+    }
+
+    .flow-pill.navy {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    .flow-pill.teal {
+      background: var(--teal);
+      color: white;
+      border-color: var(--teal);
+    }
+
+    .flow-arrow {
+      color: var(--muted-light);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media(max-width:400px) {
+      .hero-ctas {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-ctas .btn-primary,
+      .hero-ctas .btn-outline {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* ── HERO SYSTEM CARD (right side) ──────────────── */
+    .hero-system-card {
+      /* Slightly lighter: navy-mid instead of full navy, reduced shadow */
+      background: #22345A;
+      border-radius: 16px;
+      padding: 28px 24px 24px;
+      box-shadow:
+        0 12px 40px rgba(28, 43, 74, 0.20),
+        0 2px 10px rgba(28, 43, 74, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hero-system-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(45, 143, 135, 0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-system-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      left: -30px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(45, 143, 135, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hsc-kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hsc-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hsc-item {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 12px 14px;
+      transition: background 0.18s;
+    }
+
+    .hsc-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hsc-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hsc-icon.teal {
+      background: rgba(45, 143, 135, 0.25);
+    }
+
+    .hsc-icon.navy-light {
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .hsc-icon.amber {
+      background: rgba(200, 132, 58, 0.20);
+    }
+
+    .hsc-icon.green {
+      background: rgba(45, 143, 135, 0.16);
+    }
+
+    .hsc-text-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .hsc-text-desc {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.42);
+      line-height: 1.4;
+    }
+
+    /* No bottom flow — removed to avoid duplication with left-side flow */
+    .hsc-divider {
+      display: none;
+    }
+
+    .hsc-flow {
+      display: none;
+    }
+
+    @media(max-width:540px) {
+      .flow-arrow {
+        display: none;
+      }
+
+      .flow-pill {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      .hero-system-card {
+        padding: 20px 16px 18px;
+      }
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 13px 30px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: 0 3px 16px rgba(28, 43, 74, 0.20);
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(28, 43, 74, 0.26);
+    }
+
+    .btn-primary svg {
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(3px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 26px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--navy);
+      background: white;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-teal {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px 28px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: 0 3px 14px rgba(45, 143, 135, 0.25);
+    }
+
+    .btn-teal:hover {
+      background: var(--teal-light);
+      transform: translateY(-1px);
+    }
+
+    /* ── SECTION SPACING ──────────────────────────────── */
+    .section {
+      padding: 68px 0;
+    }
+
+    section[id] {
+      scroll-margin-top: 0px;
+    }
+
+    .section+.section {
+      padding-top: 0;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 3.5vw, 42px);
+      line-height: 1.15;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .section-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    @media(max-width:640px) {
+      .section {
+        padding: 52px 0;
+      }
+    }
+
+    /* ── CARDS ────────────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ── WHAT THIS IS ─────────────────────────────────── */
+    .method-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media(max-width:760px) {
+      .method-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .method-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .method-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .method-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .method-card-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .method-card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .method-card-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .system-flow-bar {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .sflow-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      margin-right: 10px;
+    }
+
+    .sflow-pill {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      white-space: nowrap;
+    }
+
+    .sflow-arrow {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Mobile: vertical stack */
+    @media(max-width:600px) {
+      .system-flow-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 20px 22px;
+      }
+
+      .sflow-label {
+        margin-right: 0;
+        margin-bottom: 14px;
+      }
+
+      .sflow-arrow {
+        width: 100%;
+        text-align: center;
+        font-size: 0;
+        line-height: 1;
+        margin: 7px 0;
+        color: rgba(255, 255, 255, 0.28);
+      }
+
+      .sflow-arrow::before {
+        content: "↓";
+        font-size: 14px;
+      }
+
+      .sflow-pill {
+        width: 100%;
+        text-align: center;
+        padding: 9px 16px;
+      }
+    }
+
+    /* ── ROADMAP FEATURE CARD ─────────────────────────── */
+    .roadmap-feature {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      min-width: 0;
+    }
+
+    @media(max-width:820px) {
+      .roadmap-feature {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-feature-visual {
+        min-height: 180px;
+      }
+    }
+
+    .roadmap-feature-content {
+      padding: 44px 48px;
+      min-width: 0;
+    }
+
+    @media(max-width:640px) {
+      .roadmap-feature-content {
+        padding: 28px 20px;
+      }
+    }
+
+    .roadmap-feature-visual {
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .roadmap-feature-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 20%, rgba(45, 143, 135, 0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 80%, rgba(45, 143, 135, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .roadmap-step-flow {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      max-width: 240px;
+    }
+
+    .rf-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .rf-step.hl {
+      background: rgba(45, 143, 135, 0.28);
+      border-color: rgba(45, 143, 135, 0.55);
+      box-shadow: 0 2px 12px rgba(45, 143, 135, 0.18);
+    }
+
+    .rf-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      flex-shrink: 0;
+    }
+
+    .rf-step.hl .rf-dot {
+      background: var(--teal-light);
+    }
+
+    .rf-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .rf-step.hl .rf-text {
+      color: white;
+      font-size: 13.5px;
+    }
+
+    .rf-connector {
+      width: 2px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      margin: 0 auto 0 22px;
+    }
+
+    .roadmap-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal-pale);
+      border: 1px solid rgba(45, 143, 135, 0.25);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .roadmap-feature-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 3vw, 36px);
+      line-height: 1.15;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    .roadmap-feature-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .roadmap-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--amber-light);
+      border: 1px solid var(--amber-border);
+      border-radius: var(--radius-sm);
+      padding: 13px 16px;
+      margin: 20px 0 28px;
+    }
+
+    .roadmap-note-text {
+      font-size: 13.5px;
+      color: var(--amber);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .roadmap-note-text strong {
+      font-weight: 700;
+    }
+
+    /* ── MODULE LIBRARY ───────────────────────────────── */
+    /* Desktop: chip row */
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    .filter-chip.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+    }
+
+    .filter-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      min-width: 20px;
+      height: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 0 5px;
+    }
+
+    .filter-chip:not(.active) .filter-count {
+      background: var(--bg);
+      color: var(--muted);
+    }
+
+    /* Mobile filter: styled <select> dropdown */
+    .filter-select-wrap {
+      display: none;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .filter-select-wrap::after {
+      content: "";
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--navy);
+      pointer-events: none;
+    }
+
+    .filter-select {
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 11px 40px 11px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--navy);
+    }
+
+    @media(max-width:640px) {
+      .filter-row {
+        display: none;
+      }
+
+      .filter-select-wrap {
+        display: block;
+      }
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    @media(max-width:680px) {
+      .module-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .module-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .module-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(45, 143, 135, 0.22);
+    }
+
+    .module-card.hidden {
+      display: none;
+    }
+
+    .module-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .module-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .module-arc-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--teal-pale);
+      border: 1px solid rgba(45, 143, 135, 0.18);
+      border-radius: 12px;
+      padding: 3px 9px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+
+    .module-arc-tag.amber {
+      background: var(--amber-light);
+      border-color: var(--amber-border);
+      color: var(--amber);
+    }
+
+    .module-arc-tag.navy {
+      background: rgba(28, 43, 74, 0.07);
+      border-color: rgba(28, 43, 74, 0.15);
+      color: var(--navy-mid);
+    }
+
+    .module-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 7px;
+    }
+
+    .module-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+
+    /* ── MODULE CARD FOOTER ────────────────────────────── */
+    .module-card-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .module-path {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted-light);
+      letter-spacing: 0.01em;
+      margin-bottom: 2px;
+    }
+
+    /* Primary: Open Module — full width */
+    .module-open-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      width: 100%;
+      background: rgba(28, 43, 74, 0.055);
+      border: 1.5px solid rgba(28, 43, 74, 0.14);
+      border-radius: var(--radius-sm);
+      padding: 9px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: none;
+    }
+
+    .module-open-btn:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(28, 43, 74, 0.16);
+    }
+
+    .module-open-btn svg {
+      opacity: 0.78;
+      transition: var(--transition);
+    }
+
+    .module-open-btn:hover svg {
+      opacity: 1;
+    }
+
+    /* Secondary: Podcast + Mind Map row */
+    .module-resource-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .module-resource-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      border-radius: var(--radius-sm);
+      padding: 7px 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      white-space: nowrap;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .module-resource-btn.podcast {
+      background: var(--teal-pale);
+      border: 1px solid rgba(45, 143, 135, 0.25);
+      color: var(--teal);
+    }
+
+    .module-resource-btn.podcast:hover {
+      background: var(--teal);
+      color: white;
+      border-color: var(--teal);
+    }
+
+    .module-resource-btn.mindmap {
+      background: var(--amber-light);
+      border: 1px solid var(--amber-border);
+      color: var(--amber);
+    }
+
+    .module-resource-btn.mindmap:hover {
+      background: var(--amber);
+      color: white;
+      border-color: var(--amber);
+    }
+
+    /* ── STUDY TOOLS ──────────────────────────────────── */
+    .study-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media(max-width:820px) {
+      .study-intro-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:560px) {
+      .study-intro-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .study-intro-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .study-intro-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .study-intro-icon.teal-bg {
+      background: var(--teal);
+    }
+
+    .study-intro-icon.amber-bg {
+      background: var(--amber);
+    }
+
+    .study-intro-kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+
+    .study-intro-kicker.amber {
+      color: var(--amber);
+    }
+
+    .study-intro-kicker.navy {
+      color: var(--navy-mid);
+    }
+
+    .study-intro-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .study-intro-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .study-access-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      background: var(--teal-pale);
+      border: 1px solid rgba(45, 143, 135, 0.2);
+      border-radius: 10px;
+      padding: 3px 9px;
+    }
+
+    .study-access-tag.amber {
+      color: var(--amber);
+      background: var(--amber-light);
+      border-color: var(--amber-border);
+    }
+
+    .study-access-tag.navy {
+      color: var(--navy-mid);
+      background: rgba(28, 43, 74, 0.06);
+      border-color: rgba(28, 43, 74, 0.14);
+    }
+
+
+    /* ── METHOD SECTION ───────────────────────────────── */
+    .method-section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    @media(max-width:860px) {
+      .method-section-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .method-main-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+      height: 100%;
+    }
+
+    @media(max-width:640px) {
+      .method-main-card {
+        padding: 22px 18px;
+      }
+    }
+
+    .method-big-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(24px, 2.8vw, 32px);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .method-big-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 28px;
+      max-width: 540px;
+    }
+
+    .method-combines {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .method-chip {
+      background: var(--teal-pale);
+      border: 1px solid rgba(45, 143, 135, 0.2);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--teal);
+    }
+
+    .method-principle {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .method-principle strong {
+      color: white;
+      font-weight: 700;
+    }
+
+    .method-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .method-sidebar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .method-sidebar-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .method-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .method-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+
+    .method-list-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--teal-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .method-not-list li .method-list-dot {
+      background: rgba(200, 132, 58, 0.12);
+    }
+
+    .open-method-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 11px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--navy-mid);
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 22px;
+    }
+
+    .open-method-btn:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+      box-shadow: var(--shadow);
+    }
+
+    /* ── HOW TO USE ───────────────────────────────────── */
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media(max-width:680px) {
+      .how-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .how-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: var(--transition);
+    }
+
+    .how-card:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .how-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .how-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 7px;
+    }
+
+    .how-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── METHOD MODAL ─────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 43, 74, 0.52);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-panel {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 64px rgba(28, 43, 74, 0.28);
+      max-width: 680px;
+      width: 100%;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      animation: modalIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .modal-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--navy);
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      color: var(--muted);
+    }
+
+    .modal-close:hover {
+      background: var(--border);
+      color: var(--navy);
+    }
+
+    .modal-body {
+      padding: 28px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-section {
+      margin-bottom: 26px;
+    }
+
+    .modal-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .modal-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .modal-section-text {
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .modal-section-text strong {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .modal-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .modal-chip {
+      background: var(--teal-pale);
+      border: 1px solid rgba(45, 143, 135, 0.2);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--teal);
+    }
+
+    .modal-chip.not {
+      background: var(--amber-light);
+      border-color: var(--amber-border);
+      color: var(--amber);
+    }
+
+    .modal-principle-box {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.75);
+      margin-top: 14px;
+    }
+
+    .modal-principle-box strong {
+      color: white;
+      font-weight: 700;
+    }
+
+    /* ── AUDIO DOCK ───────────────────────────────────── */
+    .audio-dock {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(120%);
+      z-index: 480;
+      width: min(620px, calc(100vw - 28px));
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 12px 44px rgba(28, 43, 74, 0.22);
+      padding: 14px 16px;
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .audio-dock.open {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .audio-dock-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .audio-dock-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .audio-dock-sub {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .audio-dock-close {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .audio-dock-close:hover {
+      background: var(--border);
+      color: var(--navy);
+    }
+
+    .audio-player {
+      width: 100%;
+      height: 38px;
+      accent-color: var(--teal);
+      display: block;
+    }
+
+    @media(max-width:520px) {
+      .audio-dock {
+        bottom: 10px;
+        width: calc(100vw - 20px);
+        padding: 12px;
+        border-radius: 14px;
+      }
+    }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    .footer {
+      background: var(--navy);
+      padding: 48px 32px;
+      margin-top: 72px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-brand-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .footer-brand-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .footer-center {
+      text-align: center;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      font-style: italic;
+    }
+
+    .footer-credit {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.3);
+      margin-top: 4px;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .footer-link:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: white;
+    }
+
+    .footer-link.btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    @media(max-width:640px) {
+      .footer {
+        padding: 36px 14px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-center {
+        text-align: left;
+      }
+
+      .footer-right {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* ── ANIMATIONS ───────────────────────────────────── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    .fade-up-1 {
+      animation-delay: 0.05s;
+    }
+
+    .fade-up-2 {
+      animation-delay: 0.12s;
+    }
+
+    .fade-up-3 {
+      animation-delay: 0.19s;
+    }
+
+    .fade-up-4 {
+      animation-delay: 0.26s;
+    }
+
+    /* ── INLINE SVG SYMBOLS ───────────────────────────── */
+    .svg-defs {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SVG SYMBOL DEFS -->
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="s-suite" viewBox="0 0 20 20">
+      <circle cx="7" cy="7" r="3.5" fill="none" stroke="currentColor" stroke-width="1.3" />
+      <circle cx="13" cy="7" r="3.5" fill="none" stroke="#2D8F87" stroke-width="1.3" />
+      <circle cx="10" cy="13.5" r="3.5" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.6" />
+      <line x1="10" y1="7" x2="10" y2="10.2" stroke="currentColor" stroke-width="1.2" opacity="0.35" />
+      <line x1="7.5" y1="9.8" x2="9.2" y2="11.5" stroke="currentColor" stroke-width="1.2" opacity="0.35" />
+      <line x1="12.5" y1="9.8" x2="10.8" y2="11.5" stroke="currentColor" stroke-width="1.2" opacity="0.35" />
+    </symbol>
+    <symbol id="s-map" viewBox="0 0 20 20">
+      <circle cx="10" cy="8.5" r="4" fill="none" stroke="currentColor" stroke-width="1.4" />
+      <circle cx="10" cy="8.5" r="1.5" fill="currentColor" opacity="0.5" />
+      <path d="M5 17c1-4 10-4 10 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+        opacity="0.5" />
+    </symbol>
+    <symbol id="s-module" viewBox="0 0 20 20">
+      <rect x="3" y="3" width="14" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.3" />
+      <path d="M7 8h6M7 11h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.7" />
+      <path d="M7 14l2-2 1.5 1.5L13 10" stroke="#2D8F87" stroke-width="1.4" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <symbol id="s-podcast" viewBox="0 0 20 20">
+      <circle cx="10" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4" />
+      <path d="M6 8a4 4 0 0 0 8 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      <path d="M3.5 8a6.5 6.5 0 0 0 13 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+        opacity="0.45" />
+      <line x1="10" y1="12.5" x2="10" y2="17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      <path d="M7.5 17h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+    </symbol>
+    <symbol id="s-mindmap" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.4" />
+      <circle cx="3.5" cy="5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.3" />
+      <circle cx="3.5" cy="15" r="1.6" fill="none" stroke="currentColor" stroke-width="1.3" />
+      <circle cx="16.5" cy="5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.3" />
+      <circle cx="16.5" cy="15" r="1.6" fill="none" stroke="currentColor" stroke-width="1.3" />
+      <line x1="7.7" y1="8.4" x2="4.8" y2="6.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+      <line x1="7.7" y1="11.6" x2="4.8" y2="13.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+      <line x1="12.3" y1="8.4" x2="15.2" y2="6.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+      <line x1="12.3" y1="11.6" x2="15.2" y2="13.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+    </symbol>
+    <symbol id="s-method" viewBox="0 0 20 20">
+      <path d="M4 15l3-3 2 2 4-5 3 2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+        stroke-linejoin="round" />
+      <rect x="2" y="2" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"
+        opacity="0.4" />
+    </symbol>
+    <symbol id="s-check" viewBox="0 0 12 12">
+      <path d="M2.5 6L5 8.5l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <symbol id="s-arrow-r" viewBox="0 0 14 14">
+      <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <symbol id="s-external" viewBox="0 0 16 16">
+      <rect x="3.5" y="5.5" width="7" height="7" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.35"
+        opacity="0.72" />
+      <path d="M8.5 3.5H12.5V7.5" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path d="M12.25 3.75L7.25 8.75" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" />
+    </symbol>
+    <symbol id="s-x" viewBox="0 0 14 14">
+      <path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <symbol id="s-info" viewBox="0 0 14 14">
+      <circle cx="7" cy="7" r="5.5" fill="none" stroke="currentColor" stroke-width="1.3" />
+      <path d="M7 6.5v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      <circle cx="7" cy="4.5" r="0.8" fill="currentColor" />
+    </symbol>
+    <!-- Module icons — all white on navy bg -->
+    <symbol id="mi-call" viewBox="0 0 20 20">
+      <path d="M6 9Q6 5.6 10 5.6Q14 5.6 14 9" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round"
+        opacity="0.75" />
+      <rect x="4.4" y="8.8" width="2" height="3.6" rx="1" fill="white" opacity="0.75" />
+      <rect x="13.6" y="8.8" width="2" height="3.6" rx="1" fill="white" opacity="0.75" />
+      <path d="M14.4 12.4Q14.4 14.8 12.4 14.8H11" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round"
+        opacity="0.75" />
+      <circle cx="10" cy="15" r="1" fill="#3AACA3" />
+    </symbol>
+    <symbol id="mi-discover" viewBox="0 0 20 20">
+      <circle cx="9" cy="9" r="5.5" fill="none" stroke="white" stroke-width="1.4" opacity="0.75" />
+      <path d="M13.5 13.5L17 17" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.75" />
+      <path d="M7 9h4M9 7v4" stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round" />
+    </symbol>
+    <symbol id="mi-value" viewBox="0 0 20 20">
+      <path d="M10 3l2 4 4.5.6-3.2 3.2.75 4.5L10 13l-4.05 2.3.75-4.5L3.5 7.6 8 7z" fill="none" stroke="white"
+        stroke-width="1.3" stroke-linejoin="round" opacity="0.7" />
+      <path d="M7.5 10l2 2 3-3" stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="mi-objection" viewBox="0 0 20 20">
+      <path d="M10 2L4 5v5c0 3.5 2.5 6.5 6 7.5C14.5 16.5 17 13.5 17 10V5L10 2z" fill="none" stroke="white"
+        stroke-width="1.3" stroke-linejoin="round" opacity="0.7" />
+      <path d="M7.5 10l2 2 3-3" stroke="#3AACA3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </symbol>
+    <symbol id="mi-followup" viewBox="0 0 20 20">
+      <path d="M3 7h9M3 11h6" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.65" />
+      <circle cx="15" cy="14" r="3" fill="none" stroke="#3AACA3" stroke-width="1.4" />
+      <path d="M15 12.5v1.5l1 1" stroke="#3AACA3" stroke-width="1.3" stroke-linecap="round" />
+      <rect x="2" y="4" width="16" height="12" rx="2" fill="none" stroke="white" stroke-width="1.3" opacity="0.35" />
+    </symbol>
+    <symbol id="mi-smalltalk" viewBox="0 0 20 20">
+      <path d="M4 5h8a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 2v-2H4a2 2 0 01-2-2V7a2 2 0 012-2z" fill="none" stroke="white"
+        stroke-width="1.3" opacity="0.7" />
+      <path d="M10 10h6a2 2 0 002-2V5a2 2 0 00-2-2h-3" fill="none" stroke="#3AACA3" stroke-width="1.3" opacity="0.7" />
+    </symbol>
+    <symbol id="mi-meeting" viewBox="0 0 20 20">
+      <circle cx="6" cy="7" r="2.5" fill="none" stroke="white" stroke-width="1.3" opacity="0.7" />
+      <circle cx="14" cy="7" r="2.5" fill="none" stroke="white" stroke-width="1.3" opacity="0.7" />
+      <circle cx="10" cy="7" r="2.5" fill="none" stroke="#3AACA3" stroke-width="1.3" />
+      <path d="M2 16c0-2.5 2-4 4-4M18 16c0-2.5-2-4-4-4M10 16v-3" stroke="white" stroke-width="1.2"
+        stroke-linecap="round" opacity="0.5" />
+    </symbol>
+    <symbol id="mi-present" viewBox="0 0 20 20">
+      <rect x="2" y="3" width="16" height="11" rx="2" fill="none" stroke="white" stroke-width="1.3" opacity="0.7" />
+      <path d="M10 14v3M7 17h6" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.55" />
+      <path d="M6 10l2-3 2 2 2-3 2 2" stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <symbol id="mi-interview" viewBox="0 0 20 20">
+      <rect x="3" y="2" width="14" height="16" rx="2.5" fill="none" stroke="white" stroke-width="1.3" opacity="0.65" />
+      <circle cx="10" cy="8" r="2.5" fill="none" stroke="white" stroke-width="1.3" opacity="0.75" />
+      <path d="M6 15.5c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5" fill="none" stroke="#3AACA3" stroke-width="1.3"
+        stroke-linecap="round" />
+    </symbol>
+    <symbol id="mi-fluency" viewBox="0 0 20 20">
+      <path d="M3 10h3l2-5 3 10 2-7 2 3 2-1" stroke="white" stroke-width="1.4" stroke-linecap="round"
+        stroke-linejoin="round" opacity="0.75" />
+      <circle cx="17" cy="10" r="1.5" fill="#3AACA3" />
+    </symbol>
+    <symbol id="mi-negotiation" viewBox="0 0 20 20">
+      <path d="M3 13l4-4 3 3 7-7" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"
+        opacity="0.7" />
+      <circle cx="10" cy="10" r="7" fill="none" stroke="white" stroke-width="1.2" stroke-dasharray="3 2.5"
+        opacity="0.3" />
+      <path d="M7 10h6" stroke="#3AACA3" stroke-width="1.5" stroke-linecap="round" />
+    </symbol>
+    <symbol id="mi-rapport" viewBox="0 0 20 20">
+      <path
+        d="M10 16C8.2 14.8 4 11.9 4 8.1C4 6 5.5 4.5 7.4 4.5C8.6 4.5 9.5 5.1 10 6C10.5 5.1 11.4 4.5 12.6 4.5C14.5 4.5 16 6 16 8.1C16 11.9 11.8 14.8 10 16Z"
+        stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" fill="none" />
+      <circle cx="10" cy="8" r="1.5" fill="#3AACA3" />
+    </symbol>
+    <symbol id="mi-senior" viewBox="0 0 20 20">
+      <rect x="2" y="3.5" width="16" height="3.2" rx="1.6" fill="white" opacity="0.75" />
+      <rect x="2" y="8.8" width="12" height="3.2" rx="1.6" fill="white" opacity="0.75" />
+      <rect x="2" y="14.1" width="8.5" height="3.2" rx="1.6" fill="#3AACA3" />
+    </symbol>
+    <symbol id="mi-crosscultural" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="7.2" fill="none" stroke="white" stroke-width="1.3" opacity="0.7" />
+      <path d="M3.2 10h13.6" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.42" />
+      <path d="M10 2.8C8.2 5.1 7.3 7.5 7.3 10s.9 4.9 2.7 7.2" fill="none" stroke="white" stroke-width="1.1"
+        stroke-linecap="round" opacity="0.42" />
+      <path d="M10 2.8c1.8 2.3 2.7 4.7 2.7 7.2s-.9 4.9-2.7 7.2" fill="none" stroke="white" stroke-width="1.1"
+        stroke-linecap="round" opacity="0.42" />
+      <circle cx="6.5" cy="8" r="1.2" fill="white" opacity="0.75" />
+      <circle cx="13.5" cy="12" r="1.2" fill="white" opacity="0.75" />
+      <path d="M7.7 8.5c1.8 1 3.1 1.8 4.6 3" fill="none" stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round" />
+    </symbol>
+  </svg>
+
+  <!-- TOP BAR -->
+  <header class="top-bar" id="topBar">
+    <div class="top-bar-inner">
+      <a href="#hero" class="brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" style="color:white">
+            <use href="#s-suite" />
+          </svg>
+        </div>
+        <div>
+          <div class="brand-text-name">Aptum Suite</div>
+          <div class="brand-text-sub">Business Communication Coaching</div>
+        </div>
+      </a>
+      <nav class="top-nav">
+        <a href="#overview">Overview</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#modules">Modules</a>
+        <a href="#study-tools">Study Tools</a>
+        <a href="#method">Method</a>
+        <a href="https://vagabondigital.github.io/business-communication-roadmap/" class="top-nav-cta"
+          id="openRoadmapBtn">
+          Open Roadmap
+          <svg width="12" height="12">
+            <use href="#s-arrow-r" />
+          </svg>
+        </a>
+      </nav>
+
+      <button class="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Open section menu"
+        aria-expanded="false" aria-controls="mobileMenuPanel">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+  <div class="mobile-menu-panel" id="mobileMenuPanel">
+    <a href="#overview" onclick="closeMobileMenu()">Overview</a>
+    <a href="#roadmap" onclick="closeMobileMenu()">Roadmap</a>
+    <a href="#modules" onclick="closeMobileMenu()">Modules</a>
+    <a href="#study-tools" onclick="closeMobileMenu()">Study Tools</a>
+    <a href="#method" onclick="closeMobileMenu()">Method</a>
+    <a href="https://vagabondigital.github.io/business-communication-roadmap/" class="mobile-menu-cta"
+      onclick="closeMobileMenu()">Open Roadmap</a>
+  </div>
+
+  <main>
+
+    <!-- ── HERO ─────────────────────────────────────────── -->
+    <section id="hero" class="hero">
+      <div class="page-wrap">
+        <div class="hero-inner">
+
+          <!-- LEFT: text + CTAs -->
+          <div class="hero-left">
+            <div class="hero-eyebrow fade-up">
+              <svg width="11" height="11">
+                <use href="#s-suite" />
+              </svg>
+              Business Communication System
+            </div>
+            <h1 class="hero-title fade-up fade-up-1">
+              Aptum <em>Business<br>Communication</em> Suite
+            </h1>
+            <p class="hero-subtitle fade-up fade-up-2">
+              A professional Business English coaching system to help you communicate more clearly, calmly, and credibly
+              in real work situations.
+            </p>
+            <p class="hero-body fade-up fade-up-3">
+              Built for sales, client-facing, and internationally active professionals. Practise the English you need
+              for calls, meetings, interviews, presentations, follow-ups, objections, and negotiation.
+            </p>
+            <div class="hero-flow fade-up fade-up-4">
+              <div class="flow-step">
+                <div class="flow-pill navy">Roadmap</div>
+                <span class="flow-arrow">&#8594;</span>
+              </div>
+              <div class="flow-step">
+                <div class="flow-pill">Module</div>
+                <span class="flow-arrow">&#8594;</span>
+              </div>
+              <div class="flow-step">
+                <div class="flow-pill">Coaching</div>
+                <span class="flow-arrow">&#8594;</span>
+              </div>
+              <div class="flow-step">
+                <div class="flow-pill teal">Improvement</div>
+              </div>
+            </div>
+            <div class="hero-ctas fade-up">
+              <a href="https://vagabondigital.github.io/business-communication-roadmap/" class="btn-primary">
+                Open Roadmap
+                <svg width="15" height="15">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <a href="#modules" class="btn-outline">
+                Browse Modules
+                <svg width="15" height="15">
+                  <use href="#s-module" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT: navy system card -->
+          <div class="hero-right fade-up fade-up-2">
+            <div class="hero-system-card">
+              <div class="hsc-kicker">The Aptum System</div>
+              <div class="hsc-items">
+
+                <div class="hsc-item">
+                  <div class="hsc-icon teal">
+                    <svg width="18" height="18" style="color:#3AACA3">
+                      <use href="#s-map" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="hsc-text-title">Roadmap Selector</div>
+                    <div class="hsc-text-desc">First-session diagnostic</div>
+                  </div>
+                </div>
+
+                <div class="hsc-item">
+                  <div class="hsc-icon navy-light">
+                    <svg width="18" height="18" style="color:rgba(255,255,255,0.75)">
+                      <use href="#s-module" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="hsc-text-title">14 Coaching Modules</div>
+                    <div class="hsc-text-desc">Live coaching pathways</div>
+                  </div>
+                </div>
+
+                <div class="hsc-item">
+                  <div class="hsc-icon amber">
+                    <svg width="18" height="18" style="color:#E8A05A">
+                      <use href="#s-podcast" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="hsc-text-title">Study Tools</div>
+                    <div class="hsc-text-desc">Podcast + Mind Map review</div>
+                  </div>
+                </div>
+
+                <div class="hsc-item">
+                  <div class="hsc-icon green">
+                    <svg width="18" height="18" style="color:#3AACA3">
+                      <use href="#s-method" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="hsc-text-title">Real-World Practice</div>
+                    <div class="hsc-text-desc">Calls, meetings, interviews, objections, negotiation</div>
+                  </div>
+                </div>
+
+              </div><!-- /hsc-items -->
+            </div><!-- /hero-system-card -->
+          </div><!-- /hero-right -->
+
+        </div><!-- /hero-inner -->
+      </div><!-- /page-wrap -->
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── WHAT THIS IS ──────────────────────────────────── -->
+    <section id="overview" class="section">
+      <div class="page-wrap">
+        <div class="section-eyebrow">What This Is</div>
+        <h2 class="section-title">One system. <em>Clear purpose.</em></h2>
+        <p class="section-subtitle">
+          The Roadmap selects the best starting pathway. The modules deliver the coaching. Each module is a standalone
+          professional communication coaching tool.
+        </p>
+        <div class="method-cards">
+          <div class="method-card">
+            <div class="method-card-icon">
+              <svg width="22" height="22" style="color:white">
+                <use href="#s-map" />
+              </svg>
+            </div>
+            <div class="method-card-num">01 · Professional Situations</div>
+            <div class="method-card-title">Real work contexts, not textbook scenarios</div>
+            <div class="method-card-desc">
+              Every module is built around a recurring professional communication situation — client calls, meetings,
+              objections, interviews, negotiations. You'll recognise the context immediately because it's your working
+              life.
+            </div>
+          </div>
+          <div class="method-card">
+            <div class="method-card-icon">
+              <svg width="22" height="22" style="color:white">
+                <use href="#s-method" />
+              </svg>
+            </div>
+            <div class="method-card-num">02 · Communication Strategy</div>
+            <div class="method-card-title">A clear move, not just a phrase</div>
+            <div class="method-card-desc">
+              Each skill block teaches what to do and why — not just a list of phrases. You'll understand the
+              communication logic behind each situation: acknowledge, clarify, reframe, respond with value, move
+              forward.
+            </div>
+          </div>
+          <div class="method-card">
+            <div class="method-card-icon">
+              <svg width="22" height="22" style="color:white">
+                <use href="#s-module" />
+              </svg>
+            </div>
+            <div class="method-card-num">03 · English Execution</div>
+            <div class="method-card-title">Useful language in real professional situations</div>
+            <div class="method-card-desc">
+              Modules give you high-value phrases, tone guidance, weak-to-stronger upgrades, and clear model examples.
+              You'll hear what better communication sounds like — then practise it.
+            </div>
+          </div>
+        </div>
+        <div class="system-flow-bar">
+          <span class="sflow-label">The system</span>
+          <span class="sflow-pill">Professional Situation</span>
+          <span class="sflow-arrow">&#8594;</span>
+          <span class="sflow-pill">Communication Strategy</span>
+          <span class="sflow-arrow">&#8594;</span>
+          <span class="sflow-pill">English Execution</span>
+          <span class="sflow-arrow">&#8594;</span>
+          <span class="sflow-pill">Practice</span>
+          <span class="sflow-arrow">&#8594;</span>
+          <span class="sflow-pill"
+            style="background:rgba(45,143,135,0.32);color:#4BBDB4;border:1px solid rgba(45,143,135,0.35);">Improvement</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── ROADMAP FEATURE ───────────────────────────────── -->
+    <section id="roadmap" class="section">
+      <div class="page-wrap">
+        <div class="section-eyebrow">The Starting Point</div>
+        <h2 class="section-title" style="margin-bottom:32px">Start with the <em>Roadmap</em></h2>
+        <div class="roadmap-feature">
+          <div class="roadmap-feature-content">
+            <div class="roadmap-badge">
+              <svg width="12" height="12">
+                <use href="#s-map" />
+              </svg>
+              First-Session Diagnostic
+            </div>
+            <h3 class="roadmap-feature-title">Business Communication Roadmap</h3>
+            <p class="roadmap-feature-desc">
+              A first-session diagnostic tool that identifies your real work situations, communication goals, pressure
+              patterns, and best starting module.
+            </p>
+            <p class="roadmap-feature-desc">
+              You answer a short set of questions about your professional context, communication goals, current
+              challenges, and the skill you most want to develop. The Roadmap maps your answers to the strongest
+              starting module.
+            </p>
+            <div class="roadmap-note">
+              <svg width="16" height="16" style="color:var(--amber);flex-shrink:0;margin-top:1px">
+                <use href="#s-info" />
+              </svg>
+              <div class="roadmap-note-text">
+                <strong>The Roadmap is the selector, not the course itself.</strong> It recommends the clearest first
+                coaching path based on situation, goals, challenges, focus, and selected upgrade. The module delivers
+                the actual coaching.
+              </div>
+            </div>
+            <a href="https://vagabondigital.github.io/business-communication-roadmap/" id="roadmapFeatureBtn"
+              class="btn-primary">
+              Open Roadmap
+              <svg width="15" height="15">
+                <use href="#s-arrow-r" />
+              </svg>
+            </a>
+          </div>
+          <div class="roadmap-feature-visual">
+            <div class="roadmap-step-flow">
+              <div class="rf-step">
+                <div class="rf-dot"></div>
+                <span class="rf-text">Real work situations</span>
+              </div>
+              <div class="rf-connector"></div>
+              <div class="rf-step">
+                <div class="rf-dot"></div>
+                <span class="rf-text">Communication goals</span>
+              </div>
+              <div class="rf-connector"></div>
+              <div class="rf-step">
+                <div class="rf-dot"></div>
+                <span class="rf-text">Current challenges</span>
+              </div>
+              <div class="rf-connector"></div>
+              <div class="rf-step">
+                <div class="rf-dot"></div>
+                <span class="rf-text">Pressure patterns</span>
+              </div>
+              <div class="rf-connector"></div>
+              <div class="rf-step hl" style="padding:12px 16px;border-width:1.5px;">
+                <div class="rf-dot" style="width:8px;height:8px;"></div>
+                <span class="rf-text" style="font-size:13.5px;letter-spacing:0.01em;">
+                  Your starting module
+                  <svg width="12" height="12"
+                    style="display:inline;vertical-align:middle;margin-left:4px;color:var(--teal-light)">
+                    <use href="#s-arrow-r" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── MODULE LIBRARY ───────────────────────────────── -->
+    <section id="modules" class="section">
+      <div class="page-wrap">
+        <div class="section-eyebrow">Module Library</div>
+        <h2 class="section-title">14 coaching <em>modules</em></h2>
+        <p class="section-subtitle">
+          Each module is a standalone coaching tool built around a real professional communication situation. Browse and
+          open any module — or use the Podcast and Mind Map from the card.
+        </p>
+
+        <!-- Desktop: chip row -->
+        <div class="filter-row" id="filterRow">
+          <button class="filter-chip active" onclick="filterModules('all', this)">
+            All <span class="filter-count">14</span>
+          </button>
+          <button class="filter-chip" onclick="filterModules('client', this)">
+            Client Communication <span class="filter-count">5</span>
+          </button>
+          <button class="filter-chip" onclick="filterModules('rapport', this)">
+            Relationship &amp; Rapport <span class="filter-count">3</span>
+          </button>
+          <button class="filter-chip" onclick="filterModules('workplace', this)">
+            Workplace Communication <span class="filter-count">4</span>
+          </button>
+          <button class="filter-chip" onclick="filterModules('career', this)">
+            Career <span class="filter-count">1</span>
+          </button>
+          <button class="filter-chip" onclick="filterModules('authority', this)">
+            Authority <span class="filter-count">3</span>
+          </button>
+        </div>
+        <!-- Mobile: select dropdown -->
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filterSelect" onchange="filterModulesBySelect(this)">
+            <option value="all">All modules (14)</option>
+            <option value="client">Client Communication (5)</option>
+            <option value="rapport">Relationship &amp; Rapport (3)</option>
+            <option value="workplace">Workplace Communication (4)</option>
+            <option value="career">Career (1)</option>
+            <option value="authority">Authority (3)</option>
+          </select>
+        </div>
+
+        <div class="module-grid" id="moduleGrid">
+
+          <!-- 1. Client Call Confidence -->
+          <div class="module-card" data-arcs="client">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-call" />
+                </svg>
+              </div>
+              <span class="module-arc-tag">Client Communication</span>
+            </div>
+            <div class="module-title">Client Call Confidence</div>
+            <div class="module-desc">For client-facing professionals who need smoother calls, clearer next steps, and
+              more confident real-time communication.</div>
+            <div class="module-card-footer">
+              <span class="module-path">3–5 lessons</span>
+              <a href="https://vagabondigital.github.io/client-call-confidence-module/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/client-call-confidence-module/client-call-confidence-audio-overview.m4a','Client Call Confidence')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/99ccdad7-996f-4b28-9e90-fd8a63bbb685/artifact/f9305676-69a5-4876-9c3f-5473c28aecb6?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Discovery Call Foundations -->
+          <div class="module-card" data-arcs="client">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-discover" />
+                </svg>
+              </div>
+              <span class="module-arc-tag">Client Communication</span>
+            </div>
+            <div class="module-title">Discovery Call Foundations</div>
+            <div class="module-desc">For sales, consulting, account management, and client needs analysis where better
+              questions create better opportunities.</div>
+            <div class="module-card-footer">
+              <span class="module-path">3–5 lessons</span>
+              <a href="https://vagabondigital.github.io/discovery-call-foundations-module/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/discovery-call-foundations-module/discovery-call-foundations-audio-overview.m4a','Discovery Call Foundations')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/e20304bd-f339-4cb3-a10e-674b7f6c9ed0/artifact/7348bffc-037c-485c-a66c-b1300a639930?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Explaining Value Clearly -->
+          <div class="module-card" data-arcs="client">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-value" />
+                </svg>
+              </div>
+              <span class="module-arc-tag">Client Communication</span>
+            </div>
+            <div class="module-title">Explaining Value Clearly</div>
+            <div class="module-desc">For explaining why an offer, idea, product, or service matters without sounding
+              generic, pushy, or feature-heavy.</div>
+            <div class="module-card-footer">
+              <span class="module-path">3–5 lessons</span>
+              <a href="https://vagabondigital.github.io/explaining-value-clearly-module/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/explaining-value-clearly-module/explaining-value-clearly-audio-overview.m4a','Explaining Value Clearly')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/f9605de1-855b-479c-b0fe-30e2c81f11ea/artifact/83092093-9e85-4276-8adc-9e9dd7e33eef?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Objection Handling -->
+          <div class="module-card" data-arcs="client">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-objection" />
+                </svg>
+              </div>
+              <span class="module-arc-tag">Client Communication</span>
+            </div>
+            <div class="module-title">Objection Handling</div>
+            <div class="module-desc">For responding to price concerns, timing issues, hesitation, existing providers,
+              and other client pushback.</div>
+            <div class="module-card-footer">
+              <span class="module-path">3–5 lessons</span>
+              <a href="modules/objection-handling/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('modules/objection-handling/objection-handling-audio-overview.m4a','Objection Handling')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/b1039906-1747-4616-87a0-cdf4b58babcd/artifact/4957322d-66f0-4370-ad05-2553a470f055"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Follow-Up and Next Steps -->
+          <div class="module-card" data-arcs="client">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-followup" />
+                </svg>
+              </div>
+              <span class="module-arc-tag">Client Communication</span>
+            </div>
+            <div class="module-title">Follow-Up and Next Steps</div>
+            <div class="module-desc">For maintaining momentum after calls, meetings, interviews, and business
+              conversations.</div>
+            <div class="module-card-footer">
+              <span class="module-path">2–4 lessons</span>
+              <a href="https://vagabondigital.github.io/follow-up-and-next-steps-module/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/follow-up-and-next-steps-module/follow-up-and-next-steps-audio-overview.m4a','Follow-Up and Next Steps')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/552c7ff7-c59d-4977-810b-026ab46d9452/artifact/d55adae6-0e7c-46f7-95e6-77c717df811f?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Small Talk to Business -->
+          <div class="module-card" data-arcs="rapport">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-smalltalk" />
+                </svg>
+              </div>
+              <span class="module-arc-tag"
+                style="background:rgba(200,132,58,0.1);border-color:var(--amber-border);color:var(--amber)">Relationship
+                &amp; Rapport</span>
+            </div>
+            <div class="module-title">Small Talk to Business</div>
+            <div class="module-desc">For moving naturally from rapport-building into the business conversation.</div>
+            <div class="module-card-footer">
+              <span class="module-path">2–3 lessons</span>
+              <a href="modules/small-talk-to-business/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('modules/small-talk-to-business/small-talk-to-business-audio-overview.m4a','Small Talk to Business')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/9f4fe727-989f-409c-84c6-c9ca928ae413/artifact/77b38e2a-8386-4bfb-b007-16f79540e8b8?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Meeting Participation -->
+          <div class="module-card" data-arcs="workplace">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-meeting" />
+                </svg>
+              </div>
+              <span class="module-arc-tag navy">Workplace Communication</span>
+            </div>
+            <div class="module-title">Meeting Participation</div>
+            <div class="module-desc">For speaking up, giving opinions, clarifying, agreeing, disagreeing, and
+              contributing in meetings.</div>
+            <div class="module-card-footer">
+              <span class="module-path">3–5 lessons</span>
+              <a href="https://vagabondigital.github.io/meeting-participation-module/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/meeting-participation-module/meeting-participation-audio-overview.m4a','Meeting Participation')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/ffd38919-4a31-47c6-b303-e019af360f6c/artifact/f4347154-1c95-47e9-bc25-d83d7b37e039?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Presentation and Q&A Structure -->
+          <div class="module-card" data-arcs="workplace">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-present" />
+                </svg>
+              </div>
+              <span class="module-arc-tag navy">Workplace Communication</span>
+            </div>
+            <div class="module-title">Presentation and Q&amp;A Structure</div>
+            <div class="module-desc">For presentations, project updates, pitches, transitions, and live Q&amp;A control.
+            </div>
+            <div class="module-card-footer">
+              <span class="module-path">3–5 lessons</span>
+              <a href="hmodules/presentation-and-qa-structure/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('modules/presentation-and-qa-structure/presentation-and-qa-structure-audio-overview.m4a','Presentation and Q&A Structure')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/2d690521-3a0c-4470-870a-3fcfca3ae1cb/artifact/5977e5dd-0675-46b2-a4cf-fb7affed6286?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. Sales Interview Prep -->
+          <div class="module-card" data-arcs="career">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-interview" />
+                </svg>
+              </div>
+              <span class="module-arc-tag amber">Career</span>
+            </div>
+            <div class="module-title">Sales Interview Prep</div>
+            <div class="module-desc">For sales and client-facing professionals preparing interview answers,
+              achievements, targets, process, and client stories.</div>
+            <div class="module-card-footer">
+              <span class="module-path">3–5 lessons</span>
+              <a href="https://vagabondigital.github.io/sales-interview-prep-module/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/sales-interview-prep-module/sales-interview-prep-audio-overview.m4a','Sales Interview Prep')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/86392cf7-db63-43c3-9ef0-1fd35c50f186/artifact/dc0ca463-c423-4fcf-a3cb-525c9d10f3b3?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. Fluency Under Pressure -->
+          <div class="module-card" data-arcs="workplace authority">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-fluency" />
+                </svg>
+              </div>
+              <span class="module-arc-tag navy">Workplace · Authority</span>
+            </div>
+            <div class="module-title">Fluency Under Pressure</div>
+            <div class="module-desc">For freezing, rambling, interruptions, fast questions, hesitation, and
+              unpredictable conversations.</div>
+            <div class="module-card-footer">
+              <span class="module-path">4–6 lessons</span>
+              <a href="https://vagabondigital.github.io/fluency-under-pressure-module/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/fluency-under-pressure-module/fluency-under-pressure-audio-overview.m4a','Fluency Under Pressure')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/35a8edb7-c10c-4695-97e4-86508d19bd9f/artifact/9ffa803f-80c2-44fc-a24b-7882273013e8?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. Negotiation and Difficult Conversations -->
+          <div class="module-card" data-arcs="workplace authority">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-negotiation" />
+                </svg>
+              </div>
+              <span class="module-arc-tag navy">Workplace · Authority</span>
+            </div>
+            <div class="module-title">Negotiation and Difficult Conversations</div>
+            <div class="module-desc">For pricing, deadlines, disagreement, compromise, boundaries, and firm but polite
+              communication.</div>
+            <div class="module-card-footer">
+              <span class="module-path">4–6 lessons</span>
+              <a href="https://vagabondigital.github.io/negotiation-and-difficult-conversations-module/"
+                class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/negotiation-and-difficult-conversations-module/negotiation-and-difficult-conversations-audio-overview.m4a','Negotiation and Difficult Conversations')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/53cd7eb6-7381-408c-ad4b-1ff6de43fe0f/artifact/afba0bce-54c2-4d8e-b812-a6201dda719e?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12. Rapport and Professional Tone -->
+          <div class="module-card" data-arcs="rapport">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-rapport" />
+                </svg>
+              </div>
+              <span class="module-arc-tag"
+                style="background:rgba(200,132,58,0.1);border-color:var(--amber-border);color:var(--amber)">Relationship
+                &amp; Rapport</span>
+            </div>
+            <div class="module-title">Rapport and Professional Tone</div>
+            <div class="module-desc">For sounding warmer, more natural, more confident, and professionally credible
+              across business contexts.</div>
+            <div class="module-card-footer">
+              <span class="module-path">3–5 lessons</span>
+              <a href="https://vagabondigital.github.io/rapport-and-professional-tone-module/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/rapport-and-professional-tone-module/rapport-and-professional-tone-audio-overview.m4a','Rapport and Professional Tone')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/0cbccd5f-2f20-4d66-ba75-08e2bad80873/artifact/ab3f238b-d6bb-4e5f-a510-420047ffe190?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13. Sounding Senior and In Control -->
+          <div class="module-card" data-arcs="authority">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-senior" />
+                </svg>
+              </div>
+              <span class="module-arc-tag">Authority</span>
+            </div>
+            <div class="module-title">Sounding Senior and In Control</div>
+            <div class="module-desc">For sounding more decisive, authoritative, structured, calm, and credible in
+              English.</div>
+            <div class="module-card-footer">
+              <span class="module-path">4–6 lessons</span>
+              <a href="https://vagabondigital.github.io/sounding-senior-and-in-control-module/" class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/sounding-senior-and-in-control-module/sounding-senior-and-in-control-audio-overview.m4a','Sounding Senior and In Control')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/10318cba-a20e-4e8a-ab87-8e00d96918a5/artifact/2e985d50-c18f-4ab5-b9df-df402fbaaa18?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 14. Cross-Cultural Business Communication -->
+          <div class="module-card" data-arcs="rapport">
+            <div class="module-card-top">
+              <div class="module-icon">
+                <svg width="22" height="22">
+                  <use href="#mi-crosscultural" />
+                </svg>
+              </div>
+              <span class="module-arc-tag"
+                style="background:rgba(200,132,58,0.1);border-color:var(--amber-border);color:var(--amber)">Relationship
+                &amp; Rapport</span>
+            </div>
+            <div class="module-title">Cross-Cultural Business Communication</div>
+            <div class="module-desc">For international teams, global clients, directness, indirectness, tone adaptation,
+              and cultural nuance.</div>
+            <div class="module-card-footer">
+              <span class="module-path">3–5 lessons</span>
+              <a href="https://vagabondigital.github.io/cross-cultural-business-communication-module/"
+                class="module-open-btn">
+                Open Module <svg width="13" height="13">
+                  <use href="#s-arrow-r" />
+                </svg>
+              </a>
+              <div class="module-resource-row">
+                <button class="module-resource-btn podcast"
+                  onclick="openAudio('https://vagabondigital.github.io/cross-cultural-business-communication-module/cross-cultural-business-communication-audio-overview.m4a','Cross-Cultural Business Communication')">
+                  <svg width="12" height="12">
+                    <use href="#s-podcast" />
+                  </svg> Podcast
+                </button>
+                <a class="module-resource-btn mindmap"
+                  href="https://notebooklm.google.com/notebook/4473e90b-4f0b-4b94-8f06-9768b8783764/artifact/4fe711c5-cac5-42d0-bff0-648328e77e83?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_"
+                  target="_blank" rel="noopener">
+                  <svg width="12" height="12">
+                    <use href="#s-mindmap" />
+                  </svg> Mind Map
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /module-grid -->
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── STUDY TOOLS ───────────────────────────────────── -->
+    <section id="study-tools" class="section">
+      <div class="page-wrap">
+        <div class="section-eyebrow">Study Tools</div>
+        <h2 class="section-title">Built-in review tools for every <em>module</em></h2>
+        <p class="section-subtitle">
+          Each module includes review and practice tools to help you prepare before a session, revisit key ideas
+          afterward, and practise before real professional situations.
+        </p>
+
+        <div class="study-intro-grid">
+
+          <div class="study-intro-card">
+            <div class="study-intro-icon teal-bg">
+              <svg width="22" height="22" style="color:white">
+                <use href="#s-podcast" />
+              </svg>
+            </div>
+            <div>
+              <div class="study-intro-kicker">Audio Review</div>
+              <div class="study-intro-title">Podcast Deep Dive</div>
+              <div class="study-intro-desc">A hosted audio overview covering the module's core framework, a running
+                scenario, and weak-to-stronger examples. Good for warming up before a session or reviewing afterward.
+              </div>
+            </div>
+          </div>
+
+          <div class="study-intro-card">
+            <div class="study-intro-icon amber-bg">
+              <svg width="22" height="22" style="color:white">
+                <use href="#s-mindmap" />
+              </svg>
+            </div>
+            <div>
+              <div class="study-intro-kicker amber">Visual Review</div>
+              <div class="study-intro-title">Mind Map</div>
+              <div class="study-intro-desc">An interactive NotebookLM mind map covering framework steps, key phrases,
+                situation types, and practice challenges. Opens in a new tab for visual review before a real
+                conversation.</div>
+            </div>
+          </div>
+
+          <div class="study-intro-card">
+            <div class="study-intro-icon">
+              <svg width="22" height="22" style="color:white">
+                <use href="#s-module" />
+              </svg>
+            </div>
+            <div>
+              <div class="study-intro-kicker navy">Quick Review</div>
+              <div class="study-intro-title">Quick Reference</div>
+              <div class="study-intro-desc">A compact summary of the module's core framework, key language, and the most
+                useful phrases in one quick-scan view. Ideal for a fast refresh before a call, meeting, or presentation.
+              </div>
+            </div>
+          </div>
+
+          <div class="study-intro-card">
+            <div class="study-intro-icon">
+              <svg width="22" height="22" style="color:white">
+                <use href="#s-method" />
+              </svg>
+            </div>
+            <div>
+              <div class="study-intro-kicker navy">Practice Support</div>
+              <div class="study-intro-title">Practice &amp; Challenge Bank</div>
+              <div class="study-intro-desc">Reusable prompts, roleplay situations, and realistic pressure variations
+                help you practise the same communication skill in simple, applied, and more challenging ways.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── METHOD SECTION ────────────────────────────────── -->
+    <section id="method" class="section">
+      <div class="page-wrap">
+        <div class="section-eyebrow">How It Works</div>
+        <h2 class="section-title" style="margin-bottom:32px">The <em>Aptum Method</em></h2>
+        <div class="method-section-grid">
+          <div class="method-main-card">
+            <div class="method-big-title">Business communication strategy, executed in English</div>
+            <p class="method-big-desc">
+              Aptum modules teach the professional communication logic behind each situation — then give you the English
+              to execute it. They are not grammar worksheets, phrase banks, or generic conversation practice.
+            </p>
+            <div
+              style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;">
+              Each module combines</div>
+            <div class="method-combines">
+              <span class="method-chip">Professional communication structure</span>
+              <span class="method-chip">Useful English phrasing</span>
+              <span class="method-chip">Tone and clarity</span>
+              <span class="method-chip">Scenario practice</span>
+              <span class="method-chip">Weak → Stronger upgrades</span>
+              <span class="method-chip">Live feedback</span>
+              <span class="method-chip">Repetition</span>
+            </div>
+            <div class="method-principle">
+              <strong>The module provides the structure.</strong> The tutor brings the human coaching. You practise the
+              skill. The conversation makes it personal.
+            </div>
+            <button class="open-method-btn" onclick="openMethodModal()">
+              <svg width="15" height="15">
+                <use href="#s-method" />
+              </svg>
+              Open Method Notes
+            </button>
+          </div>
+          <div class="method-sidebar">
+            <div class="method-sidebar-card">
+              <div class="method-sidebar-title">Default material first</div>
+              <div style="font-size:13.5px;color:var(--muted);line-height:1.65;">
+                Every module works even without a specific work situation to hand. Built-in examples, default scenarios,
+                practice prompts, and frameworks are all included. Your real situations personalise the lesson when
+                available.
+              </div>
+            </div>
+            <div class="method-sidebar-card">
+              <div class="method-sidebar-title">What the modules teach</div>
+              <ul class="method-list">
+                <li>
+                  <div class="method-list-dot"><svg width="8" height="8" style="color:var(--teal)">
+                      <use href="#s-check" />
+                    </svg></div>How to clarify a concern
+                </li>
+                <li>
+                  <div class="method-list-dot"><svg width="8" height="8" style="color:var(--teal)">
+                      <use href="#s-check" />
+                    </svg></div>How to explain value clearly
+                </li>
+                <li>
+                  <div class="method-list-dot"><svg width="8" height="8" style="color:var(--teal)">
+                      <use href="#s-check" />
+                    </svg></div>How to communicate achievements in interviews
+                </li>
+                <li>
+                  <div class="method-list-dot"><svg width="8" height="8" style="color:var(--teal)">
+                      <use href="#s-check" />
+                    </svg></div>How to contribute in meetings
+                </li>
+                <li>
+                  <div class="method-list-dot"><svg width="8" height="8" style="color:var(--teal)">
+                      <use href="#s-check" />
+                    </svg></div>How to follow up professionally
+                </li>
+                <li>
+                  <div class="method-list-dot"><svg width="8" height="8" style="color:var(--teal)">
+                      <use href="#s-check" />
+                    </svg></div>How to stay calm under pressure
+                </li>
+              </ul>
+            </div>
+            <div class="method-sidebar-card" style="background:var(--amber-light);border-color:var(--amber-border);">
+              <div class="method-sidebar-title" style="color:var(--amber);">What they do not teach</div>
+              <ul class="method-list method-not-list">
+                <li>
+                  <div class="method-list-dot" style="background:rgba(200,132,58,0.15)"><svg width="8" height="8"
+                      style="color:var(--amber)">
+                      <use href="#s-check" />
+                    </svg></div><span style="color:var(--muted);">Whether to discount or change pricing</span>
+                </li>
+                <li>
+                  <div class="method-list-dot" style="background:rgba(200,132,58,0.15)"><svg width="8" height="8"
+                      style="color:var(--amber)">
+                      <use href="#s-check" />
+                    </svg></div><span style="color:var(--muted);">How to manage company strategy</span>
+                </li>
+                <li>
+                  <div class="method-list-dot" style="background:rgba(200,132,58,0.15)"><svg width="8" height="8"
+                      style="color:var(--amber)">
+                      <use href="#s-check" />
+                    </svg></div><span style="color:var(--muted);">How to replace professional judgement</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── HOW TO USE ─────────────────────────────────────── -->
+    <section id="how-to-use" class="section">
+      <div class="page-wrap">
+        <div class="section-eyebrow">Getting Started</div>
+        <h2 class="section-title" style="margin-bottom:32px">How to use <em>this suite</em></h2>
+        <div class="how-grid">
+          <div class="how-card">
+            <div class="how-num">1</div>
+            <div>
+              <div class="how-title">If you’re new</div>
+              <div class="how-desc">Start with the Roadmap. It identifies your real professional situations, goals, and
+                challenges, then recommends the strongest starting module. Open that module together in the first
+                session.</div>
+            </div>
+          </div>
+          <div class="how-card">
+            <div class="how-num">2</div>
+            <div>
+              <div class="how-title">For an existing student</div>
+              <div class="how-desc">Open the module that connects to the current communication need — an upcoming call,
+                interview, meeting, or presentation. Use the skill blocks and practice prompts to work through it
+                together.</div>
+            </div>
+          </div>
+          <div class="how-card">
+            <div class="how-num">3</div>
+            <div>
+              <div class="how-title">After a lesson</div>
+              <div class="how-desc">Share the module link as a review tool. You can return to the framework, useful
+                phrases, and practice prompts before your next real situation.</div>
+            </div>
+          </div>
+          <div class="how-card">
+            <div class="how-num">4</div>
+            <div>
+              <div class="how-title">Between sessions</div>
+              <div class="how-desc">Use the Quick Reference, Podcast, and Mind Map from each module. The Quick Reference
+                gives the core framework and key phrases in one compact view. Audio and mind map support recall between
+                sessions.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-icon">
+          <svg width="22" height="22" style="color:rgba(255,255,255,0.8)">
+            <use href="#s-suite" />
+          </svg>
+        </div>
+        <div>
+          <div class="footer-brand-name">Aptum Suite</div>
+          <div class="footer-brand-sub">Business Communication Coaching</div>
+        </div>
+      </div>
+      <div class="footer-center">
+        <div class="footer-tagline">Professional English coaching for real business communication.</div>
+        <div class="footer-credit">Created by Emrys</div>
+      </div>
+      <div class="footer-right">
+        <a href="roadmap/" id="footerRoadmapBtn"
+          class="footer-link">
+          <svg width="13" height="13">
+            <use href="#s-map" />
+          </svg>
+          Open Roadmap
+        </a>
+        <a href="#modules" class="footer-link">
+          <svg width="13" height="13">
+            <use href="#s-module" />
+          </svg>
+          All Modules
+        </a>
+        <button class="footer-link btn" onclick="openMethodModal()">
+          <svg width="13" height="13">
+            <use href="#s-method" />
+          </svg>
+          Method Notes
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── METHOD MODAL ───────────────────────────────────── -->
+  <div class="modal-overlay" id="methodModal" onclick="handleModalOverlayClick(event)">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="methodModalTitle">
+      <div class="modal-header">
+        <h2 class="modal-title" id="methodModalTitle">Method Notes</h2>
+        <button class="modal-close" onclick="closeMethodModal()" aria-label="Close">
+          <svg width="14" height="14">
+            <use href="#s-x" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="modal-section">
+          <div class="modal-section-title">Core Idea</div>
+          <div class="modal-section-text">
+            <strong>The Roadmap selects the best starting pathway. The modules deliver the coaching.</strong> Each
+            module is a standalone professional communication coaching tool for a real recurring professional situation
+            — not a generic English lesson, grammar worksheet, or phrase bank.
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title">What the modules are</div>
+          <div class="modal-section-text">
+            Standalone HTML coaching pathways built around recurring professional communication situations. They are
+            designed for sales, client-facing, and internationally active professionals who need to sound clearer,
+            calmer, more credible, and more natural in English.
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title">What each module combines</div>
+          <div class="modal-chips">
+            <span class="modal-chip">Professional situation</span>
+            <span class="modal-chip">Communication strategy</span>
+            <span class="modal-chip">English execution</span>
+            <span class="modal-chip">Realistic practice</span>
+            <span class="modal-chip">Weak → Stronger upgrades</span>
+            <span class="modal-chip">Skill-block structure</span>
+            <span class="modal-chip">Model examples</span>
+            <span class="modal-chip">Live feedback</span>
+            <span class="modal-chip">Repetition</span>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title">What the modules are not</div>
+          <div class="modal-chips">
+            <span class="modal-chip not">Grammar worksheets</span>
+            <span class="modal-chip not">Generic phrase banks</span>
+            <span class="modal-chip not">Pure sales consulting</span>
+            <span class="modal-chip not">Rigid textbook units</span>
+            <span class="modal-chip not">Self-study platforms</span>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title">Default material first, personalisation second</div>
+          <div class="modal-section-text">
+            The module must work even if the student brings no specific work situation. Built-in examples, default
+            scenarios, practice prompts, frameworks, and phrases are included. The student's real work situations
+            personalise the lesson when they are available. <strong>The module provides the core material. The student's
+              real work personalises it when useful.</strong>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title">Content quality standard</div>
+          <div class="modal-section-text">
+            Each module gives the student a useful mental model of the professional situation — not theory, but a
+            practical way to see it. It gives better language that helps with a specific move: opening, clarifying,
+            softening, asking, explaining, summarising, or moving forward. It shows the upgrade clearly through
+            weak-to-stronger examples. And it creates real practice — speakable moments that turn the material into a
+            live coaching tool.
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <div class="modal-section-title">The final principle</div>
+          <div class="modal-principle-box">
+            <strong>The module provides the structure.</strong> The tutor brings the human coaching. The student
+            practises the skill. The conversation makes it personal.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AUDIO DOCK ──────────────────────────────────────── -->
+  <div class="audio-dock" id="audioDock">
+    <div class="audio-dock-top">
+      <div>
+        <div class="audio-dock-title" id="audioModalTitle">Module Audio Overview</div>
+        <div class="audio-dock-sub">Podcast · Deep Dive</div>
+      </div>
+      <button class="audio-dock-close" onclick="closeAudioModal()" aria-label="Close audio player">
+        <svg width="14" height="14">
+          <use href="#s-x" />
+        </svg>
+      </button>
+    </div>
+
+    <audio class="audio-player" controls preload="metadata" id="audioPlayer">
+      <source id="audioSource" src="" type="audio/mp4">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <script>
+    /* ── MOBILE MENU ──────────────────────────────── */
+    function toggleMobileMenu() {
+      var panel = document.getElementById('mobileMenuPanel');
+      var overlay = document.getElementById('mobileMenuOverlay');
+      var btn = document.querySelector('.mobile-menu-btn');
+
+      if (!panel) return;
+
+      var isOpen = !panel.classList.contains('open');
+
+      panel.classList.toggle('open', isOpen);
+      if (overlay) overlay.classList.toggle('open', isOpen);
+      document.body.classList.toggle('mobile-menu-open', isOpen);
+
+      if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+
+    function closeMobileMenu() {
+      var panel = document.getElementById('mobileMenuPanel');
+      var overlay = document.getElementById('mobileMenuOverlay');
+      var btn = document.querySelector('.mobile-menu-btn');
+
+      if (panel) panel.classList.remove('open');
+      if (overlay) overlay.classList.remove('open');
+      document.body.classList.remove('mobile-menu-open');
+
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+
+    document.addEventListener('click', function (e) {
+      var panel = document.getElementById('mobileMenuPanel');
+      var btn = document.querySelector('.mobile-menu-btn');
+
+      if (!panel || !btn) return;
+
+      if (panel.classList.contains('open') && !panel.contains(e.target) && !btn.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    document.querySelectorAll('#mobileMenuPanel a').forEach(function (link) {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    /* ── MODULE FILTER ─────────────────────────────── */
+    function filterModules(arc, btn) {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      // keep select in sync
+      var sel = document.getElementById('filterSelect');
+      if (sel) sel.value = arc;
+      _applyArcFilter(arc);
+    }
+
+    function filterModulesBySelect(sel) {
+      var arc = sel.value;
+      // keep chips in sync
+      document.querySelectorAll('.filter-chip').forEach(function (c) {
+        var onclick = c.getAttribute('onclick') || '';
+        var match = onclick.match(/filterModules\('([^']+)'/);
+        if (match && match[1] === arc) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
+      _applyArcFilter(arc);
+    }
+
+    function _applyArcFilter(arc) {
+      var cards = document.querySelectorAll('.module-card');
+      cards.forEach(function (card) {
+        if (arc === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          var arcs = card.getAttribute('data-arcs') || '';
+          if (arcs.indexOf(arc) !== -1) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        }
+      });
+    }
+
+    /* ── METHOD MODAL ──────────────────────────────── */
+    function openMethodModal() {
+      document.getElementById('methodModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMethodModal() {
+      document.getElementById('methodModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function handleModalOverlayClick(e) {
+      if (e.target === document.getElementById('methodModal')) closeMethodModal();
+    }
+
+    /* ── AUDIO DOCK ────────────────────────────────── */
+    function openAudio(filename, title) {
+      document.getElementById('audioModalTitle').textContent = title;
+      document.getElementById('audioSource').src = filename;
+      var player = document.getElementById('audioPlayer');
+      player.load();
+      document.getElementById('audioDock').classList.add('open');
+    }
+
+    function closeAudioModal() {
+      document.getElementById('audioDock').classList.remove('open');
+      var player = document.getElementById('audioPlayer');
+      player.pause();
+    }
+
+    /* ── ESCAPE KEY ────────────────────────────────── */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeMobileMenu();
+        closeMethodModal();
+        closeAudioModal();
+      }
+    });
+
+    /* ── ACTIVE NAV HIGHLIGHTING ON SCROLL ─────────── */
+    (function () {
+      var sections = ['overview', 'roadmap', 'modules', 'study-tools', 'method'];
+      var links = document.querySelectorAll('.top-nav a:not(.top-nav-cta)');
+
+      function getActiveSectionId() {
+        var scrollY = window.scrollY + 100;
+        var active = null;
+        sections.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el && el.offsetTop <= scrollY) active = id;
+        });
+        return active;
+      }
+
+      function updateNav() {
+        var active = getActiveSectionId();
+        links.forEach(function (link) {
+          var href = link.getAttribute('href').replace('#', '');
+          link.classList.toggle('active', href === active);
+        });
+      }
+
+      window.addEventListener('scroll', updateNav, { passive: true });
+      updateNav();
+    })();
+  </script>
+</body>
+
+</html>
