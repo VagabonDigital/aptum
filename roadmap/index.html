@@ -1,0 +1,3739 @@
+<!DOCTYPE html>
+<!-- ═══════════════════════════════════════════════════════════════
+     APTUM ROADMAP
+     ─────────────────────────────────────────────────────────────
+     The first gate of the Aptum system.
+
+     Purpose:   discover the learner’s real communication terrain
+     Method:    situation → goal → challenge → focus → action plan
+     Output:    one recommended starting module, with useful next paths
+     Spirit:    Lingua, structura, actio.
+
+     This is not the course.
+     This is the map before the road.
+════════════════════════════════════════════════════════════════ -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+    <rect width='100' height='100' rx='18' fill='%231C2B4A'/>
+    <rect x='22' y='22' width='22' height='22' rx='5' fill='%23ffffff' opacity='0.88'/>
+    <rect x='56' y='22' width='22' height='22' rx='5' fill='%23ffffff' opacity='0.55'/>
+    <rect x='22' y='56' width='22' height='22' rx='5' fill='%23ffffff' opacity='0.55'/>
+    <rect x='56' y='56' width='22' height='22' rx='5' fill='%232D8F87'/>
+    </svg>">
+  <title>Business Communication Roadmap</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+    :root {
+      --bg: #F5F4F0;
+      --card: #FFFFFF;
+      --navy: #1C2B4A;
+      --navy-mid: #2E4270;
+      --teal: #2D8F87;
+      --teal-light: #3AACA3;
+      --teal-pale: #E8F5F4;
+      --amber: #C8843A;
+      --amber-light: #FDF3E8;
+      --muted: #6B7280;
+      --border: #E8E6E0;
+      --shadow: 0 2px 16px rgba(28, 43, 74, 0.07);
+      --shadow-md: 0 4px 24px rgba(28, 43, 74, 0.10);
+      --shadow-lg: 0 8px 40px rgba(28, 43, 74, 0.13);
+      --radius: 14px;
+      --radius-sm: 8px;
+      --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+      --clarity: #2D6FA8;
+      --clarity-bg: #EEF4FB;
+      --clarity-border: #B8D3ED;
+      --credibility: #8B4E9E;
+      --credibility-bg: #F5EEF8;
+      --credibility-border: #D4AEE3;
+      --connection: #2D8F87;
+      --connection-bg: #E8F5F4;
+      --connection-border: #9AD3CF;
+      --control: #C8843A;
+      --control-bg: #FDF3E8;
+      --control-border: #EAC08C;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── LAYOUT ───────────────────────────────────────────── */
+    .app-shell {
+      min-height: 100vh;
+    }
+
+    /* ── STICKY HEADER ────────────────────────────────────── */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 8px rgba(28, 43, 74, 0.06);
+      padding: 0 32px;
+    }
+
+    .top-bar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .brand-icon svg {
+      opacity: 0.9;
+    }
+
+    .brand-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+      line-height: 1.15;
+      white-space: nowrap;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    /* ── CENTERED PROGRESS ────────────────────────────────── */
+    .progress-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex: 1;
+      max-width: 700px;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: default;
+    }
+
+    .progress-step.clickable {
+      cursor: pointer;
+    }
+
+    .progress-step.clickable:hover .step-dot {
+      background: var(--teal-pale);
+    }
+
+    .progress-step.clickable:hover .step-label {
+      color: var(--teal);
+    }
+
+    .progress-connector {
+      width: 28px;
+      height: 1px;
+      background: var(--border);
+      margin: 0 10px;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .progress-connector.done {
+      background: var(--teal);
+    }
+
+    .step-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      border: 2px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .progress-step.active .step-dot {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+    }
+
+    .progress-step.completed .step-dot {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white;
+    }
+
+    .step-dot .check-icon {
+      display: none;
+    }
+
+    .progress-step.completed .step-dot .check-icon {
+      display: block;
+    }
+
+    .progress-step.completed .step-dot .step-num {
+      display: none;
+    }
+
+    .step-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-left: 8px;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .progress-step.active .step-label {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .progress-step.completed .step-label {
+      color: var(--teal);
+    }
+
+    @media (max-width: 900px) {
+      .progress-track {
+        display: none;
+      }
+
+      .top-bar-inner {
+        justify-content: center;
+      }
+    }
+
+    /* ── PAGE CONTENT OFFSET ──────────────────────────────── */
+    .page-content {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 20px 100px;
+    }
+
+    /* ── FIXED BOTTOM NAV ─────────────────────────────────── */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -2px 16px rgba(28, 43, 74, 0.08);
+      z-index: 100;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+
+    .bottom-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .selected-count {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .selected-count.visible {
+      opacity: 1;
+    }
+
+    .btn-back-bottom {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 22px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy-mid);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-back-bottom:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    .btn-continue {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px 28px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 3px 14px rgba(28, 43, 74, 0.2);
+    }
+
+    .btn-continue:hover:not(:disabled) {
+      background: var(--navy-mid);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 20px rgba(28, 43, 74, 0.28);
+    }
+
+    .btn-continue:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ── PROGRESS BAR (old alias kept for compat) ─────────── */
+
+    /* ── PAGES ────────────────────────────────────────────── */
+    .page {
+      display: none;
+      animation: fadeUp 0.28s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── PAGE 1 — OPENING ─────────────────────────────────── */
+    .opening-hero {
+      text-align: center;
+      padding: 24px 0 44px;
+    }
+
+    .opening-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal-pale);
+      border: 1px solid var(--connection-border);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
+    .opening-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.12;
+      color: var(--navy);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .opening-title em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .opening-subtitle {
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 400;
+      max-width: 480px;
+      margin: 0 auto 14px;
+      line-height: 1.55;
+    }
+
+    .opening-intro {
+      font-size: 14.5px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .flow-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin: 0 auto 48px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .flow-pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy-mid);
+      box-shadow: var(--shadow);
+      white-space: nowrap;
+    }
+
+    .flow-pill.highlight {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    .flow-arrow {
+      color: var(--muted);
+      font-size: 14px;
+      opacity: 0.5;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 16px 36px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.01em;
+      box-shadow: 0 4px 20px rgba(28, 43, 74, 0.22);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-mid);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(28, 43, 74, 0.28);
+    }
+
+    .btn-primary svg {
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* ── SECTION HEADER ───────────────────────────────────── */
+    .section-header {
+      margin-bottom: 28px;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(34px, 3.3vw, 46px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .section-note {
+      font-size: 18px;
+      color: var(--muted);
+      margin-top: 12px;
+      line-height: 1.55;
+      max-width: 760px;
+    }
+
+    /* ── CHIP GROUPS ──────────────────────────────────────── */
+    .group-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      margin-top: 24px;
+    }
+
+    .group-label:first-of-type {
+      margin-top: 0;
+    }
+
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .chip-break {
+      flex-basis: 100%;
+      height: 0;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 24px;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy-mid);
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+      box-shadow: 0 1px 4px rgba(28, 43, 74, 0.05);
+    }
+
+    .chip:hover {
+      border-color: var(--teal);
+      background: var(--teal-pale);
+      color: var(--teal);
+    }
+
+    .chip.selected {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+      box-shadow: 0 2px 10px rgba(28, 43, 74, 0.2);
+    }
+
+    .chip-check {
+      width: 15px;
+      height: 15px;
+      display: none;
+    }
+
+    .chip.selected .chip-check {
+      display: block;
+    }
+
+    /* 4C colored chips */
+    .chip.clarity-chip.selected {
+      background: var(--clarity);
+      border-color: var(--clarity);
+    }
+
+    .chip.credibility-chip.selected {
+      background: var(--credibility);
+      border-color: var(--credibility);
+    }
+
+    .chip.connection-chip.selected {
+      background: var(--connection);
+      border-color: var(--connection);
+    }
+
+    .chip.control-chip.selected {
+      background: var(--control);
+      border-color: var(--control);
+    }
+
+    /* ── 4C CARDS (Page 3 & 5) ────────────────────────────── */
+    .fourc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .fourc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .fourc-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+
+    .fourc-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .fourc-card.selected-clarity {
+      border-color: var(--clarity);
+      background: var(--clarity-bg);
+    }
+
+    .fourc-card.selected-credibility {
+      border-color: var(--credibility);
+      background: var(--credibility-bg);
+    }
+
+    .fourc-card.selected-connection {
+      border-color: var(--connection);
+      background: var(--connection-bg);
+    }
+
+    .fourc-card.selected-control {
+      border-color: var(--control);
+      background: var(--control-bg);
+    }
+
+    .fourc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .badge-clarity {
+      background: var(--clarity-bg);
+      color: var(--clarity);
+    }
+
+    .badge-credibility {
+      background: var(--credibility-bg);
+      color: var(--credibility);
+    }
+
+    .badge-connection {
+      background: var(--connection-bg);
+      color: var(--connection);
+    }
+
+    .badge-control {
+      background: var(--control-bg);
+      color: var(--control);
+    }
+
+    .fourc-card-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    .fourc-card-desc {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      line-height: 1.55;
+    }
+
+    .fourc-card-for {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .fourc-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .fourc-tag {
+      font-size: 11.5px;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+
+    /* Chips in groups within 4C cards (page 3) */
+    .fourc-chips {
+      margin-top: 12px;
+    }
+
+    /* ── (legacy nav removed — replaced by fixed bottom bar) ─ */
+
+    .nav-hint {
+      display: none;
+    }
+
+    /* ── PAGE 5 — FOCUS ───────────────────────────────────── */
+    .focus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .focus-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .focus-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .focus-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .focus-card .primary-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .focus-card.primary-focus {
+      border-width: 2.5px;
+    }
+
+    .focus-card.primary-focus .primary-indicator {
+      display: block;
+    }
+
+    .focus-card.selected-clarity.primary-focus {
+      border-color: var(--clarity);
+      background: var(--clarity-bg);
+    }
+
+    .focus-card.selected-clarity.primary-focus .primary-indicator {
+      background: var(--clarity);
+      color: white;
+    }
+
+    .focus-card.selected-credibility.primary-focus {
+      border-color: var(--credibility);
+      background: var(--credibility-bg);
+    }
+
+    .focus-card.selected-credibility.primary-focus .primary-indicator {
+      background: var(--credibility);
+      color: white;
+    }
+
+    .focus-card.selected-connection.primary-focus {
+      border-color: var(--connection);
+      background: var(--connection-bg);
+    }
+
+    .focus-card.selected-connection.primary-focus .primary-indicator {
+      background: var(--connection);
+      color: white;
+    }
+
+    .focus-card.selected-control.primary-focus {
+      border-color: var(--control);
+      background: var(--control-bg);
+    }
+
+    .focus-card.selected-control.primary-focus .primary-indicator {
+      background: var(--control);
+      color: white;
+    }
+
+    .focus-card.secondary-focus {
+      opacity: 0.85;
+    }
+
+    .focus-card.secondary-focus .primary-indicator {
+      display: block;
+    }
+
+    .focus-card.selected-clarity.secondary-focus {
+      border-color: var(--clarity-border);
+      background: var(--clarity-bg);
+    }
+
+    .focus-card.selected-clarity.secondary-focus .primary-indicator {
+      background: var(--clarity-border);
+      color: var(--clarity);
+    }
+
+    .focus-card.selected-credibility.secondary-focus {
+      border-color: var(--credibility-border);
+      background: var(--credibility-bg);
+    }
+
+    .focus-card.selected-credibility.secondary-focus .primary-indicator {
+      background: var(--credibility-border);
+      color: var(--credibility);
+    }
+
+    .focus-card.selected-connection.secondary-focus {
+      border-color: var(--connection-border);
+      background: var(--connection-bg);
+    }
+
+    .focus-card.selected-connection.secondary-focus .primary-indicator {
+      background: var(--connection-border);
+      color: var(--connection);
+    }
+
+    .focus-card.selected-control.secondary-focus {
+      border-color: var(--control-border);
+      background: var(--control-bg);
+    }
+
+    .focus-card.selected-control.secondary-focus .primary-indicator {
+      background: var(--control-border);
+      color: var(--control);
+    }
+
+    .focus-card-inner {
+      pointer-events: none;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 30px 0;
+    }
+
+    /* ── PAGE 6 — ACTION PLAN ─────────────────────────────── */
+    .action-plan-header {
+      text-align: center;
+      padding: 28px 0 36px;
+    }
+
+    .action-plan-header .section-eyebrow {
+      justify-content: center;
+      display: flex;
+    }
+
+    .action-plan-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(30px, 4vw, 46px);
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .action-plan-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* PRIMARY MODULE BLOCK */
+    .module-hero {
+      background: var(--navy);
+      border-radius: 18px;
+      padding: 32px 36px;
+      color: white;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(28, 43, 74, 0.22);
+    }
+
+    .module-hero::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(45, 143, 135, 0.12);
+    }
+
+    .module-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -30px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(45, 143, 135, 0.07);
+    }
+
+    .module-hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .module-hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 3.5vw, 32px);
+      line-height: 1.2;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .module-hero-desc {
+      font-size: 14px;
+      opacity: 0.75;
+      line-height: 1.6;
+      max-width: 500px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .module-hero-bottom {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .module-hero-path {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 0 14px;
+      font-size: 13px;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-open-module {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+      min-height: 40px;
+    }
+
+    .btn-open-module:hover {
+      background: var(--teal-light);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-open-module svg {
+      transition: transform 0.2s;
+    }
+
+    .btn-open-module:hover svg {
+      transform: translateX(3px);
+    }
+
+    .btn-label-short,
+    .focus-label-short {
+      display: none;
+    }
+
+    .btn-label-full,
+    .focus-label-full {
+      display: inline;
+    }
+
+    .override-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      padding: 10px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .override-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .override-select {
+      flex: 1;
+      min-width: 0;
+      max-width: 100%;
+      border: none;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--navy);
+      cursor: pointer;
+      outline: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ROADMAP SUMMARY */
+    .roadmap-summary-card {
+      padding: 18px 22px;
+      margin-bottom: 16px;
+    }
+
+    .summary-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .why-module-box {
+      margin-bottom: 12px;
+    }
+
+    .why-module-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .why-module-box p {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: var(--navy-mid);
+      margin: 0;
+      max-width: 960px;
+    }
+
+    .summary-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--teal);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .summary-toggle:hover {
+      color: var(--navy);
+    }
+
+    .summary-toggle-chevron {
+      transition: transform 0.2s ease;
+    }
+
+    .roadmap-summary-card.open .summary-toggle-chevron {
+      transform: rotate(180deg);
+    }
+
+    .roadmap-summary-details {
+      display: none;
+      border-top: 1px solid var(--border);
+      margin-top: 14px;
+      padding-top: 14px;
+    }
+
+    .roadmap-summary-card.open .roadmap-summary-details {
+      display: block;
+    }
+
+    .roadmap-summary-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      align-items: start;
+      gap: 14px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .summary-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .summary-chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--navy-mid);
+      font-size: 12.5px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .summary-chip.more {
+      color: var(--teal);
+      background: transparent;
+      border-color: var(--teal-pale);
+      font-weight: 600;
+    }
+
+    @media (max-width: 700px) {
+      .summary-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+
+    /* AP BLOCKS */
+    .ap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 620px) {
+      .ap-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ap-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .ap-block-full {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .ap-block-label {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    /* Focus pills */
+    .focus-combo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .focus-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .focus-pill-connector {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .focus-desc {
+      font-size: 15px;
+      color: var(--navy-mid);
+      line-height: 1.6;
+    }
+
+    /* Outcome bullets */
+    .outcome-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .outcome-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy-mid);
+      line-height: 1.55;
+    }
+
+    .outcome-bullet {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--teal-pale);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .outcome-bullet svg {
+      color: var(--teal);
+    }
+
+    /* Path block */
+    .path-display {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .path-range {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .path-unit {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* Prep chips */
+    .prep-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 6px;
+    }
+
+    .prep-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12.5px;
+      color: var(--navy-mid);
+      font-weight: 500;
+    }
+
+    .prep-chip.none {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Secondary modules */
+    .secondary-module {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .secondary-module-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .secondary-module-header:hover {
+      background: var(--bg);
+    }
+
+    .secondary-module-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .secondary-module-tag {
+      font-size: 11px;
+      color: var(--muted);
+      margin-left: 8px;
+      font-weight: 400;
+    }
+
+    .secondary-chevron {
+      transition: transform 0.2s;
+      color: var(--muted);
+    }
+
+    .secondary-module.open .secondary-chevron {
+      transform: rotate(180deg);
+    }
+
+    .secondary-module-body {
+      display: none;
+      padding: 0 20px 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .secondary-module.open .secondary-module-body {
+      display: block;
+    }
+
+    .secondary-module-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 12px 0 8px;
+    }
+
+    .secondary-module-path {
+      font-size: 12.5px;
+      color: var(--navy-mid);
+      font-weight: 500;
+    }
+
+    /* ── UTILS ────────────────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .fourc-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .fourc-section-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .fourc-section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--navy);
+    }
+
+    .fourc-section-desc {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 0;
+      line-height: 1.45;
+    }
+
+    #page-2 .situation-group {
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(232, 230, 224, 0.85);
+      border-radius: 18px;
+      padding: 20px 22px 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 14px rgba(28, 43, 74, 0.035);
+    }
+
+    #page-2 .situation-group .group-label {
+      margin-top: 0;
+      margin-bottom: 14px;
+    }
+
+    #page-2 .situation-group .chips-row {
+      margin-bottom: 0;
+    }
+
+    #page-3.page.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    #page-3 .section-header {
+      grid-column: 1 / -1;
+      margin-bottom: 20px;
+    }
+
+    #page-3 .fourc-section {
+      margin-bottom: 0;
+    }
+
+    #page-4.page.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    #page-4 .section-header {
+      grid-column: 1 / -1;
+      margin-bottom: 20px;
+    }
+
+    #page-4 .fourc-section {
+      margin-bottom: 0;
+    }
+
+    /* ── METHOD NOTES BUTTON ─────────────────────────────── */
+    .btn-method-notes {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 7px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.01em;
+    }
+
+    .btn-method-notes:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: var(--teal-pale);
+    }
+
+    /* ── METHOD NOTES MODAL ──────────────────────────────── */
+    .method-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 43, 74, 0.45);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(2px);
+    }
+
+    .method-modal-overlay.open {
+      display: flex;
+      animation: fadeIn 0.18s ease both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .method-modal {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 560px;
+      max-height: 82vh;
+      display: flex;
+      flex-direction: column;
+      animation: slideUp 0.22s cubic-bezier(0.4, 0, 0.2, 1) both;
+      overflow: hidden;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(16px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .method-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .method-modal-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+
+    .method-modal-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .method-modal-close:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+      background: var(--bg);
+    }
+
+    .method-modal-body {
+      padding: 20px 24px 24px;
+      overflow-y: auto;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.65;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .method-modal-body p {
+      margin: 0;
+    }
+
+    .method-source {
+      display: flex;
+      gap: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+
+    .method-source-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .method-source>div {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .method-source-title {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 13px;
+    }
+
+    .method-combines {
+      background: var(--teal-pale);
+      border: 1px solid var(--connection-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+
+    .method-combines-label {
+      font-weight: 600;
+      color: var(--teal);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .method-combines ul {
+      margin: 0;
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .method-combines li {
+      font-size: 13px;
+      color: var(--navy-mid);
+    }
+
+    .method-modal-byline {
+      font-size: 12px;
+      color: var(--muted);
+      font-style: italic;
+      text-align: right;
+      padding-top: 4px;
+      opacity: 0.7;
+    }
+
+    /* ── MOBILE FIRST ───────────────────────────────────────────
+       Breakpoint: ≤ 540px (single-column phone)
+    ──────────────────────────────────────────────────────────── */
+
+    /* Prevent any child from creating horizontal scroll */
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    @media (max-width: 540px) {
+
+      /* ── Top bar ─── */
+      .top-bar {
+        padding: 0 16px;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      /* ── Page content ─── */
+      .page-content {
+        padding: 24px 16px 90px;
+      }
+
+      /* ── Bottom bar ─────────────────────────────────────────
+         Tighter padding + smaller buttons so nothing overflows */
+      .bottom-bar {
+        padding: 0 12px;
+        height: 64px;
+      }
+
+      .btn-back-bottom {
+        padding: 9px 12px;
+        font-size: 13px;
+      }
+
+      .btn-continue {
+        padding: 10px 16px;
+        font-size: 13.5px;
+      }
+
+      .module-hero-bottom {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .module-hero-path {
+        min-height: 48px;
+        justify-content: center;
+      }
+
+      .btn-open-module {
+        justify-content: center;
+        min-height: 48px;
+      }
+
+      .btn-label-full,
+      .focus-label-full {
+        display: none;
+      }
+
+      .btn-label-short,
+      .focus-label-short {
+        display: inline;
+      }
+
+      .chip-break {
+        display: none;
+      }
+
+      /* ── Action plan: roadmap summary card header ────────────
+         Stack "Based on your roadmap" label and Method Notes
+         button vertically so neither gets clipped             */
+      .roadmap-summary-card>div:first-child {
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .btn-method-notes {
+        flex-shrink: 0;
+      }
+
+      /* ── Method notes modal ─── */
+      .method-modal-overlay {
+        padding: 12px;
+        align-items: flex-end;
+      }
+
+      .method-modal {
+        max-height: 88vh;
+        border-radius: var(--radius) var(--radius) 0 0;
+      }
+
+      /* ── AP grid already collapses at 620px — just tighten padding ─── */
+      .ap-block,
+      .ap-block-full {
+        padding: 16px;
+      }
+
+      /* ── Focus desc font ─── */
+      .focus-desc {
+        font-size: 14px;
+      }
+
+      /* ── Module hero (action plan) ─── */
+      .module-hero {
+        padding: 24px 20px;
+      }
+
+      #page-3.page.active,
+      #page-4.page.active {
+        grid-template-columns: 1fr;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- STICKY HEADER -->
+    <div class="top-bar" id="topBar">
+      <div class="top-bar-inner">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="2" y="2" width="6" height="6" rx="1.5" fill="white" opacity="0.85" />
+              <rect x="10" y="2" width="6" height="6" rx="1.5" fill="white" opacity="0.55" />
+              <rect x="2" y="10" width="6" height="6" rx="1.5" fill="white" opacity="0.55" />
+              <rect x="10" y="10" width="6" height="6" rx="1.5" fill="white" opacity="0.85" />
+            </svg>
+          </div>
+          <div>
+            <div class="brand-name">Business Communication Roadmap</div>
+            <div class="brand-sub">Clarity, credibility, connection & control</div>
+          </div>
+        </div>
+
+        <div class="progress-track" id="progressTrack">
+          <div class="progress-step" data-step="2" id="pstep-2">
+            <div class="step-dot">
+              <span class="step-num">1</span>
+              <svg class="check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 6l2.5 2.5L9.5 3.5" stroke="white" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="step-label">Situation</div>
+          </div>
+          <div class="progress-connector" id="pc-1"></div>
+          <div class="progress-step" data-step="3" id="pstep-3">
+            <div class="step-dot">
+              <span class="step-num">2</span>
+              <svg class="check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 6l2.5 2.5L9.5 3.5" stroke="white" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="step-label">Goal</div>
+          </div>
+          <div class="progress-connector" id="pc-2"></div>
+          <div class="progress-step" data-step="4" id="pstep-4">
+            <div class="step-dot">
+              <span class="step-num">3</span>
+              <svg class="check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 6l2.5 2.5L9.5 3.5" stroke="white" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="step-label">Challenge</div>
+          </div>
+          <div class="progress-connector" id="pc-3"></div>
+          <div class="progress-step" data-step="5" id="pstep-5">
+            <div class="step-dot">
+              <span class="step-num">4</span>
+              <svg class="check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 6l2.5 2.5L9.5 3.5" stroke="white" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="step-label">Focus</div>
+          </div>
+          <div class="progress-connector" id="pc-4"></div>
+          <div class="progress-step" data-step="6" id="pstep-6">
+            <div class="step-dot">
+              <span class="step-num">5</span>
+              <svg class="check-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 6l2.5 2.5L9.5 3.5" stroke="white" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="step-label">Action Plan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIXED BOTTOM NAV -->
+    <div class="bottom-bar" id="bottomBar" style="display:none;">
+      <button class="btn-back-bottom" id="btnBack" onclick="handleBack()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M11 7H3M6 4L3 7l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        Back
+      </button>
+      <div class="bottom-bar-right">
+        <span class="selected-count" id="selectedCount"></span>
+        <button class="btn-continue" id="btnContinue" onclick="handleContinue()">
+          <span id="btnContinueLabel">Continue</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 7h8M7 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- ═══════════════════════════════════════════════════
+       PAGE 1 — OPENING
+  ════════════════════════════════════════════════════ -->
+      <div class="page active" id="page-1">
+        <div class="opening-hero">
+          <div class="opening-eyebrow">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <circle cx="6" cy="6" r="6" fill="#2D8F87" opacity="0.3" />
+              <circle cx="6" cy="6" r="3" fill="#2D8F87" />
+            </svg>
+            First Coaching Session
+          </div>
+          <h1 class="opening-title">Business Communication<br><em>Roadmap</em></h1>
+          <p class="opening-subtitle">Find where English affects your professional performance — and what to improve
+            first.</p>
+          <p class="opening-intro">We’ll use this session like a Discovery Call: your role, your real work situations,
+            your
+            communication pressure points, and the best first coaching path.</p>
+
+          <div class="flow-visual">
+            <div class="flow-step">
+              <div class="flow-pill">Situation</div>
+              <div class="flow-arrow">→</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-pill">Goal</div>
+              <div class="flow-arrow">→</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-pill">Challenge</div>
+              <div class="flow-arrow">→</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-pill">Focus</div>
+              <div class="flow-arrow">→</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-pill highlight">Action Plan</div>
+            </div>
+          </div>
+
+          <button class="btn-primary" onclick="goToPage(2)">
+            Begin Roadmap
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+       PAGE 2 — SITUATION
+  ════════════════════════════════════════════════════ -->
+      <div class="page" id="page-2">
+        <div class="section-header">
+          <div class="section-eyebrow">Step 1 of 4</div>
+          <h2 class="section-title">Where does English affect your work most right now?</h2>
+          <p class="section-note">Select the real situations where better English would make the biggest professional
+            difference. Aim for 1–3.</p>
+        </div>
+        <div class="situation-group">
+          <div class="group-label">Sales &amp; Clients</div>
+          <div class="chips-row">
+            <div class="chip" onclick="toggleChip(this,'situation','sales-calls')" data-value="sales-calls">Sales calls
+            </div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','discovery-calls')" data-value="discovery-calls">
+              Discovery calls</div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','client-meetings')" data-value="client-meetings">
+              Client meetings</div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','explaining-value')" data-value="explaining-value">
+              Explaining value</div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','objection-handling')"
+              data-value="objection-handling">Objection handling</div>
+
+            <div class="chip-break"></div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','negotiation')" data-value="negotiation">Negotiation
+            </div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','follow-ups')" data-value="follow-ups">Follow-ups
+            </div>
+          </div>
+        </div>
+
+        <div class="situation-group">
+          <div class="group-label">Workplace Communication</div>
+          <div class="chips-row">
+            <div class="chip" onclick="toggleChip(this,'situation','internal-meetings')" data-value="internal-meetings">
+              Internal meetings</div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','presentations')" data-value="presentations">
+              Presentations</div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','leadership-conversations')"
+              data-value="leadership-conversations">Leadership conversations</div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','customer-support')" data-value="customer-support">
+              Customer support</div>
+          </div>
+        </div>
+
+        <div class="situation-group">
+          <div class="group-label">Career &amp; Global</div>
+          <div class="chips-row">
+            <div class="chip" onclick="toggleChip(this,'situation','interviews')" data-value="interviews">Interviews
+            </div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','networking')" data-value="networking">Networking
+            </div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','cross-cultural')" data-value="cross-cultural">
+              Cross-cultural communication</div>
+
+            <div class="chip" onclick="toggleChip(this,'situation','general-professional')"
+              data-value="general-professional">General professional speaking</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+       PAGE 3 — COMMUNICATION GOAL
+  ════════════════════════════════════════════════════ -->
+      <div class="page" id="page-3">
+        <div class="section-header">
+          <div class="section-eyebrow">Step 2 of 4</div>
+          <h2 class="section-title">How do you want to sound in<br>professional conversations?</h2>
+          <p class="section-note">Choose the qualities you want people to hear in your English. These connect to the 4C
+            Method —
+            Clarity, Credibility, Connection, and Control. Aim for 2–4.</p>
+        </div>
+
+        <!-- CLARITY -->
+        <div class="fourc-section">
+          <div class="fourc-section-header">
+            <div class="fourc-badge badge-clarity">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <circle cx="5" cy="5" r="4" stroke="#2D6FA8" stroke-width="1.4" />
+                <path d="M3 5h4M5 3v4" stroke="#2D6FA8" stroke-width="1.4" stroke-linecap="round" />
+              </svg>
+              Clarity
+            </div>
+            <div class="fourc-section-info">
+              <div class="fourc-section-desc">Clearer, sharper, and easier to follow.</div>
+            </div>
+          </div>
+          <div class="chips-row">
+            <div class="chip clarity-chip" onclick="toggleChip(this,'goal','clear')" data-value="clear"
+              data-4c="clarity">Clear</div>
+            <div class="chip clarity-chip" onclick="toggleChip(this,'goal','concise')" data-value="concise"
+              data-4c="clarity">Concise</div>
+            <div class="chip clarity-chip" onclick="toggleChip(this,'goal','structured')" data-value="structured"
+              data-4c="clarity">Structured</div>
+            <div class="chip clarity-chip" onclick="toggleChip(this,'goal','precise')" data-value="precise"
+              data-4c="clarity">Precise</div>
+          </div>
+        </div>
+
+        <!-- CREDIBILITY -->
+        <div class="fourc-section">
+          <div class="fourc-section-header">
+            <div class="fourc-badge badge-credibility">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M5 1l1.2 2.5 2.8.4-2 1.95.47 2.75L5 7.4 2.53 8.64 3 5.9 1 3.9l2.8-.4L5 1z" stroke="#8B4E9E"
+                  stroke-width="1.2" stroke-linejoin="round" />
+              </svg>
+              Credibility
+            </div>
+            <div class="fourc-section-info">
+              <div class="fourc-section-desc">More specific, senior, and trustworthy.</div>
+            </div>
+          </div>
+          <div class="chips-row">
+            <div class="chip credibility-chip" onclick="toggleChip(this,'goal','credible')" data-value="credible"
+              data-4c="credibility">Credible</div>
+            <div class="chip credibility-chip" onclick="toggleChip(this,'goal','professional')"
+              data-value="professional" data-4c="credibility">Professional</div>
+            <div class="chip credibility-chip" onclick="toggleChip(this,'goal','senior')" data-value="senior"
+              data-4c="credibility">Senior</div>
+            <div class="chip credibility-chip" onclick="toggleChip(this,'goal','persuasive')" data-value="persuasive"
+              data-4c="credibility">Persuasive</div>
+          </div>
+        </div>
+
+        <!-- CONNECTION -->
+        <div class="fourc-section">
+          <div class="fourc-section-header">
+            <div class="fourc-badge badge-connection">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M3 5c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z" stroke="#2D8F87" stroke-width="1.3" />
+                <path d="M1 2.5C1.5 1.5 3 1 5 1s3.5.5 4 1.5M1 7.5C1.5 8.5 3 9 5 9s3.5-.5 4-1.5" stroke="#2D8F87"
+                  stroke-width="1.3" stroke-linecap="round" />
+              </svg>
+              Connection
+            </div>
+            <div class="fourc-section-info">
+              <div class="fourc-section-desc">More natural, human, and relationship-aware.</div>
+            </div>
+          </div>
+          <div class="chips-row">
+            <div class="chip connection-chip" onclick="toggleChip(this,'goal','natural')" data-value="natural"
+              data-4c="connection">Natural</div>
+            <div class="chip connection-chip" onclick="toggleChip(this,'goal','warm')" data-value="warm"
+              data-4c="connection">Warm</div>
+            <div class="chip connection-chip" onclick="toggleChip(this,'goal','diplomatic')" data-value="diplomatic"
+              data-4c="connection">Diplomatic</div>
+            <div class="chip connection-chip" onclick="toggleChip(this,'goal','less-robotic')" data-value="less-robotic"
+              data-4c="connection">Less robotic</div>
+          </div>
+        </div>
+
+        <!-- CONTROL -->
+        <div class="fourc-section">
+          <div class="fourc-section-header">
+            <div class="fourc-badge badge-control">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5h6M5 2v6" stroke="#C8843A" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              Control
+            </div>
+            <div class="fourc-section-info">
+              <div class="fourc-section-desc">More composed when the conversation moves fast.</div>
+            </div>
+          </div>
+          <div class="chips-row">
+            <div class="chip control-chip" onclick="toggleChip(this,'goal','confident')" data-value="confident"
+              data-4c="control">Confident</div>
+            <div class="chip control-chip" onclick="toggleChip(this,'goal','calm-under-pressure')"
+              data-value="calm-under-pressure" data-4c="control">Calm under pressure</div>
+            <div class="chip control-chip" onclick="toggleChip(this,'goal','less-hesitant')" data-value="less-hesitant"
+              data-4c="control">Less hesitant</div>
+            <div class="chip control-chip" onclick="toggleChip(this,'goal','more-fluent')" data-value="more-fluent"
+              data-4c="control">More fluent</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+       PAGE 4 — CHALLENGE
+  ════════════════════════════════════════════════════ -->
+      <div class="page" id="page-4">
+        <div class="section-header">
+          <div class="section-eyebrow">Step 3 of 4</div>
+          <h2 class="section-title">What happens when the conversation gets difficult?</h2>
+          <p class="section-note">These are common pressure patterns — not personal failures. Select 1–3 that
+            feel
+            most familiar.</p>
+        </div>
+
+        <div class="fourc-section">
+          <div class="fourc-section-header">
+            <div class="fourc-badge badge-clarity">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.4" />
+                <path d="M3 5h4M5 3v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+              </svg>
+              Clarity
+            </div>
+          </div>
+          <div class="chips-row">
+            <div class="chip clarity-chip" onclick="toggleChip(this,'challenge','losing-structure')"
+              data-value="losing-structure" data-4c="clarity">Losing structure</div>
+            <div class="chip clarity-chip" onclick="toggleChip(this,'challenge','searching-for-words')"
+              data-value="searching-for-words" data-4c="clarity">Searching for words</div>
+            <div class="chip clarity-chip" onclick="toggleChip(this,'challenge','translating-too-much')"
+              data-value="translating-too-much" data-4c="clarity">Translating too much</div>
+            <div class="chip clarity-chip" onclick="toggleChip(this,'challenge','responding-slowly')"
+              data-value="responding-slowly" data-4c="clarity">Responding slowly</div>
+            <div class="chip clarity-chip" onclick="toggleChip(this,'challenge','rambling')" data-value="rambling"
+              data-4c="clarity">Rambling</div>
+          </div>
+        </div>
+
+        <div class="fourc-section">
+          <div class="fourc-section-header">
+            <div class="fourc-badge badge-credibility">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M5 1l1.2 2.5 2.8.4-2 1.95.47 2.75L5 7.4 2.53 8.64 3 5.9 1 3.9l2.8-.4L5 1z"
+                  stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+              </svg>
+              Credibility
+            </div>
+          </div>
+          <div class="chips-row">
+            <div class="chip credibility-chip" onclick="toggleChip(this,'challenge','generic-answers')"
+              data-value="generic-answers" data-4c="credibility">Generic answers</div>
+            <div class="chip credibility-chip" onclick="toggleChip(this,'challenge','sounding-too-simple')"
+              data-value="sounding-too-simple" data-4c="credibility">Sounding too simple</div>
+            <div class="chip credibility-chip" onclick="toggleChip(this,'challenge','sounding-nervous')"
+              data-value="sounding-nervous" data-4c="credibility">Sounding nervous</div>
+            <div class="chip credibility-chip" onclick="toggleChip(this,'challenge','over-apologising')"
+              data-value="over-apologising" data-4c="credibility">Over-apologising</div>
+            <div class="chip credibility-chip" onclick="toggleChip(this,'challenge','sounding-less-experienced')"
+              data-value="sounding-less-experienced" data-4c="credibility">Sounding less experienced than I am</div>
+          </div>
+        </div>
+
+        <div class="fourc-section">
+          <div class="fourc-section-header">
+            <div class="fourc-badge badge-connection">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M3 5c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z" stroke="currentColor" stroke-width="1.3" />
+                <path d="M1 2.5C1.5 1.5 3 1 5 1s3.5.5 4 1.5M1 7.5C1.5 8.5 3 9 5 9s3.5-.5 4-1.5" stroke="currentColor"
+                  stroke-width="1.3" stroke-linecap="round" />
+              </svg>
+              Connection
+            </div>
+          </div>
+          <div class="chips-row">
+            <div class="chip connection-chip" onclick="toggleChip(this,'challenge','sounding-robotic')"
+              data-value="sounding-robotic" data-4c="connection">Sounding robotic</div>
+            <div class="chip connection-chip" onclick="toggleChip(this,'challenge','too-direct')"
+              data-value="too-direct" data-4c="connection">Sounding too direct</div>
+            <div class="chip connection-chip" onclick="toggleChip(this,'challenge','awkward-rapport')"
+              data-value="awkward-rapport" data-4c="connection">Awkward rapport</div>
+            <div class="chip connection-chip" onclick="toggleChip(this,'challenge','cross-cultural-tone')"
+              data-value="cross-cultural-tone" data-4c="connection">Cross-cultural tone</div>
+          </div>
+        </div>
+
+        <div class="fourc-section">
+          <div class="fourc-section-header">
+            <div class="fourc-badge badge-control">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5h6M5 2v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              Control
+            </div>
+          </div>
+          <div class="chips-row">
+            <div class="chip control-chip" onclick="toggleChip(this,'challenge','freezing')" data-value="freezing"
+              data-4c="control">Freezing under pressure</div>
+            <div class="chip control-chip" onclick="toggleChip(this,'challenge','fast-questions')"
+              data-value="fast-questions" data-4c="control">Fast questions</div>
+            <div class="chip control-chip" onclick="toggleChip(this,'challenge','interruptions')"
+              data-value="interruptions" data-4c="control">Interruptions</div>
+            <div class="chip control-chip" onclick="toggleChip(this,'challenge','objections-pushback')"
+              data-value="objections-pushback" data-4c="control">Objections or pushback</div>
+            <div class="chip control-chip" onclick="toggleChip(this,'challenge','avoiding-speaking')"
+              data-value="avoiding-speaking" data-4c="control">Avoiding speaking</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+       PAGE 5 — FOCUS
+  ════════════════════════════════════════════════════ -->
+      <div class="page" id="page-5">
+        <div class="section-header">
+          <div class="section-eyebrow">Step 4 of 4</div>
+          <h2 class="section-title">Best Starting Focus</h2>
+          <p class="section-note">Choose one main focus area that would make the biggest professional difference right
+            now — Clarity, Credibility, Connection, or Control. You can add a secondary focus if useful.</p>
+        </div>
+
+        <div class="focus-grid">
+
+          <div class="focus-card" id="fc-clarity" onclick="selectFocus('clarity')">
+            <div class="primary-indicator" id="fi-clarity">Primary</div>
+            <div class="focus-card-inner">
+              <div class="fourc-badge badge-clarity" style="margin-bottom:10px;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <circle cx="5" cy="5" r="4" stroke="#2D6FA8" stroke-width="1.4" />
+                  <path d="M3 5h4M5 3v4" stroke="#2D6FA8" stroke-width="1.4" stroke-linecap="round" />
+                </svg>
+                Clarity
+              </div>
+              <div class="fourc-card-title">Make strong ideas easier to follow.</div>
+              <div class="fourc-card-desc" style="margin:8px 0 10px; font-size:12.5px;">Examples:</div>
+              <div class="fourc-card-tags">
+                <span class="fourc-tag">Rambling</span>
+                <span class="fourc-tag">Unclear explanations</span>
+                <span class="fourc-tag">Long answers</span>
+                <span class="fourc-tag">Vague structure</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="focus-card" id="fc-credibility" onclick="selectFocus('credibility')">
+            <div class="primary-indicator" id="fi-credibility">Primary</div>
+            <div class="focus-card-inner">
+              <div class="fourc-badge badge-credibility" style="margin-bottom:10px;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M5 1l1.2 2.5 2.8.4-2 1.95.47 2.75L5 7.4 2.53 8.64 3 5.9 1 3.9l2.8-.4L5 1z" stroke="#8B4E9E"
+                    stroke-width="1.2" stroke-linejoin="round" />
+                </svg>
+                Credibility
+              </div>
+              <div class="fourc-card-title">Sound more specific, senior, and trustworthy.</div>
+              <div class="fourc-card-desc" style="margin:8px 0 10px; font-size:12.5px;">Examples:</div>
+              <div class="fourc-card-tags">
+                <span class="fourc-tag">Generic answers</span>
+                <span class="fourc-tag">Weak claims</span>
+                <span class="fourc-tag">Sounding junior</span>
+                <span class="fourc-tag">Vague language</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="focus-card" id="fc-connection" onclick="selectFocus('connection')">
+            <div class="primary-indicator" id="fi-connection">Primary</div>
+            <div class="focus-card-inner">
+              <div class="fourc-badge badge-connection" style="margin-bottom:10px;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M3 5c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z" stroke="#2D8F87" stroke-width="1.3" />
+                </svg>
+                Connection
+              </div>
+              <div class="fourc-card-title">Build rapport while staying professional.</div>
+              <div class="fourc-card-desc" style="margin:8px 0 10px; font-size:12.5px;">Examples:</div>
+              <div class="fourc-card-tags">
+                <span class="fourc-tag">Robotic English</span>
+                <span class="fourc-tag">Awkward rapport</span>
+                <span class="fourc-tag">Too direct</span>
+                <span class="fourc-tag">Cross-cultural tone</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="focus-card" id="fc-control" onclick="selectFocus('control')">
+            <div class="primary-indicator" id="fi-control">Primary</div>
+            <div class="focus-card-inner">
+              <div class="fourc-badge badge-control" style="margin-bottom:10px;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5h6M5 2v6" stroke="#C8843A" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                Control
+              </div>
+              <div class="fourc-card-title">Stay structured when the conversation moves fast or gets difficult.</div>
+              <div class="fourc-card-desc" style="margin:8px 0 10px; font-size:12.5px;">Examples:</div>
+              <div class="fourc-card-tags">
+                <span class="fourc-tag">Freezing</span>
+                <span class="fourc-tag">Interruptions</span>
+                <span class="fourc-tag">Objections</span>
+                <span class="fourc-tag">Fast questions</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="section-divider" style="margin: 20px 0;"></div>
+
+        <div style="margin-bottom:10px;">
+          <div class="section-eyebrow" style="margin-bottom:4px;">Suggested First Upgrade</div>
+          <p class="section-note" style="margin-top:0;">Choose one practical skill to start with.
+            (Optional)</p>
+        </div>
+
+        <!-- Clarity Upgrades -->
+        <div class="group-label" style="color: var(--clarity); margin-top:12px;">Clarity</div>
+        <div class="chips-row">
+          <div class="chip clarity-chip" onclick="toggleChip(this,'upgrade','better-structure')"
+            data-value="better-structure" data-4c="clarity">Better structure</div>
+          <div class="chip clarity-chip" onclick="toggleChip(this,'upgrade','concise-answers')"
+            data-value="concise-answers" data-4c="clarity">More concise answers</div>
+          <div class="chip clarity-chip" onclick="toggleChip(this,'upgrade','clearer-next-steps')"
+            data-value="clearer-next-steps" data-4c="clarity">Clearer next steps</div>
+        </div>
+
+        <!-- Credibility Upgrades -->
+        <div class="group-label" style="color: var(--credibility); margin-top:12px;">Credibility</div>
+        <div class="chips-row">
+          <div class="chip credibility-chip" onclick="toggleChip(this,'upgrade','specific-language')"
+            data-value="specific-language" data-4c="credibility">More specific language</div>
+          <div class="chip credibility-chip" onclick="toggleChip(this,'upgrade','confident-phrasing')"
+            data-value="confident-phrasing" data-4c="credibility">More confident phrasing</div>
+          <div class="chip credibility-chip" onclick="toggleChip(this,'upgrade','stronger-value')"
+            data-value="stronger-value" data-4c="credibility">Stronger value explanation</div>
+        </div>
+
+        <!-- Connection Upgrades -->
+        <div class="group-label" style="color: var(--connection); margin-top:12px;">Connection</div>
+        <div class="chips-row">
+          <div class="chip connection-chip" onclick="toggleChip(this,'upgrade','stronger-opening')"
+            data-value="stronger-opening" data-4c="connection">Stronger opening</div>
+          <div class="chip connection-chip" onclick="toggleChip(this,'upgrade','diplomatic-tone')"
+            data-value="diplomatic-tone" data-4c="connection">Softer / more diplomatic tone</div>
+          <div class="chip connection-chip" onclick="toggleChip(this,'upgrade','discovery-questions')"
+            data-value="discovery-questions" data-4c="connection">Better discovery questions</div>
+        </div>
+
+        <!-- Control Upgrades -->
+        <div class="group-label" style="color: var(--control); margin-top:12px;">Control</div>
+        <div class="chips-row">
+          <div class="chip control-chip" onclick="toggleChip(this,'upgrade','recovery-phrases')"
+            data-value="recovery-phrases" data-4c="control">Better recovery phrases</div>
+          <div class="chip control-chip" onclick="toggleChip(this,'upgrade','objection-structure')"
+            data-value="objection-structure" data-4c="control">Objection response structure</div>
+          <div class="chip control-chip" onclick="toggleChip(this,'upgrade','fast-follow-up')"
+            data-value="fast-follow-up" data-4c="control">Handling fast questions</div>
+        </div>
+
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+       PAGE 6 — ACTION PLAN
+  ════════════════════════════════════════════════════ -->
+      <div class="page" id="page-6">
+
+        <div class="action-plan-header">
+          <div class="section-eyebrow">Your Recommended Coaching Path</div>
+          <h2 class="action-plan-title">Action Plan</h2>
+          <p class="action-plan-subtitle">Based on your role, goals, and pressure points, this is the clearest place to
+            start.</p>
+        </div>
+
+        <!-- PRIMARY MODULE HERO -->
+        <div class="module-hero" id="ap-module-hero">
+          <div class="module-hero-eyebrow">Recommended First Module</div>
+          <div class="module-hero-title" id="ap-module-title">—</div>
+          <div class="module-hero-desc" id="ap-module-desc">—</div>
+          <div class="module-hero-bottom">
+            <div class="module-hero-path" id="ap-module-path">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <rect x="1" y="2" width="12" height="10" rx="2" stroke="white" stroke-width="1.2" opacity="0.7" />
+                <path d="M4 5h6M4 7.5h4" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.7" />
+              </svg>
+              —
+            </div>
+            <a class="btn-open-module" id="ap-module-btn" href="#">
+              Open Module
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- OVERRIDE -->
+        <div class="override-row">
+          <span class="override-label">Tutor override</span>
+          <select class="override-select" id="module-override" onchange="overrideModule(this.value)">
+            <option value="">— Select a different module —</option>
+            <option value="0">Client Call Confidence</option>
+            <option value="1">Discovery Call Foundations</option>
+            <option value="2">Explaining Value Clearly</option>
+            <option value="3">Objection Handling</option>
+            <option value="4">Follow-Up and Next Steps</option>
+            <option value="5">Small Talk to Business</option>
+            <option value="6">Meeting Participation</option>
+            <option value="7">Presentation and Q&A Structure</option>
+            <option value="8">Sales Interview Prep</option>
+            <option value="9">Fluency Under Pressure</option>
+            <option value="10">Negotiation and Difficult Conversations</option>
+            <option value="11">Rapport and Professional Tone</option>
+            <option value="12">Sounding Senior and In Control</option>
+            <option value="13">Cross-Cultural Business Communication</option>
+          </select>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M4 6l3 3 3-3" stroke="#6B7280" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+
+        <!-- ROADMAP SUMMARY -->
+        <div class="ap-block-full roadmap-summary-card" id="roadmapSummaryCard">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 0;">
+            <div class="summary-eyebrow" style="margin-bottom:0;">Based on Your Roadmap</div>
+            <button class="btn-method-notes" onclick="openMethodNotes()" type="button">
+              <svg width="12" height="12" viewBox="0 0 13 13" fill="none">
+                <circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.3" />
+                <path d="M6.5 5.5v4M6.5 4h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+              </svg>
+              Method Notes
+            </button>
+          </div>
+
+          <div class="why-module-box" style="margin-top:10px;">
+            <div class="why-module-label">Why this fits</div>
+            <p id="whyModuleFitsText"></p>
+          </div>
+
+          <button class="summary-toggle" type="button" id="roadmapSummaryToggle" onclick="toggleRoadmapDetails()"
+            aria-expanded="false">
+            <span id="roadmapSummaryToggleText">Show roadmap details</span>
+            <svg class="summary-toggle-chevron" width="15" height="15" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <div class="roadmap-summary-details" id="roadmapSummaryDetails">
+            <div class="roadmap-summary-grid">
+              <div class="summary-row" id="summarySituationRow">
+                <div class="summary-label">Situation</div>
+                <div class="summary-chips" id="summarySituationChips"></div>
+              </div>
+
+              <div class="summary-row" id="summaryGoalRow">
+                <div class="summary-label">Goal</div>
+                <div class="summary-chips" id="summaryGoalChips"></div>
+              </div>
+
+              <div class="summary-row" id="summaryChallengeRow">
+                <div class="summary-label">Challenge</div>
+                <div class="summary-chips" id="summaryChallengeChips"></div>
+              </div>
+
+              <div class="summary-row" id="summaryUpgradeRow">
+                <div class="summary-label">First Upgrade</div>
+                <div class="summary-chips" id="summaryUpgradeChips"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WHAT THIS BUILDS -->
+        <div class="ap-block-full">
+          <div class="ap-block-label">What This Will Build</div>
+          <ul class="outcome-list" id="ap-outcomes">
+            <!-- populated by JS -->
+          </ul>
+        </div>
+
+        <!-- FOCUS + OUTCOMES GRID -->
+        <div class="ap-grid">
+
+          <div class="ap-block">
+            <div class="ap-block-label">Recommended Starting Focus</div>
+            <div class="focus-combo" id="ap-focus-combo">
+              <!-- populated by JS -->
+            </div>
+            <div class="focus-desc" id="ap-focus-desc">—</div>
+          </div>
+
+          <div class="ap-block">
+            <div class="ap-block-label">Typical Lesson Path</div>
+            <div class="path-display">
+              <div class="path-range" id="ap-path-range">3–5</div>
+              <div class="path-unit">lessons<br><span style="font-size:11px; opacity:0.6;">estimated range</span>
+              </div>
+            </div>
+            <p style="font-size:11.5px; color:var(--muted); margin-top:10px; line-height:1.5;">This is a focused
+              starting range. We can go deeper if the situation needs more rehearsal or pressure practice.</p>
+          </div>
+
+        </div>
+
+        <!-- NEXT MODULES -->
+        <div class="ap-block-full">
+          <div class="ap-block-label">Useful Next Modules</div>
+          <div id="ap-next-modules">
+            <!-- populated by JS -->
+          </div>
+        </div>
+
+        <!-- PREP -->
+        <div class="ap-block-full">
+          <div class="ap-block-label">Helpful Prep</div>
+          <p style="font-size:12.5px; color:var(--muted); margin-bottom:10px; line-height:1.5;">Optional examples for
+            future sessions:</p>
+          <div class="prep-chips" id="ap-prep-chips">
+            <!-- populated by JS -->
+          </div>
+        </div>
+
+        <!-- RESTART -->
+        <div
+          style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end;">
+          <button class="btn-back-bottom" onclick="resetAll()" style="border-color: var(--teal); color: var(--teal);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7a5 5 0 1 1 1.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M2 11V7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            Start Over
+          </button>
+        </div>
+
+      </div><!-- /page-6 -->
+
+    </div><!-- /page-content -->
+
+  </div><!-- /app-shell -->
+
+  <!-- METHOD NOTES MODAL -->
+  <div class="method-modal-overlay" id="methodNotesOverlay" onclick="closeMethodNotes()" role="dialog" aria-modal="true"
+    aria-labelledby="methodNotesTitle">
+    <div class="method-modal" onclick="event.stopPropagation()">
+      <div class="method-modal-header">
+        <h3 class="method-modal-title" id="methodNotesTitle">Method Notes</h3>
+        <button class="method-modal-close" onclick="closeMethodNotes()" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+      <div class="method-modal-body">
+        <p>This roadmap and the coaching modules were built for professional English coaching sessions with
+          client-facing and business professionals.</p>
+        <p>The material is based on four main sources:</p>
+
+        <div class="method-source">
+          <div class="method-source-num">1</div>
+          <div>
+            <div class="method-source-title">Real client-facing communication experience</div>
+            <p>The scenarios reflect common professional situations such as client calls, discovery conversations, value
+              explanations, objections, follow-ups, interviews, meetings, presentations, negotiation, leadership
+              conversations, and cross-cultural communication.</p>
+          </div>
+        </div>
+
+        <div class="method-source">
+          <div class="method-source-num">2</div>
+          <div>
+            <div class="method-source-title">Common professional communication patterns</div>
+            <p>The material draws on recurring communication patterns used across sales, client service, account
+              management, interviews, meetings, presentations, negotiation, follow-up, and cross-cultural workplace
+              communication.</p>
+            <p>These patterns are turned into practical English coaching: what to say, how to structure it, how to
+              adjust the tone, and how to practise it in realistic professional situations.</p>
+          </div>
+        </div>
+
+        <div class="method-source">
+          <div class="method-source-num">3</div>
+          <div>
+            <div class="method-source-title">English coaching methodology</div>
+            <p>The lessons are built around skill blocks: useful language, weak-to-stronger examples, controlled
+              practice, applied practice, realistic challenges, and live feedback.</p>
+            <p>This helps students build one communication move at a time instead of memorising long phrase lists.</p>
+          </div>
+        </div>
+
+        <div class="method-source">
+          <div class="method-source-num">4</div>
+          <div>
+            <div class="method-source-title">Live personalisation</div>
+            <p>The modules provide the core material, but your real work situations can be used whenever they are
+              useful.</p>
+            <p>This means the session can work with no preparation, while still becoming specific to your role,
+              industry, and communication challenges.</p>
+          </div>
+        </div>
+
+        <p>The goal is not to follow a generic textbook course. The goal is to build the English you need for real
+          professional situations.</p>
+
+        <div class="method-combines">
+          <div class="method-combines-label">Each module combines:</div>
+          <ul>
+            <li>Professional communication strategy</li>
+            <li>Useful English phrasing</li>
+            <li>Live practice with feedback</li>
+          </ul>
+        </div>
+
+        <div class="method-modal-byline">Created by Emrys</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════
+    // STATE
+    // ═══════════════════════════════════════════════
+    const state = {
+      situation: [],
+      goal: [],
+      challenge: [],
+      focus: { primary: null, secondary: null },
+      upgrade: [],
+      currentPage: 1,
+      overriddenModule: null
+    };
+
+    // ═══════════════════════════════════════════════
+    // MODULE LIBRARY
+    // ═══════════════════════════════════════════════
+    const MODULES = [
+      {
+        "id": 0,
+        "title": "Client Call Confidence",
+        "desc": "For client-facing professionals who need smoother calls, clearer next steps, and more confident real-time client communication.",
+        "builds": [
+          "Smoother call openings that build rapport without wasting time",
+          "Clearer agenda-setting and purpose at the start of a call",
+          "Better clarification and follow-up questions in real time",
+          "Stronger confirmation of decisions, actions, and next steps",
+          "More natural confidence when speaking with clients live",
+          "Calmer handling of unexpected client questions"
+        ],
+        "path": "3–5",
+        "prep": [
+          "Client-call example",
+          "Recent difficult conversation",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 1,
+        "title": "Discovery Call Foundations",
+        "desc": "For sales calls, consulting conversations, account management, and client needs analysis where better questions create better opportunities.",
+        "builds": [
+          "Stronger openings that create trust early",
+          "Sharper discovery questions that uncover real needs",
+          "Clearer summaries of what the client actually said",
+          "Smoother movement from problem to next step",
+          "More control when clients push back or give vague answers",
+          "Better structure for understanding client priorities"
+        ],
+        "path": "3–5",
+        "prep": [
+          "Client-call example",
+          "Product/service explanation",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Explaining Value Clearly",
+        "desc": "For pitching, product or service explanation, presentations, and moments where your idea needs to land quickly and persuasively.",
+        "builds": [
+          "Clearer and more compelling value explanations",
+          "Stronger feature-to-benefit language",
+          "Simpler explanations of complex products, services, or experience",
+          "More persuasive and specific wording",
+          "Better connection between the client problem and your solution",
+          "Less overexplaining and more confident delivery"
+        ],
+        "path": "3–5",
+        "prep": [
+          "Product/service explanation",
+          "Presentation or meeting topic",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Objection Handling",
+        "desc": "For client pushback, difficult questions, price concerns, timing issues, and moments that need a calm, structured response.",
+        "builds": [
+          "Calmer and more considered responses to pushback",
+          "Less defensive language under pressure",
+          "Better responses to price, timing, and fit objections",
+          "Clearer structure when conversations become difficult",
+          "Smoother movement toward next steps after resistance",
+          "More control when the conversation shifts unexpectedly"
+        ],
+        "path": "3–5",
+        "prep": [
+          "Recent difficult conversation",
+          "Client-call example",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Follow-Up and Next Steps",
+        "desc": "For ending calls clearly, maintaining momentum, confirming actions, and using professional follow-up language that keeps opportunities moving.",
+        "builds": [
+          "Clearer and more confident call endings",
+          "Stronger action-point summaries",
+          "More natural and professional follow-up language",
+          "Polite persistence without sounding pushy",
+          "Better next-step confirmation that clients remember",
+          "Less momentum lost after promising conversations"
+        ],
+        "path": "2–4",
+        "prep": [
+          "Client-call example",
+          "Recent difficult conversation",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Small Talk to Business",
+        "desc": "For professionals who can communicate in English but struggle to move naturally from rapport-building into the business conversation.",
+        "builds": [
+          "Warmer and more natural call and meeting openers",
+          "Smoother transitions from small talk into business purpose",
+          "Less awkward silences or abrupt topic changes",
+          "More confident rapport-building language",
+          "Better timing for when to shift from social to professional",
+          "More natural English for the first few minutes of any conversation"
+        ],
+        "path": "2–3",
+        "prep": [
+          "Client-call example",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Meeting Participation",
+        "desc": "For internal meetings, international teams, speaking up, giving opinions, clarifying points, and contributing with more professional presence.",
+        "builds": [
+          "Clearer and more concise meeting contributions",
+          "More confident opinions with structured reasoning",
+          "Better clarification language in real time",
+          "More natural interruption and turn-taking language",
+          "Stronger action-point summaries at the end",
+          "More confidence speaking in group settings"
+        ],
+        "path": "3–5",
+        "prep": [
+          "Presentation or meeting topic",
+          "Recent difficult conversation",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Presentation and Q&A Structure",
+        "desc": "For formal presentations, project updates, signposting, transitions, and handling questions without losing control of the message.",
+        "builds": [
+          "Clearer and more engaging openings",
+          "Stronger transitions between sections",
+          "A more structured and memorable core message",
+          "Better control during Q&A moments",
+          "More concise delivery with less overexplaining",
+          "A stronger closing that drives a clear outcome"
+        ],
+        "path": "3–5",
+        "prep": [
+          "Presentation or meeting topic",
+          "Product/service explanation",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Sales Interview Prep",
+        "desc": "For sales and client-facing professionals preparing for interviews — targets, achievements, sales process, client stories, and high-performance credibility.",
+        "builds": [
+          "Stronger answers about motivation, targets, and sales experience",
+          "A clearer career story with a logical thread",
+          "Better achievement language with numbers and context",
+          "More confident responses in sales roleplay scenarios",
+          "Stronger handling of rejection and resilience questions",
+          "More commercial, sales-aware interview language"
+        ],
+        "path": "3–5",
+        "prep": [
+          "Job description",
+          "Interview question",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Fluency Under Pressure",
+        "desc": "For freezing, rambling, fast questions, interruptions, nervousness, hesitation, and thinking clearly in English when the conversation becomes unpredictable.",
+        "builds": [
+          "Better recovery phrases when you lose your place",
+          "More control when interrupted mid-sentence",
+          "Shorter and clearer answers under pressure",
+          "Less over-apologising and more confident recovery",
+          "Faster response structure without needing to translate every idea",
+          "More confidence in unscripted situations"
+        ],
+        "path": "4–6",
+        "prep": [
+          "Recent difficult conversation",
+          "Interview question",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Negotiation and Difficult Conversations",
+        "desc": "For pricing, deadlines, terms, complaints, disagreement, compromise, and firm but polite communication under pressure.",
+        "builds": [
+          "Firmer but more diplomatic language",
+          "Better softening and tone control",
+          "Clearer compromise and alternative-offer language",
+          "Stronger boundary-setting without creating unnecessary conflict",
+          "Calmer responses in tense moments",
+          "More control and direction during disagreement"
+        ],
+        "path": "4–6",
+        "prep": [
+          "Recent difficult conversation",
+          "Client-call example",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Rapport and Professional Tone",
+        "desc": "For professionals who can communicate in English but want to sound warmer, more natural, and more professionally credible across all business contexts.",
+        "builds": [
+          "More natural and professional phrasing",
+          "Warmer responses that build real connection",
+          "Better active listening and response language",
+          "Less robotic and more human English",
+          "More confident tone without sounding aggressive",
+          "More relationship-aware communication across professional contexts"
+        ],
+        "path": "3–5",
+        "prep": [
+          "Client-call example",
+          "Recent difficult conversation",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Sounding Senior and In Control",
+        "desc": "For managers, senior professionals, founders, consultants, and anyone who needs to sound more decisive, authoritative, and credible in English.",
+        "builds": [
+          "Stronger and more decisive recommendations",
+          "More senior and authoritative phrasing",
+          "Clearer expectations and direction-setting",
+          "Firmer but respectful language in difficult situations",
+          "Better feedback, delegation, and alignment language",
+          "More authority without sounding aggressive or rude"
+        ],
+        "path": "4–6",
+        "prep": [
+          "Recent difficult conversation",
+          "Presentation or meeting topic",
+          "No prep needed"
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Cross-Cultural Business Communication",
+        "desc": "For international teams, global clients, cultural nuance, direct versus indirect communication, and adapting tone without losing your message.",
+        "builds": [
+          "Better tone adaptation across cultural contexts",
+          "More awareness of direct versus indirect communication",
+          "Stronger softening and diplomatic language",
+          "More appropriate formality in different situations",
+          "Less accidental rudeness or misreading of tone",
+          "Better ability to read the room in cross-cultural settings"
+        ],
+        "path": "3–5",
+        "prep": [
+          "Recent difficult conversation",
+          "Client-call example",
+          "No prep needed"
+        ]
+      }
+    ];
+
+    // ═══════════════════════════════════════════════
+    // RECOMMENDATION ENGINE
+    // ═══════════════════════════════════════════════
+    function computeModuleScores() {
+      const scores = new Array(14).fill(0);
+
+      const addScores = (items, map, weights) => {
+        items.forEach(item => {
+          (map[item] || []).forEach((moduleId, index) => {
+            scores[moduleId] += weights[index] || 0;
+          });
+        });
+      };
+
+      // ID reference:
+      // 0=Client Call Confidence, 1=Discovery Call Foundations,
+      // 2=Explaining Value Clearly, 3=Objection Handling,
+      // 4=Follow-Up and Next Steps, 5=Small Talk to Business,
+      // 6=Meeting Participation, 7=Presentation and Q&A Structure,
+      // 8=Sales Interview Prep, 9=Fluency Under Pressure,
+      // 10=Negotiation and Difficult Conversations,
+      // 11=Rapport and Professional Tone,
+      // 12=Sounding Senior and In Control,
+      // 13=Cross-Cultural Business Communication
+
+      const situationMap = {
+        'sales-calls': [0, 1, 3, 2, 4],
+        'discovery-calls': [1, 0, 2, 11],
+        'client-meetings': [0, 5, 11, 6, 10],
+        'explaining-value': [2, 1, 7, 0],
+        'objection-handling': [3, 10, 9],
+        'negotiation': [10, 3, 9],
+        'follow-ups': [4, 0, 10],
+
+        'internal-meetings': [6, 12, 9, 13],
+        'presentations': [7, 6, 12, 9],
+        'leadership-conversations': [12, 10, 6, 13],
+        'customer-support': [0, 11, 9, 10],
+
+        'interviews': [8, 9, 12],
+        'networking': [11, 5, 13, 0],
+        'cross-cultural': [13, 11, 10, 0],
+        'general-professional': [9, 11, 6, 12]
+      };
+
+      const challengeMap = {
+        'losing-structure': [9, 6, 7, 2],
+        'searching-for-words': [9, 11, 0],
+        'translating-too-much': [9, 13, 11],
+        'responding-slowly': [9, 0, 6],
+        'rambling': [9, 7, 6, 2],
+
+        'generic-answers': [2, 12, 6],
+        'sounding-too-simple': [2, 12, 11],
+        'sounding-nervous': [9, 12, 11],
+        'over-apologising': [9, 10, 12, 11],
+        'sounding-less-experienced': [12, 2, 6],
+
+        'sounding-robotic': [11, 13, 0],
+        'too-direct': [13, 10, 11],
+        'awkward-rapport': [11, 5, 13],
+        'cross-cultural-tone': [13, 11, 10],
+
+        'freezing': [9, 3, 10],
+        'fast-questions': [9, 3, 0],
+        'interruptions': [9, 6, 10],
+        'objections-pushback': [3, 10, 9],
+        'avoiding-speaking': [9, 6, 11]
+      };
+
+      const goalMap = {
+        'clear': [7, 2, 6, 0],
+        'concise': [7, 6, 2, 0],
+        'structured': [7, 6, 2, 9],
+        'precise': [2, 12, 7],
+
+        'credible': [12, 2, 0],
+        'professional': [12, 11, 6, 0],
+        'senior': [12, 10, 6],
+        'persuasive': [2, 3, 10, 12],
+
+        'natural': [11, 5, 13],
+        'warm': [11, 5, 13],
+        'diplomatic': [13, 10, 11],
+        'less-robotic': [11, 5, 13],
+
+        'confident': [9, 12, 6],
+        'calm-under-pressure': [9, 3, 10],
+        'less-hesitant': [9, 11, 0],
+        'more-fluent': [9, 11, 6]
+      };
+
+      const upgradeMap = {
+        'better-structure': [7, 6, 2, 9],
+        'concise-answers': [7, 6, 2],
+        'clearer-next-steps': [4, 0, 6],
+
+        'specific-language': [2, 12, 6],
+        'confident-phrasing': [12, 9, 11],
+        'stronger-value': [2, 1, 0],
+
+        'stronger-opening': [11, 5, 0, 1],
+        'diplomatic-tone': [10, 13, 11],
+        'discovery-questions': [1, 0, 11],
+
+        'recovery-phrases': [9, 3, 6],
+        'objection-structure': [3, 10, 9],
+        'fast-follow-up': [9, 3, 0]
+      };
+
+      const focusMap = {
+        clarity: [7, 6, 2, 0],
+        credibility: [12, 2, 0, 10],
+        connection: [11, 5, 13, 10],
+        control: [9, 3, 10, 6]
+      };
+
+      addScores(state.situation, situationMap, [16, 10, 5, 3, 1]);
+      addScores(state.challenge, challengeMap, [4, 3, 2, 1]);
+      addScores(state.goal, goalMap, [3, 2, 1, 1]);
+      addScores(state.upgrade, upgradeMap, [4, 3, 2, 1]);
+
+      if (state.focus.primary) {
+        addScores([state.focus.primary], focusMap, [4, 3, 2, 1]);
+      }
+
+      if (state.focus.secondary) {
+        addScores([state.focus.secondary], focusMap, [2, 1, 1, 1]);
+      }
+
+      if (!state.situation.includes('interviews')) {
+        scores[8] = -999;
+      }
+
+      return scores;
+    }
+
+    function getTopModules() {
+      const scores = computeModuleScores();
+      const indexed = scores.map((s, i) => ({ score: s, idx: i }));
+      indexed.sort((a, b) => b.score - a.score);
+      return indexed;
+    }
+
+    // ═══════════════════════════════════════════════
+    // CHIP TOGGLE
+    // ═══════════════════════════════════════════════
+    function toggleChip(el, category, value) {
+      const arr = state[category];
+      const i = arr.indexOf(value);
+      if (i === -1) {
+        arr.push(value);
+        el.classList.add('selected');
+      } else {
+        arr.splice(i, 1);
+        el.classList.remove('selected');
+      }
+
+      // Limit upgrade to 1
+      if (category === 'upgrade' && arr.length > 1) {
+        const prev = arr[0];
+        arr.splice(0, 1);
+        document.querySelectorAll(`.chip[data-value="${prev}"]`).forEach(c => {
+          if (c.closest('#page-5')) c.classList.remove('selected');
+        });
+      }
+
+      if (['situation', 'goal', 'challenge'].includes(category)) {
+        updateContinueState(state.currentPage);
+      }
+    }
+
+    // ═══════════════════════════════════════════════
+    // FOCUS SELECTION (Page 5)
+    // ═══════════════════════════════════════════════
+    function selectFocus(c) {
+      const { primary, secondary } = state.focus;
+
+      if (primary === c) {
+        // Deselect primary, promote secondary if exists
+        state.focus.primary = secondary;
+        state.focus.secondary = null;
+      } else if (secondary === c) {
+        // Deselect secondary
+        state.focus.secondary = null;
+      } else if (!primary) {
+        state.focus.primary = c;
+      } else if (!secondary) {
+        state.focus.secondary = c;
+      } else {
+        // Replace secondary
+        state.focus.secondary = c;
+      }
+      renderFocusCards();
+    }
+
+    function renderFocusCards() {
+      const all = ['clarity', 'credibility', 'connection', 'control'];
+      all.forEach(c => {
+        const card = document.getElementById('fc-' + c);
+        const ind = document.getElementById('fi-' + c);
+        card.className = 'focus-card';
+        ind.textContent = 'Primary';
+
+        if (state.focus.primary === c) {
+          card.classList.add('selected-' + c, 'primary-focus');
+          ind.textContent = 'Primary';
+        } else if (state.focus.secondary === c) {
+          card.classList.add('selected-' + c, 'secondary-focus');
+          ind.textContent = 'Secondary';
+        }
+      });
+
+      // Update bottom bar if on page 5
+      if (state.currentPage === 5) {
+        const valMsg = document.getElementById('validationMsg');
+        if (valMsg) valMsg.classList.remove('show');
+        updateContinueState(5);
+      }
+    }
+
+    // ═══════════════════════════════════════════════
+    // PAGE NAVIGATION
+    // ═══════════════════════════════════════════════
+    function goToPage(n) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + n).classList.add('active');
+      state.currentPage = n;
+      if (n > (state.highestPage || 1)) state.highestPage = n;
+      updateProgress(n);
+      updateBottomBar(n);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (n === 6) {
+        setTimeout(renderRoadmapSummary, 0);
+      }
+    }
+
+    function updateProgress(n) {
+      // Steps map: page 2→step1, 3→step2, 4→step3, 5→step4, 6→step5
+      const stepPages = [2, 3, 4, 5, 6];
+      stepPages.forEach((p, i) => {
+        const el = document.getElementById('pstep-' + p);
+        if (!el) return;
+        el.classList.remove('active', 'completed', 'clickable');
+        el.onclick = null;
+        if (p === n) {
+          el.classList.add('active');
+        } else if (p < n) {
+          el.classList.add('completed');
+          // Completed steps that have been reached are clickable
+          if (p <= state.highestPage) {
+            el.classList.add('clickable');
+            el.onclick = () => goToPage(p);
+          }
+        }
+      });
+
+      // Connectors
+      for (let i = 1; i <= 4; i++) {
+        const conn = document.getElementById('pc-' + i);
+        if (!conn) continue;
+        // connector i is between step i and step i+1 (pages i+1 and i+2)
+        conn.classList.toggle('done', (i + 1) < n);
+      }
+
+      // Show/hide progress on page 1
+      const pt = document.getElementById('progressTrack');
+      if (pt) pt.style.opacity = n === 1 ? '0.35' : '1';
+    }
+
+    // Track highest page reached for clickable progress
+    function updateBottomBar(n) {
+      const bar = document.getElementById('bottomBar');
+      const btnBack = document.getElementById('btnBack');
+      const btnContinue = document.getElementById('btnContinue');
+      const btnLabel = document.getElementById('btnContinueLabel');
+
+      // Hide bar on page 1 and page 6
+      if (n === 1 || n === 6) {
+        bar.style.display = 'none';
+        return;
+      }
+
+      bar.style.display = 'flex';
+
+      // Back button target
+      const backTargets = { 2: 1, 3: 2, 4: 3, 5: 4 };
+      btnBack.onclick = () => goToPage(backTargets[n] || 1);
+
+      // Label for continue
+      if (n === 5) {
+        btnLabel.innerHTML = '<span class="btn-label-full">See Action Plan</span><span class="btn-label-short">Action Plan</span>';
+      } else {
+        btnLabel.textContent = 'Continue';
+      }
+
+      updateContinueState(n);
+    }
+
+    function getSelectionCount(n) {
+      if (n === 2) return state.situation.length;
+      if (n === 3) return state.goal.length;
+      if (n === 4) return state.challenge.length;
+      if (n === 5) return state.focus.primary ? 1 : 0;
+      return 0;
+    }
+
+    function formatFocusName(value) {
+      const names = {
+        clarity: 'Clarity',
+        credibility: 'Credibility',
+        connection: 'Connection',
+        control: 'Control'
+      };
+
+      return names[value] || value;
+    }
+
+    function updateContinueState(n) {
+      const btnContinue = document.getElementById('btnContinue');
+      const selCount = document.getElementById('selectedCount');
+      const count = getSelectionCount(n);
+
+      const isValid = n === 5 ? !!state.focus.primary : count > 0;
+
+      if (n === 5) {
+        const primary = state.focus.primary;
+        const secondary = state.focus.secondary;
+
+        if (primary) {
+          const focusText = secondary
+            ? `${formatFocusName(primary)} + ${formatFocusName(secondary)}`
+            : formatFocusName(primary);
+          const count = secondary ? 2 : 1;
+
+          selCount.innerHTML = `<span class="focus-label-full">Focus: <strong>${focusText}</strong></span><span class="focus-label-short">${count} selected</span>`;
+          selCount.classList.add('visible');
+        } else {
+          selCount.textContent = '';
+          selCount.classList.remove('visible');
+        }
+      } else {
+        selCount.textContent = count > 0 ? count + ' selected' : '';
+        selCount.classList.toggle('visible', count > 0);
+      }
+
+      btnContinue.disabled = !isValid;
+    }
+
+    function handleBack() {
+      const backTargets = { 2: 1, 3: 2, 4: 3, 5: 4, 6: 5 };
+      goToPage(backTargets[state.currentPage] || 1);
+    }
+
+    function handleContinue() {
+      const n = state.currentPage;
+      const valMsg = document.getElementById('validationMsg');
+
+      if (valMsg) valMsg.classList.remove('show');
+
+      if (n === 5) {
+        buildAndGoToActionPlan();
+      } else {
+        goToPage(n + 1);
+      }
+    }
+
+    // ═══════════════════════════════════════════════
+    // BUILD ACTION PLAN
+    // ═══════════════════════════════════════════════
+    const focusColors = {
+      clarity: { pill: 'var(--clarity-bg)', text: 'var(--clarity)' },
+      credibility: { pill: 'var(--credibility-bg)', text: 'var(--credibility)' },
+      connection: { pill: 'var(--connection-bg)', text: 'var(--connection)' },
+      control: { pill: 'var(--control-bg)', text: 'var(--control)' }
+    };
+
+    const focusDescs = {
+      'clarity+credibility': 'Make strong ideas easier to follow while sounding more specific and credible.',
+      'clarity+connection': 'Communicate clearly while sounding natural, human, and relationship-aware.',
+      'clarity+control': 'Use clearer structure so you stay composed when conversations get difficult.',
+      'credibility+clarity': 'Sound more trustworthy and senior with sharper, more structured language.',
+      'credibility+connection': 'Sound more senior and credible while building stronger professional rapport.',
+      'credibility+control': 'Sound more authoritative while staying composed when you need to hold your ground.',
+      'connection+clarity': 'Sound more natural and warm while keeping the message clear and on point.',
+      'connection+credibility': 'Build real rapport while sounding professional, specific, and trustworthy.',
+      'connection+control': 'Sound more natural and client-aware while staying structured under pressure.',
+      'control+clarity': 'Stay structured under pressure while keeping your message clear and easy to follow.',
+      'control+credibility': 'Handle pressure with composure while sounding more senior, specific, and credible.',
+      'control+connection': 'Stay structured under pressure while sounding natural, calm, and client-aware.'
+    };
+
+    const focusSingleDesc = {
+      clarity: 'Make strong ideas easier to follow — clearer, more concise, and better structured.',
+      credibility: 'Sound more specific, senior, and trustworthy in professional conversations.',
+      connection: 'Build rapport while sounding natural, warm, and professionally aware.',
+      control: 'Stay structured when conversations move fast, difficult, or unpredictable.'
+    };
+
+    function buildAndGoToActionPlan() {
+      state.overriddenModule = null;
+      document.getElementById('module-override').value = '';
+      buildActionPlan();
+      goToPage(6);
+    }
+
+    function formatChipLabelFallback(value) {
+      return value
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    }
+
+    function getSelectedLabelsFromState(group) {
+      const values = state[group] || [];
+
+      return values.map(value => {
+        const chip = Array.from(document.querySelectorAll('.chip')).find(chip => {
+          const clickAttr = chip.getAttribute('onclick') || '';
+          return chip.dataset.value === value && clickAttr.includes(`'${group}'`);
+        });
+
+        return chip
+          ? chip.textContent.trim().replace(/\s+/g, ' ')
+          : formatChipLabelFallback(value);
+      }).filter(Boolean);
+    }
+
+    function renderSummaryChipRow(rowId, chipsId, labels, limit = 3) {
+      const row = document.getElementById(rowId);
+      const container = document.getElementById(chipsId);
+
+      if (!row || !container) return;
+
+      container.innerHTML = '';
+
+      if (!labels || labels.length === 0) {
+        row.classList.add('hidden');
+        return;
+      }
+
+      row.classList.remove('hidden');
+
+      labels.slice(0, limit).forEach(label => {
+        const chip = document.createElement('span');
+        chip.className = 'summary-chip';
+        chip.textContent = label;
+        container.appendChild(chip);
+      });
+
+      if (labels.length > limit) {
+        const moreChip = document.createElement('span');
+        moreChip.className = 'summary-chip more';
+        moreChip.textContent = `+${labels.length - limit} more`;
+        container.appendChild(moreChip);
+      }
+    }
+
+    function joinForSentence(items) {
+      if (!items || items.length === 0) return '';
+      if (items.length === 1) return items[0].toLowerCase();
+      return `${items[0].toLowerCase()} and ${items[1].toLowerCase()}`;
+    }
+
+    function getCurrentModuleTitle() {
+      const titleEl = document.getElementById('ap-module-title');
+      return titleEl ? titleEl.textContent.trim() : 'This module';
+    }
+
+    function buildWhyModuleFits(moduleTitle, situations, goals, challenges, upgrades) {
+      const situationText = joinForSentence(situations.slice(0, 2));
+      const goalText = joinForSentence(goals.slice(0, 2));
+      const challengeText = joinForSentence(challenges.slice(0, 2));
+      const upgradeText = joinForSentence(upgrades.slice(0, 1));
+
+      if (situationText && goalText && challengeText) {
+        return `${moduleTitle} is recommended because your selections point to ${situationText}, a goal of sounding ${goalText}, and challenges like ${challengeText}.`;
+      }
+
+      if (situationText && goalText) {
+        return `${moduleTitle} is recommended because your selections point to ${situationText} and a goal of sounding ${goalText}.`;
+      }
+
+      if (situationText && challengeText) {
+        return `${moduleTitle} is recommended because your selections point to ${situationText} and challenges like ${challengeText}.`;
+      }
+
+      if (upgradeText) {
+        return `${moduleTitle} is recommended because it matches your selected starting upgrade: ${upgradeText}.`;
+      }
+
+      return `${moduleTitle} is recommended as the strongest starting point based on the roadmap selections.`;
+    }
+
+    function toggleRoadmapDetails() {
+      const card = document.getElementById('roadmapSummaryCard');
+      const toggle = document.getElementById('roadmapSummaryToggle');
+      const toggleText = document.getElementById('roadmapSummaryToggleText');
+
+      if (!card) return;
+
+      const isOpen = card.classList.toggle('open');
+
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+
+      if (toggleText) {
+        toggleText.textContent = isOpen ? 'Hide roadmap details' : 'Show roadmap details';
+      }
+    }
+
+    function renderRoadmapSummary() {
+      const situations = getSelectedLabelsFromState('situation');
+      const goals = getSelectedLabelsFromState('goal');
+      const challenges = getSelectedLabelsFromState('challenge');
+      const upgrades = getSelectedLabelsFromState('upgrade');
+
+      renderSummaryChipRow('summarySituationRow', 'summarySituationChips', situations);
+      renderSummaryChipRow('summaryGoalRow', 'summaryGoalChips', goals);
+      renderSummaryChipRow('summaryChallengeRow', 'summaryChallengeChips', challenges);
+      renderSummaryChipRow('summaryUpgradeRow', 'summaryUpgradeChips', upgrades);
+
+      const whyText = document.getElementById('whyModuleFitsText');
+
+      if (whyText) {
+        whyText.textContent = buildWhyModuleFits(
+          getCurrentModuleTitle(),
+          situations,
+          goals,
+          challenges,
+          upgrades
+        );
+      }
+    }
+
+    const MODULE_URLS = [
+      '../modules/client-call-confidence/',
+      '../modules/discovery-call-foundations/',
+      '../modules/explaining-value-clearly/',
+      '../modules/objection-handling/',
+      '../modules/follow-up-and-next-steps/',
+      '../modules/small-talk-to-business/',
+      '../modules/meeting-participation/',
+      '../modules/presentation-and-qa-structure/',
+      '../modules/sales-interview-prep/',
+      '../modules/fluency-under-pressure/',
+      '../modules/negotiation-and-difficult-conversations/',
+      '../modules/rapport-and-professional-tone/',
+      '../modules/sounding-senior-and-in-control/',
+      '../modules/cross-cultural-business-communication/'
+    ];
+
+    function buildActionPlan() {
+      const ranked = getTopModules();
+      const hasInterviewSituation = state.situation.includes('interviews');
+
+      const primaryIdx = state.overriddenModule !== null
+        ? state.overriddenModule
+        : hasInterviewSituation
+          ? 8
+          : ranked[0].idx;
+
+      const secondaryIdxList = ranked.filter(r => r.idx !== primaryIdx).slice(0, 2).map(r => r.idx);
+
+      const mod = MODULES[primaryIdx];
+
+      // Module hero
+      document.getElementById('ap-module-title').textContent = mod.title;
+      document.getElementById('ap-module-desc').textContent = mod.desc;
+      document.getElementById('ap-module-path').innerHTML =
+        `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="10" rx="2" stroke="white" stroke-width="1.2" opacity="0.7"/><path d="M4 5h6M4 7.5h4" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/></svg>
+     Typical path: ${mod.path} lessons`;
+      document.getElementById('ap-module-btn').href = MODULE_URLS[primaryIdx];
+
+      // Path range
+      document.getElementById('ap-path-range').textContent = mod.path;
+
+      // Focus combo
+      const comboCont = document.getElementById('ap-focus-combo');
+      const focusDesc = document.getElementById('ap-focus-desc');
+      comboCont.innerHTML = '';
+      const p = state.focus.primary;
+      const s = state.focus.secondary;
+
+      if (p) {
+        const pill = document.createElement('span');
+        pill.className = 'focus-pill';
+        pill.style.background = focusColors[p].pill;
+        pill.style.color = focusColors[p].text;
+        pill.textContent = p.charAt(0).toUpperCase() + p.slice(1);
+        comboCont.appendChild(pill);
+
+        if (s) {
+          const plus = document.createElement('span');
+          plus.className = 'focus-pill-connector';
+          plus.textContent = '+';
+          comboCont.appendChild(plus);
+
+          const pill2 = document.createElement('span');
+          pill2.className = 'focus-pill';
+          pill2.style.background = focusColors[s].pill;
+          pill2.style.color = focusColors[s].text;
+          pill2.textContent = s.charAt(0).toUpperCase() + s.slice(1);
+          comboCont.appendChild(pill2);
+
+          const key = p + '+' + s;
+          focusDesc.textContent = focusDescs[key] || focusSingleDesc[p];
+        } else {
+          focusDesc.textContent = focusSingleDesc[p];
+        }
+      } else {
+        const pill = document.createElement('span');
+        pill.className = 'focus-pill';
+        pill.style.background = 'var(--teal-pale)';
+        pill.style.color = 'var(--teal)';
+        pill.textContent = 'General Development';
+        comboCont.appendChild(pill);
+        focusDesc.textContent = 'Building overall professional communication with more clarity, credibility, connection, and control.';
+      }
+
+      // Outcomes
+      const outList = document.getElementById('ap-outcomes');
+      outList.innerHTML = mod.builds.map(b => `
+    <li>
+      <div class="outcome-bullet">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2.5 2.5L8 3" stroke="#2D8F87" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      ${b}
+    </li>
+  `).join('');
+
+      // Next modules
+      const nextCont = document.getElementById('ap-next-modules');
+      nextCont.innerHTML = secondaryIdxList.map(idx => {
+        const m = MODULES[idx];
+        return `
+      <div class="secondary-module" onclick="this.classList.toggle('open')">
+        <div class="secondary-module-header">
+          <div>
+            <span class="secondary-module-title">${m.title}</span>
+            <span class="secondary-module-tag">· ${m.path} lessons</span>
+          </div>
+          <svg class="secondary-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="secondary-module-body">
+          <div class="secondary-module-desc">${m.desc}</div>
+          <div class="secondary-module-path">Typical path: ${m.path} lessons</div>
+        </div>
+      </div>
+    `;
+      }).join('');
+
+      // Prep chips
+      const prepCont = document.getElementById('ap-prep-chips');
+      const allPrep = new Set(mod.prep);
+      allPrep.add('No prep needed');
+      prepCont.innerHTML = [...allPrep].map(p => `
+    <div class="prep-chip${p === 'No prep needed' ? ' none' : ''}">
+      ${p !== 'No prep needed' ? `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#2D8F87" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}
+      ${p}
+    </div>
+  `).join('');
+    }
+
+    function overrideModule(val) {
+      if (val === '') {
+        state.overriddenModule = null;
+      } else {
+        state.overriddenModule = parseInt(val);
+      }
+
+      buildActionPlan();
+      renderRoadmapSummary();
+    }
+
+    renderRoadmapSummary();
+
+    // ═══════════════════════════════════════════════
+    // RESET
+    // ═══════════════════════════════════════════════
+    function resetAll() {
+      state.situation = [];
+      state.goal = [];
+      state.challenge = [];
+      state.focus = { primary: null, secondary: null };
+      state.upgrade = [];
+      state.overriddenModule = null;
+      state.currentPage = 1;
+      state.highestPage = 1;
+
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+      renderFocusCards();
+      document.getElementById('module-override').value = '';
+      const valMsg = document.getElementById('validationMsg');
+      if (valMsg) valMsg.classList.remove('show');
+      goToPage(1);
+    }
+
+    // ═══════════════════════════════════════════════
+    // INIT
+    // ═══════════════════════════════════════════════
+    state.highestPage = 1;
+    updateProgress(1);
+    updateBottomBar(1);
+
+    // ═══════════════════════════════════════════════
+    // METHOD NOTES MODAL
+    // ═══════════════════════════════════════════════
+    function openMethodNotes() {
+      const overlay = document.getElementById('methodNotesOverlay');
+      if (overlay) overlay.classList.add('open');
+    }
+
+    function closeMethodNotes() {
+      const overlay = document.getElementById('methodNotesOverlay');
+      if (overlay) overlay.classList.remove('open');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMethodNotes();
+    });
+  </script>
+</body>
+
+</html>
