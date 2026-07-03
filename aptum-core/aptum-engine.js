@@ -303,6 +303,7 @@
                     icon: "rapport"
                     icon: "smalltalk"
                     icon: "sales-interview"
+                    icon: "cross-cultural"
                     ========================================================== -->
 
                 <symbol id="icon-objection" viewBox="0 0 20 20">
@@ -400,6 +401,16 @@
                     <path d="M6 15.5c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5"
                         fill="none" stroke="#3AACA3" stroke-width="1.3" stroke-linecap="round"/>
                 </symbol>
+
+                <symbol id="icon-cross-cultural" viewBox="0 0 20 20">
+                    <circle cx="10" cy="10" r="7.2" fill="none" stroke="white" stroke-width="1.3" opacity="0.7"/>
+                    <path d="M3.2 10h13.6" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.42"/>
+                    <path d="M10 2.8C8.2 5.1 7.3 7.5 7.3 10s.9 4.9 2.7 7.2" fill="none" stroke="white" stroke-width="1.1" stroke-linecap="round" opacity="0.42"/>
+                    <path d="M10 2.8c1.8 2.3 2.7 4.7 2.7 7.2s-.9 4.9-2.7 7.2" fill="none" stroke="white" stroke-width="1.1" stroke-linecap="round" opacity="0.42"/>
+                    <circle cx="6.5" cy="8" r="1.2" fill="white" opacity="0.75"/>
+                    <circle cx="13.5" cy="12" r="1.2" fill="white" opacity="0.75"/>
+                    <path d="M7.7 8.5c1.8 1 3.1 1.8 4.6 3" fill="none" stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round"/>
+                </symbol>                
 
 
                 <!-- ==========================================================
