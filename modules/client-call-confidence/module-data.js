@@ -558,7 +558,7 @@ window.APTUM_MODULE = {
                         label: "Controlled",
                         id: "p9-c",
                         prompt: "The client asks an unexpected question.",
-                        task: "<strong>Task</strong> — Buy time with one calm phrase.<br><strong>Use</strong> — “Let me think about that for a moment.”"
+                        task: "<strong>Task</strong> — Buy time with one calm phrase.<br><strong>Start with</strong> — “Let me think about that for a moment.”"
                     },
                     {
                         label: "Applied",
