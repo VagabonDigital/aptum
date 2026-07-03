@@ -290,12 +290,41 @@
                 <!-- ==========================================================
                     MODULE BRAND ICONS
                     Selected by module-data.js:
-                    icon: "present"
-                    icon: "smalltalk"
-                    icon: "client-call"
                     icon: "objection"
                     icon: "discovery"
+                    icon: "value"
+                    icon: "client-call"
+                    icon: "present"
+                    icon: "smalltalk"
                     ========================================================== -->
+
+                <symbol id="icon-objection" viewBox="0 0 20 20">
+                    <path d="M10 2L4 5v5c0 3.5 2.5 6.5 6 7.5C14.5 16.5 17 13.5 17 10V5L10 2z"
+                        fill="none" stroke="white" stroke-width="1.3" stroke-linejoin="round" opacity="0.7" />
+                    <path d="M7.5 10l2 2 3-3"
+                        fill="none" stroke="#3AACA3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </symbol>
+
+                <symbol id="icon-discovery" viewBox="0 0 20 20">
+                    <circle cx="9" cy="9" r="5.5" fill="none" stroke="white" stroke-width="1.4" opacity="0.75"/>
+                    <path d="M13.5 13.5L17 17" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+                    <path d="M7 9h4M9 7v4" stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round"/>
+                </symbol>
+
+                <symbol id="icon-value" viewBox="0 0 20 20">
+                    <path d="M10 3l2 4 4.5.6-3.2 3.2.75 4.5L10 13l-4.05 2.3.75-4.5L3.5 7.6 8 7z"
+                        fill="none" stroke="white" stroke-width="1.3" stroke-linejoin="round" opacity="0.7"/>
+                    <path d="M7.5 10l2 2 3-3"
+                        stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </symbol>
+
+                <symbol id="icon-client-call" viewBox="0 0 20 20">
+                    <path d="M4 10 Q4 4 10 4 Q16 4 16 10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                    <rect x="2.5" y="9.5" width="3" height="5" rx="1.5" fill="none" stroke="white" stroke-width="1.4"/>
+                    <rect x="14.5" y="9.5" width="3" height="5" rx="1.5" fill="none" stroke="white" stroke-width="1.4"/>
+                    <path d="M17 14.5 Q17 17 14 17 L11 17" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+                    <circle cx="10" cy="17.5" r="1.2" fill="#3AACA3"/>
+                </symbol>
 
                 <symbol id="icon-present" viewBox="0 0 20 20">
                     <rect x="2" y="3" width="16" height="11" rx="2" fill="none" stroke="white" stroke-width="1.3" opacity="0.7"/>
@@ -310,26 +339,6 @@
                         fill="none" stroke="#3AACA3" stroke-width="1.3" opacity="0.7"/>
                 </symbol>
 
-                <symbol id="icon-client-call" viewBox="0 0 20 20">
-                    <path d="M4 10 Q4 4 10 4 Q16 4 16 10" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                    <rect x="2.5" y="9.5" width="3" height="5" rx="1.5" fill="none" stroke="white" stroke-width="1.4"/>
-                    <rect x="14.5" y="9.5" width="3" height="5" rx="1.5" fill="none" stroke="white" stroke-width="1.4"/>
-                    <path d="M17 14.5 Q17 17 14 17 L11 17" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
-                    <circle cx="10" cy="17.5" r="1.2" fill="#3AACA3"/>
-                </symbol>
-
-                <symbol id="icon-objection" viewBox="0 0 20 20">
-                    <path d="M10 2L4 5v5c0 3.5 2.5 6.5 6 7.5C14.5 16.5 17 13.5 17 10V5L10 2z"
-                        fill="none" stroke="white" stroke-width="1.3" stroke-linejoin="round" opacity="0.7" />
-                    <path d="M7.5 10l2 2 3-3"
-                        fill="none" stroke="#3AACA3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </symbol>
-
-                <symbol id="icon-discovery" viewBox="0 0 20 20">
-                    <circle cx="9" cy="9" r="5.5" fill="none" stroke="white" stroke-width="1.4" opacity="0.75"/>
-                    <path d="M13.5 13.5L17 17" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
-                    <path d="M7 9h4M9 7v4" stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round"/>
-                </symbol>
 
 
                 <!-- ==========================================================
