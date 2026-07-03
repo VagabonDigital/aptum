@@ -293,6 +293,7 @@
                     icon: "objection"
                     icon: "discovery"
                     icon: "value"
+                    icon: "followup"
                     icon: "client-call"
                     icon: "present"
                     icon: "smalltalk"
@@ -316,6 +317,17 @@
                         fill="none" stroke="white" stroke-width="1.3" stroke-linejoin="round" opacity="0.7"/>
                     <path d="M7.5 10l2 2 3-3"
                         stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </symbol>
+
+                <symbol id="icon-followup" viewBox="0 0 20 20">
+                    <path d="M3 7h9M3 11h6"
+                        stroke="white" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
+                    <circle cx="15" cy="14" r="3"
+                        fill="none" stroke="#3AACA3" stroke-width="1.4"/>
+                    <path d="M15 12.5v1.5l1 1"
+                        stroke="#3AACA3" stroke-width="1.3" stroke-linecap="round"/>
+                    <rect x="2" y="4" width="16" height="12" rx="2"
+                        fill="none" stroke="white" stroke-width="1.3" opacity="0.35"/>
                 </symbol>
 
                 <symbol id="icon-client-call" viewBox="0 0 20 20">
