@@ -295,6 +295,7 @@
                     icon: "value"
                     icon: "followup"
                     icon: "client-call"
+                    icon: "senior"
                     icon: "present"
                     icon: "smalltalk"
                     ========================================================== -->
@@ -336,6 +337,12 @@
                     <rect x="14.5" y="9.5" width="3" height="5" rx="1.5" fill="none" stroke="white" stroke-width="1.4"/>
                     <path d="M17 14.5 Q17 17 14 17 L11 17" fill="none" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
                     <circle cx="10" cy="17.5" r="1.2" fill="#3AACA3"/>
+                </symbol>
+
+                <symbol id="icon-senior" viewBox="0 0 20 20">
+                    <rect x="2" y="3.5" width="16" height="3.2" rx="1.6" fill="white" opacity="0.75"/>
+                    <rect x="2" y="8.8" width="12" height="3.2" rx="1.6" fill="white" opacity="0.75"/>
+                    <rect x="2" y="14.1" width="8.5" height="3.2" rx="1.6" fill="#3AACA3"/>
                 </symbol>
 
                 <symbol id="icon-present" viewBox="0 0 20 20">
