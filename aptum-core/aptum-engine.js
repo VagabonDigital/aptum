@@ -296,6 +296,7 @@
                     icon: "followup"
                     icon: "client-call"
                     icon: "senior"
+                    icon: "meeting"
                     icon: "present"
                     icon: "smalltalk"
                     ========================================================== -->
@@ -343,6 +344,13 @@
                     <rect x="2" y="3.5" width="16" height="3.2" rx="1.6" fill="white" opacity="0.75"/>
                     <rect x="2" y="8.8" width="12" height="3.2" rx="1.6" fill="white" opacity="0.75"/>
                     <rect x="2" y="14.1" width="8.5" height="3.2" rx="1.6" fill="#3AACA3"/>
+                </symbol>
+
+                <symbol id="icon-meeting" viewBox="0 0 20 20">
+                    <circle cx="6" cy="7" r="2.5" fill="none" stroke="white" stroke-width="1.3" opacity="0.7"/>
+                    <circle cx="14" cy="7" r="2.5" fill="none" stroke="white" stroke-width="1.3" opacity="0.7"/>
+                    <circle cx="10" cy="7" r="2.5" fill="none" stroke="#3AACA3" stroke-width="1.3"/>
+                    <path d="M2 16c0-2.5 2-4 4-4M18 16c0-2.5-2-4-4-4M10 16v-3" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
                 </symbol>
 
                 <symbol id="icon-present" viewBox="0 0 20 20">
