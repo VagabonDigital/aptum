@@ -299,6 +299,7 @@
                     icon: "meeting"
                     icon: "present"
                     icon: "pressure"
+                    icon: "negotiation"
                     icon: "smalltalk"
                     ========================================================== -->
 
@@ -364,6 +365,15 @@
                     <path d="M3 10h3l2-5 3 10 2-7 2 3 2-1"
                         stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
                     <circle cx="17" cy="10" r="1.5" fill="#3AACA3"/>
+                </symbol>
+
+                <symbol id="icon-negotiation" viewBox="0 0 20 20">
+                    <path d="M3 13l4-4 3 3 7-7"
+                        stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+                    <circle cx="10" cy="10" r="7"
+                        fill="none" stroke="white" stroke-width="1.2" stroke-dasharray="3 2.5" opacity="0.3"/>
+                    <path d="M7 10h6"
+                        stroke="#3AACA3" stroke-width="1.5" stroke-linecap="round"/>
                 </symbol>
 
                 <symbol id="icon-smalltalk" viewBox="0 0 20 20">
