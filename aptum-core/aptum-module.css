@@ -2938,6 +2938,11 @@ body {
     align-self: flex-start;
 }
 
+.study-tool-audio,
+.study-tool-link {
+    margin-top: auto;
+}
+
 .study-tool-link:hover {
     background: linear-gradient(150deg, var(--teal-light), var(--teal));
     color: white;
