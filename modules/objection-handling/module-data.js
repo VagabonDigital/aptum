@@ -13,7 +13,7 @@
 window.APTUM_MODULE = {
     title: "Objection Handling",
     subtitle: "Business Communication Module",
-    icon: "next-objection",
+    icon: "objection",
     totalPages: 16,
     initialPage: 1,
 
