@@ -991,6 +991,7 @@ window.APTUM_MODULE = {
             "Ask one useful discovery question",
             "Deepen one answer",
             "Summarise what you heard",
+            "Connect value to what you heard",
             "Confirm the next step"
         ],
 
@@ -1004,7 +1005,8 @@ window.APTUM_MODULE = {
             "Did you give the call a direction?",
             "Did you ask before recommending?",
             "Did you deepen one vague answer?",
-            "Did you summarise before connecting value?",
+            "Did you summarise what you heard?",
+            "Did you connect value to what the client said?",
             "Did you confirm a clear next step?"
         ],
 
