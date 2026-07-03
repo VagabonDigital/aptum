@@ -200,7 +200,7 @@ window.APTUM_MODULE = {
 
     framework: {
         eyebrow: "Framework / Skill Path",
-        title: "Difficult conversations are built one calm move at a time.",
+        title: "A difficult conversation is won by structure, not by force.",
         subtitle: "You do not need aggressive English to handle tension. You need structure, clear phrases, and a way to protect the relationship while still protecting the point.",
         pathLabel: "The path",
         path: ["Pause", "Clarify", "Position", "Explore", "Hold", "Move Forward"],
