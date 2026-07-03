@@ -200,7 +200,7 @@ window.APTUM_MODULE = {
 
     framework: {
         eyebrow: "Framework / Skill Path",
-        title: "The Meeting Participation Framework",
+        title: "Meeting participation is built one move at a time.",
         subtitle: "You do not need to talk all the time to participate well. You need reliable moves for entering, adding value, and helping the discussion move forward.",
         pathLabel: "The path",
         path: ["Enter", "Contribute", "Clarify", "Build", "Challenge", "Move Forward"],
@@ -800,7 +800,7 @@ window.APTUM_MODULE = {
                 subtitle: "The same move in a more condensed form.",
                 turns: [
                     {
-                        label: "Condensed",
+                        label: "",
                         type: "response",
                         text: "“Can I add one point here? The work itself seems ready, but approval is still the main risk. I’d suggest we confirm the owner today before committing to next week.”"
                     }
