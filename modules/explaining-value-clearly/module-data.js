@@ -303,8 +303,8 @@ window.APTUM_MODULE = {
                 quote: "“This is definitely the best solution on the market.”",
                 weakPattern: "Overclaiming",
                 detail: "Strong claims without evidence make the client more skeptical, not more convinced.",
-                betterMove: "“Based on what you described, the most relevant value is helping your team compare the options more clearly before deciding.”",
-                move: "Make the value relevant and support it with proof",
+                betterMove: "“Rather than saying it’s the best, here’s one concrete point: teams often use the comparison summary in the first meeting to align on which option fits.”",
+                move: "Replace the claim with one concrete proof point",
                 button: "Go to Skill 4 — Proof",
                 page: 9
             },
@@ -840,7 +840,7 @@ window.APTUM_MODULE = {
                 title: "Prep value language for a demo",
                 situation: "You need to explain what a feature helps the client do, without becoming too technical.",
                 task: "Choose one feature and explain its value in business language. Keep the focus on what changes for the client.",
-                starter: "What this means in practice is...",
+                starter: "What that means in practice is...",
                 stressTest: "What if the client says, “I understand the feature, but why does it matter?”"
             },
             {
