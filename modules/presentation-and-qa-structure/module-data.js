@@ -448,7 +448,7 @@ window.APTUM_MODULE = {
                         label: "Controlled",
                         id: "p7-c",
                         prompt: "You are giving a short project update. The three sections are progress, timing risk, and next steps.",
-                        task: "<strong>Task</strong> — Map the structure in one clear sentence before giving any detail.<br><strong>Use</strong> — “I’ll cover three points…”"
+                        task: "<strong>Task</strong> — Map the structure in one clear sentence before giving any detail.<br><strong>Start with</strong> — “I’ll cover three points…”"
                     },
                     {
                         label: "Applied",
@@ -576,7 +576,7 @@ window.APTUM_MODULE = {
                         label: "Controlled",
                         id: "p9-c",
                         prompt: "You have just finished explaining the current results. Now move to the timing risk.",
-                        task: "<strong>Task</strong> — Use one signposting phrase to guide the listener to the next section.<br><strong>Use</strong> — “That brings me to…”"
+                        task: "<strong>Task</strong> — Use one signposting phrase to guide the listener to the next section.<br><strong>Start with</strong> — “That brings me to…”"
                     },
                     {
                         label: "Applied",
@@ -640,7 +640,7 @@ window.APTUM_MODULE = {
                         label: "Controlled",
                         id: "p10-c",
                         prompt: "“Is this realistic?” The plan can work if approval is confirmed this week.",
-                        task: "<strong>Task</strong> — Give a short, direct answer with one condition.<br><strong>Use</strong> — “The short answer is…”"
+                        task: "<strong>Task</strong> — Give a short, direct answer with one condition.<br><strong>Start with</strong> — “The short answer is…”"
                     },
                     {
                         label: "Applied",
@@ -704,7 +704,7 @@ window.APTUM_MODULE = {
                         label: "Controlled",
                         id: "p11-c",
                         prompt: "You have just finished a short update. The timeline is still possible, but approval is needed this week.",
-                        task: "<strong>Task</strong> — End with one main takeaway and one next step.<br><strong>Use</strong> — “The main takeaway is…”"
+                        task: "<strong>Task</strong> — End with one main takeaway and one next step.<br><strong>Start with</strong> — “The main takeaway is…”"
                     },
                     {
                         label: "Applied",
