@@ -1,5 +1,5 @@
 /* ==========================================================================
-   APTUM · GENERATED MODULE DATA TEST
+   APTUM · GENERATED MODULE DATA
    Business Communication Suite
    Small Talk to Business
    --------------------------------------------------------------------------
