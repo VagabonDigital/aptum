@@ -727,7 +727,7 @@ window.APTUM_MODULE = {
                 subtitle: "Same framework, tighter delivery.",
                 turns: [
                     {
-                        label: "Model response",
+                        label: "",
                         type: "response",
                         text: "“Hi Sofia, nice to meet you. Thanks for making the time today. Shall we get started? The goal for today is to understand your current onboarding process and where the delays are happening. To start, could you walk me through the process as it works now?”"
                     }
