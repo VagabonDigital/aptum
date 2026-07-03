@@ -298,6 +298,7 @@
                     icon: "senior"
                     icon: "meeting"
                     icon: "present"
+                    icon: "pressure"
                     icon: "smalltalk"
                     ========================================================== -->
 
@@ -357,6 +358,12 @@
                     <rect x="2" y="3" width="16" height="11" rx="2" fill="none" stroke="white" stroke-width="1.3" opacity="0.7"/>
                     <path d="M10 14v3M7 17h6" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
                     <path d="M6 10l2-3 2 2 2-3 2 2" stroke="#3AACA3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </symbol>
+
+                <symbol id="icon-pressure" viewBox="0 0 20 20">
+                    <path d="M3 10h3l2-5 3 10 2-7 2 3 2-1"
+                        stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+                    <circle cx="17" cy="10" r="1.5" fill="#3AACA3"/>
                 </symbol>
 
                 <symbol id="icon-smalltalk" viewBox="0 0 20 20">
