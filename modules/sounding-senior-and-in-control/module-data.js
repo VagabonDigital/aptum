@@ -199,7 +199,7 @@ window.APTUM_MODULE = {
 
     framework: {
         eyebrow: "Framework / Skill Path",
-        title: "The Senior Communication Framework",
+        title: "Senior communication is built one move at a time.",
         subtitle: "When you feel pressure to answer quickly or say the right thing, this framework helps you stay calm and sound controlled.",
         pathLabel: "The path",
         path: ["Pause", "Prioritise", "Condense", "Position", "Calibrate", "Close"],
