@@ -1019,7 +1019,7 @@ window.APTUM_MODULE = {
     quickReference: {
         eyebrow: "Quick Reference",
         title: "Explaining Value Clearly Quick Reference",
-        subtitle: "A compact reference for the value framework, key phrases, weak signals, and when to use this structure.",
+        subtitle: "A compact reference for structure, key phrases, pressure moments, and when to use this framework.",
         printLabel: "Print / Save as PDF",
 
         sections: [
@@ -1048,33 +1048,49 @@ window.APTUM_MODULE = {
             },
             {
                 type: "cards",
-                heading: "Weak Signals to Reduce",
+                heading: "Value Areas to Clarify",
                 items: [
                     {
-                        title: "Feature dumping",
-                        text: "You list what the product does without explaining why it matters."
+                        title: "Client problem",
+                        text: "What is the client trying to solve?"
                     },
                     {
-                        title: "Generic value",
-                        text: "The benefit could describe almost anything: faster, better, easier, more efficient."
+                        title: "Business impact",
+                        text: "Why does the problem matter now?"
                     },
                     {
-                        title: "Too technical",
-                        text: "The client hears product mechanics instead of practical improvement."
+                        title: "Specific outcome",
+                        text: "What improves, reduces, avoids, or becomes easier?"
                     },
                     {
-                        title: "No next step",
-                        text: "The explanation ends without a clear action."
+                        title: "Relevant proof",
+                        text: "What simple example or result supports the value?"
                     }
                 ]
             },
             {
                 type: "cards",
-                heading: "Model Response",
+                heading: "Pressure Moves",
                 items: [
                     {
-                        title: "Comparing options",
-                        text: "“The issue you described is that your team needs a clearer way to compare options before deciding. That matters because without a clear comparison, the decision can become slow or based on surface-level differences. The value here is making the trade-offs easier to understand, so your team can choose the option that fits your priorities. For example, we can compare implementation time, support, and ease of use side by side. A useful next step would be to review those options together.”"
+                        title: "Feature request",
+                        text: "Answer the feature question, then translate one feature into client value."
+                    },
+                    {
+                        title: "Generic value",
+                        text: "Replace broad words like faster or better with a concrete improvement."
+                    },
+                    {
+                        title: "Technical detail",
+                        text: "Explain what the technical point helps the client do."
+                    },
+                    {
+                        title: "Skeptical client",
+                        text: "Do not overclaim. Make the value specific to their situation."
+                    },
+                    {
+                        title: "No momentum",
+                        text: "Connect the value to a low-pressure next step."
                     }
                 ]
             },
