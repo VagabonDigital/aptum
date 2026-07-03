@@ -302,6 +302,7 @@
                     icon: "negotiation"
                     icon: "rapport"
                     icon: "smalltalk"
+                    icon: "sales-interview"
                     ========================================================== -->
 
                 <symbol id="icon-objection" viewBox="0 0 20 20">
@@ -391,6 +392,14 @@
                         fill="none" stroke="#3AACA3" stroke-width="1.3" opacity="0.7"/>
                 </symbol>
 
+                <symbol id="icon-sales-interview" viewBox="0 0 20 20">
+                    <rect x="3" y="2" width="14" height="16" rx="2.5"
+                        fill="none" stroke="white" stroke-width="1.3" opacity="0.65"/>
+                    <circle cx="10" cy="8" r="2.5"
+                        fill="none" stroke="white" stroke-width="1.3" opacity="0.75"/>
+                    <path d="M6 15.5c0-2 1.8-3.5 4-3.5s4 1.5 4 3.5"
+                        fill="none" stroke="#3AACA3" stroke-width="1.3" stroke-linecap="round"/>
+                </symbol>
 
 
                 <!-- ==========================================================
