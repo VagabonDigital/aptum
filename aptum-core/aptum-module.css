@@ -2458,6 +2458,20 @@ body {
     gap: 9px;
 }
 
+@media(min-width:901px) {
+    .prep-choice-grid:has(> .prep-choice:nth-child(5):last-child) {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .prep-choice-grid:has(> .prep-choice:nth-child(6):last-child) {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .prep-choice-grid:has(> .prep-choice:nth-child(10):last-child) {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
+
 .prep-choice {
     background: var(--card);
     border: 1px solid var(--border);
