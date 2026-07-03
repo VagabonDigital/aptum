@@ -861,7 +861,7 @@ window.APTUM_MODULE = {
         page: 14,
         eyebrow: "Prep",
         title: "Prep a Real Moment",
-        subtitle: "Choose the kind of moment coming up. You’ll get a short prep rep for sounding calm, clear, and in control.",
+        subtitle: "Choose the kind of moment coming up. You’ll get a short prep task for sounding calm, clear, and in control.",
 
         eventQuestion: "What are you preparing for?",
         defaultEvent: 0,
