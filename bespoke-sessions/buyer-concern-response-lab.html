@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Buyer Concern Response Lab</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7.5' fill='%2316233F'/><path d='M14 9.5V13L9.2 21.2C8.3 22.7 9.4 24.5 11.1 24.5H20.9C22.6 24.5 23.7 22.7 22.8 21.2L18 13V9.5' stroke='%2335A79E' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M12.5 8H19.5' stroke='%23C7A667' stroke-width='2.3' stroke-linecap='round'/><path d='M11 19.5H21' stroke='%23E4F0EE' stroke-width='2.3' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#EFEDE6;
+    --bg-2:#E9E6DD;
+    --navy:#16233F;
+    --navy-2:#0F1A30;
+    --teal:#1F8079;
+    --teal-2:#35A79E;
+    --teal-soft:#E4F0EE;
+    --gold:#C7A667;
+    --card:#FCFBF8;
+    --text:#28324A;
+    --muted:#6C7488;
+    --border:rgba(22,35,63,.12);
+    --border-soft:rgba(22,35,63,.08);
+    --shadow-sm:0 1px 2px rgba(15,26,48,.05);
+    --shadow-md:0 1px 2px rgba(15,26,48,.04), 0 10px 28px rgba(15,26,48,.07);
+    --radius:16px;
+    --radius-lg:20px;
+    --radius-sm:11px;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(31,128,121,.05), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:26px 22px 56px;
+  }
+
+  .eyebrow{
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin:0 0 7px;
+  }
+  .eyebrow.muted{ color:var(--muted); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(700px 300px at 88% -40%, rgba(53,167,158,.18), transparent 62%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:#EAF0F6;
+    border-radius:var(--radius-lg);
+    padding:24px 26px 22px;
+    box-shadow:var(--shadow-md);
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:26px; right:26px; top:0;
+    height:2px;
+    background:linear-gradient(90deg, var(--gold), rgba(199,166,103,0) 55%);
+    opacity:.75;
+  }
+  .hero-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:26px;
+    flex-wrap:wrap;
+  }
+  .hero-left{ max-width:560px; }
+  .hero .kicker{
+    font-size:10.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--teal-2); margin:0 0 10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .hero .kicker .dot{ width:6px; height:6px; border-radius:50%; background:var(--teal-2); box-shadow:0 0 0 4px rgba(53,167,158,.16); }
+  .hero h1{
+    font-family:'DM Serif Display', Georgia, 'Times New Roman', serif;
+    font-weight:400;
+    font-size:33px;
+    line-height:1.08;
+    margin:0 0 9px;
+    letter-spacing:.1px;
+    color:#F6F8FB;
+  }
+  .hero p.sub{
+    margin:0;
+    font-size:14.5px;
+    color:#AFBACB;
+    line-height:1.5;
+  }
+  .hero p.sub b{ color:#E4E9F1; font-weight:600; }
+
+  /* three-move spine in hero */
+  .spine{
+    display:flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:13px;
+    padding:8px 9px;
+  }
+  .spine .step{
+    display:flex; align-items:center; gap:7px;
+    padding:6px 10px; border-radius:9px;
+    font-size:12.5px; font-weight:600; color:#C6D0DE;
+    white-space:nowrap;
+  }
+  .spine .step .num{
+    font-size:10px; font-weight:700; color:var(--teal-2);
+    letter-spacing:.05em;
+  }
+  .spine .step.key{
+    background:var(--teal); color:#fff;
+    box-shadow:0 6px 16px rgba(31,128,121,.35);
+  }
+  .spine .step.key .num{ color:rgba(255,255,255,.85); }
+  .spine .arrow{ color:rgba(255,255,255,.28); font-size:13px; }
+
+  /* ---------- CONCERN CHIPS ---------- */
+  .chips-block{ margin-top:22px; }
+  .chips-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:11px; }
+  .chips-head .hint{ font-size:12px; color:var(--muted); }
+  .chips{ display:flex; flex-wrap:wrap; gap:9px; }
+  .chip{
+    font-family:inherit;
+    font-size:13.5px; font-weight:500;
+    color:var(--navy);
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:8px 15px;
+    cursor:pointer;
+    transition:transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease, color .14s ease;
+    box-shadow:var(--shadow-sm);
+  }
+  .chip:hover{ transform:translateY(-1px); border-color:rgba(31,128,121,.45); box-shadow:0 4px 12px rgba(15,26,48,.08); }
+  .chip[aria-pressed="true"]{
+    background:var(--teal);
+    border-color:var(--teal);
+    color:#fff;
+    box-shadow:0 6px 16px rgba(31,128,121,.30);
+  }
+
+  /* ---------- CONCERN BANNER ---------- */
+  .banner{
+    margin-top:18px;
+    background:var(--card);
+    border:1px solid var(--border-soft);
+    border-left:3px solid var(--teal);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-md);
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+    gap:0;
+    overflow:hidden;
+  }
+  .banner .cell{ padding:17px 20px; }
+  .banner .cell + .cell{ border-left:1px solid var(--border-soft); }
+  .banner .quote{
+    font-size:18px; font-weight:500; color:var(--navy);
+    line-height:1.4; margin:0;
+  }
+  .banner .quote::before{ content:"“"; color:var(--teal-2); font-family:'DM Serif Display',serif; }
+  .banner .quote::after{ content:"”"; color:var(--teal-2); font-family:'DM Serif Display',serif; }
+  .banner .cares{ font-size:14.5px; color:var(--text); margin:0; line-height:1.48; }
+  .banner .cares b{ color:var(--navy); font-weight:600; }
+
+  /* ---------- REMINDER STRIP ---------- */
+  .reminder{
+    margin:16px 0 12px;
+    display:inline-flex; align-items:center; gap:9px;
+    background:var(--teal-soft);
+    color:#155F5A;
+    border:1px solid rgba(31,128,121,.22);
+    border-radius:10px;
+    padding:7px 13px;
+    font-size:12.5px; font-weight:500;
+  }
+  .reminder .pen{ font-size:13px; }
+
+  /* ---------- RESPONSE PANELS ---------- */
+  .panels{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+  }
+  .panel{
+    background:var(--card);
+    border:1px solid var(--border-soft);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-md);
+    padding:15px 15px 16px;
+    display:flex; flex-direction:column;
+    position:relative;
+  }
+  .panel::before{
+    content:"";
+    position:absolute; left:0; top:16px; bottom:16px;
+    width:3px; border-radius:3px;
+    background:transparent;
+    transition:background .2s ease;
+  }
+  .panel.focus-key::before{ background:linear-gradient(180deg,var(--teal),var(--teal-2)); }
+  .panel-head{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .panel-num{
+    width:24px; height:24px; flex:0 0 24px;
+    border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-size:12px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .panel.focus-key .panel-num{ background:var(--teal); }
+  .panel-title{ font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--navy); }
+  .panel-tag{
+    margin-left:auto;
+    font-size:9.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--teal); background:var(--teal-soft);
+    border:1px solid rgba(31,128,121,.22);
+    padding:3px 7px; border-radius:6px; white-space:nowrap;
+  }
+  .starter-label{ font-size:10px; font-weight:600; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; }
+  .starters{ display:flex; flex-direction:column; gap:7px; margin-bottom:13px; }
+  .starter{
+    text-align:left;
+    font-family:inherit;
+    font-size:13px; line-height:1.35;
+    color:var(--text);
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:8px 11px;
+    cursor:pointer;
+    transition:border-color .14s ease, background .14s ease, transform .12s ease, box-shadow .14s ease;
+  }
+  .starter:hover{ border-color:rgba(31,128,121,.5); background:#FBFEFD; transform:translateY(-1px); box-shadow:0 3px 9px rgba(15,26,48,.06); }
+  .starter.active{ border-color:var(--teal); background:var(--teal-soft); color:#0F4A46; box-shadow:inset 0 0 0 1px rgba(31,128,121,.35); }
+  .starter.pulse{ animation:pulse .5s ease; }
+  @keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(31,128,121,.35);} 100%{ box-shadow:0 0 0 10px rgba(31,128,121,0);} }
+  .draft-label{ font-size:10px; font-weight:600; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); margin:0 0 6px; }
+  textarea.draft{
+    font-family:inherit; font-size:14px; line-height:1.45; color:var(--navy);
+    width:100%; min-height:88px; resize:vertical;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px 11px;
+    margin-top:auto;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  textarea.draft::placeholder{ color:#A7AEBD; }
+  textarea.draft:focus{ outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(31,128,121,.16); }
+
+  /* ---------- SELF-CHECK + ACTIONS ---------- */
+  .selfcheck{
+    margin-top:16px;
+    background:var(--card);
+    border:1px solid var(--border-soft);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-md);
+    padding:15px 18px 15px;
+  }
+  .sc-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:11px; }
+  .checks{ display:flex; flex-wrap:wrap; gap:8px; }
+  .check{
+    font-family:inherit; font-size:12.5px; font-weight:500;
+    color:var(--text);
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:7px 13px 7px 11px;
+    cursor:pointer;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:background .14s ease, border-color .14s ease, color .14s ease;
+  }
+  .check .box{
+    width:15px; height:15px; border-radius:5px;
+    border:1.6px solid var(--muted);
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:10px; color:#fff; line-height:1;
+    transition:background .14s ease, border-color .14s ease;
+  }
+  .check[aria-pressed="true"]{ background:var(--teal-soft); border-color:rgba(31,128,121,.4); color:#0F4A46; }
+  .check[aria-pressed="true"] .box{ background:var(--teal); border-color:var(--teal); }
+  .check.warn[aria-pressed="true"]{ background:#FBF0E7; border-color:rgba(199,120,60,.4); color:#8a4a1e; }
+  .check.warn[aria-pressed="true"] .box{ background:#C7783C; border-color:#C7783C; }
+
+  .sc-foot{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    margin-top:14px; padding-top:13px; border-top:1px solid var(--border-soft);
+    flex-wrap:wrap;
+  }
+  .natural{ font-size:13px; font-style:italic; color:var(--muted); display:flex; align-items:center; gap:8px; }
+  .natural .ear{ font-style:normal; }
+  .actions{ display:flex; gap:9px; }
+  .btn{
+    font-family:inherit; font-size:13px; font-weight:600;
+    border-radius:10px; padding:9px 15px; cursor:pointer;
+    border:1px solid transparent; transition:all .15s ease;
+    display:inline-flex; align-items:center; gap:7px;
+  }
+  .btn-ghost{ background:#fff; color:var(--navy); border-color:var(--border); }
+  .btn-ghost:hover{ border-color:rgba(22,35,63,.28); background:#fff; }
+  .btn-navy{ background:var(--navy); color:#fff; }
+  .btn-navy:hover{ background:var(--navy-2); }
+  .btn-navy .caret{ transition:transform .2s ease; font-size:11px; }
+  .btn-navy[aria-expanded="true"] .caret{ transform:rotate(90deg); }
+
+  /* ---------- COACH REVEAL ---------- */
+  .coach{
+    margin-top:14px;
+    background:linear-gradient(180deg,#182742,#111d33);
+    color:#DDE4EE;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-md);
+    overflow:hidden;
+    display:none;
+  }
+  .coach.open{ display:block; animation:reveal .28s ease; }
+  @keyframes reveal{ from{ opacity:0; transform:translateY(-4px);} to{ opacity:1; transform:none;} }
+  .coach-top{
+    display:flex; align-items:center; gap:9px;
+    padding:13px 18px; border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .coach-top .tag{
+    font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold);
+  }
+  .coach-top .who{ font-size:12px; color:#8C99AD; margin-left:auto; }
+  .coach-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0; }
+  .coach-cell{ padding:15px 18px; }
+  .coach-cell + .coach-cell{ border-left:1px solid rgba(255,255,255,.07); }
+  .coach-cell.full{ grid-column:1 / -1; border-top:1px solid rgba(255,255,255,.07); border-left:none; }
+  .coach-lbl{ font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; margin:0 0 8px; }
+  .coach-lbl.good{ color:var(--teal-2); }
+  .coach-lbl.bad{ color:#E39B7B; }
+  .coach-lbl.neutral{ color:#93A0B4; }
+  .model{
+    font-size:14.5px; line-height:1.55; color:#F1F4F8; margin:0;
+    padding-left:12px; border-left:2px solid var(--teal);
+  }
+  .weak{
+    font-size:13.5px; line-height:1.5; color:#C9B3A9; margin:0;
+    padding-left:12px; border-left:2px solid #A8623A; font-style:italic;
+  }
+  .push{ font-size:13.5px; line-height:1.55; color:#DCE3ED; margin:0; }
+  .fails{ margin:0; padding:0; list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:6px 20px; }
+  .fails li{ font-size:12.8px; color:#B6C0D0; line-height:1.4; padding-left:16px; position:relative; }
+  .fails li::before{ content:"×"; position:absolute; left:0; top:-1px; color:#E39B7B; font-weight:700; }
+
+  /* ---------- HOC BRIDGE ---------- */
+  .bridge{
+    margin-top:20px;
+    border:1px dashed rgba(22,35,63,.22);
+    border-radius:13px;
+    background:transparent;
+  }
+  .bridge summary{
+    list-style:none; cursor:pointer;
+    padding:11px 16px;
+    font-size:12.5px; color:var(--muted); font-weight:500;
+    display:flex; align-items:center; gap:9px;
+  }
+  .bridge summary::-webkit-details-marker{ display:none; }
+  .bridge summary .lead{ font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); }
+  .bridge summary .car{ margin-left:auto; transition:transform .2s ease; color:var(--muted); font-size:11px; }
+  .bridge[open] summary .car{ transform:rotate(90deg); }
+  .bridge .body{ padding:0 16px 15px; }
+  .bridge .map{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:4px; }
+  .bridge .m{
+    display:flex; flex-direction:column; gap:2px;
+    background:var(--card); border:1px solid var(--border-soft); border-radius:10px;
+    padding:8px 13px; box-shadow:var(--shadow-sm);
+  }
+  .bridge .m .from{ font-size:12.5px; font-weight:600; color:var(--navy); }
+  .bridge .m .to{ font-size:11px; color:var(--teal); font-weight:600; letter-spacing:.02em; }
+  .bridge .to-arrow{ color:rgba(22,35,63,.28); }
+  .bridge .note{ font-size:12px; color:var(--muted); margin:11px 0 0; line-height:1.5; }
+
+  .foot{ text-align:center; margin-top:26px; font-size:11px; color:var(--muted); letter-spacing:.02em; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .banner{ grid-template-columns:1fr; }
+    .banner .cell + .cell{ border-left:none; border-top:1px solid var(--border-soft); }
+    .panels{ grid-template-columns:1fr; }
+    .coach-grid{ grid-template-columns:1fr; }
+    .coach-cell + .coach-cell{ border-left:none; border-top:1px solid rgba(255,255,255,.07); }
+    .fails{ grid-template-columns:1fr; }
+    .hero-inner{ align-items:flex-start; }
+  }
+  @media (max-width:560px){
+    .wrap{ padding:18px 14px 44px; }
+    .hero h1{ font-size:27px; }
+    .spine{ width:100%; overflow-x:auto; }
+    .sc-foot{ flex-direction:column; align-items:stretch; }
+    .actions{ justify-content:flex-end; }
+  }
+
+  :focus-visible{ outline:2px solid var(--teal); outline-offset:2px; border-radius:6px; }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="kicker"><span class="dot"></span> Rapport &amp; Professional Tone · Live Practice</p>
+        <h1>Buyer Concern Response Lab</h1>
+        <p class="sub">Acknowledge the concern → <b>connect to their priority</b> → move to a useful next step.</p>
+      </div>
+      <div class="spine" aria-hidden="true">
+        <span class="step"><span class="num">01</span> Acknowledge</span>
+        <span class="arrow">→</span>
+        <span class="step key"><span class="num">02</span> Connect</span>
+        <span class="arrow">→</span>
+        <span class="step"><span class="num">03</span> Move Forward</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONCERN CHIPS -->
+  <section class="chips-block">
+    <div class="chips-head">
+      <p class="eyebrow" style="margin:0;">Pick a buyer concern</p>
+      <span class="hint">Real objections from Costco · Coles · 7-Eleven</span>
+    </div>
+    <div class="chips" id="chips" role="tablist" aria-label="Buyer concerns"></div>
+  </section>
+
+  <!-- CONCERN BANNER -->
+  <section class="banner" id="banner">
+    <div class="cell">
+      <p class="eyebrow">Buyer says</p>
+      <p class="quote" id="b-quote"></p>
+    </div>
+    <div class="cell">
+      <p class="eyebrow muted">What they really care about</p>
+      <p class="cares" id="b-cares"></p>
+    </div>
+  </section>
+
+  <!-- REMINDER -->
+  <div class="reminder"><span class="pen">✎</span> Adapt the starter. Don't recite it.</div>
+
+  <!-- RESPONSE PANELS -->
+  <section class="panels">
+    <div class="panel" data-step="ack">
+      <div class="panel-head">
+        <span class="panel-num">1</span>
+        <span class="panel-title">Acknowledge</span>
+      </div>
+      <p class="starter-label">Starters — not apologies</p>
+      <div class="starters" id="s-ack"></div>
+      <p class="draft-label">Selected response — click a starter</p>
+      <textarea class="draft" id="ta-ack" placeholder="Click a starter above to fill this in…" readonly></textarea>
+    </div>
+
+    <div class="panel focus-key" data-step="con">
+      <div class="panel-head">
+        <span class="panel-num">2</span>
+        <span class="panel-title">Connect</span>
+        <span class="panel-tag">the move that matters</span>
+      </div>
+      <p class="starter-label">Starters — link to their priority</p>
+      <div class="starters" id="s-con"></div>
+      <p class="draft-label">Your connect</p>
+      <textarea class="draft" id="ta-con" placeholder="Link the concern to what the buyer actually values…"></textarea>
+    </div>
+
+    <div class="panel" data-step="fwd">
+      <div class="panel-head">
+        <span class="panel-num">3</span>
+        <span class="panel-title">Move Forward</span>
+      </div>
+      <p class="starter-label">Starters — softened next step</p>
+      <div class="starters" id="s-fwd"></div>
+      <p class="draft-label">Your next step</p>
+      <textarea class="draft" id="ta-fwd" placeholder="Offer a small, low-pressure next step as a question…"></textarea>
+    </div>
+  </section>
+
+  <!-- SELF-CHECK + ACTIONS -->
+  <section class="selfcheck">
+    <div class="sc-head">
+      <p class="eyebrow" style="margin:0;">Check the response together</p>
+    </div>
+    <div class="checks" id="checks"></div>
+    <div class="sc-foot">
+      <span class="natural"><span class="ear">🔊</span> Say it out loud — does it sound like you?</span>
+      <div class="actions">
+        <button class="btn btn-ghost" id="clearBtn" type="button">Clear response</button>
+        <button class="btn btn-navy" id="coachBtn" type="button" aria-expanded="false" aria-controls="coach">Coach view <span class="caret">▸</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COACH REVEAL -->
+  <section class="coach" id="coach" aria-hidden="true">
+    <div class="coach-top">
+      <span class="tag">Coach view</span>
+      <span class="who">Hidden from the workspace · reveal after Justin drafts</span>
+    </div>
+    <div class="coach-grid">
+      <div class="coach-cell">
+        <p class="coach-lbl good">Strong model response</p>
+        <p class="model" id="c-model"></p>
+      </div>
+      <div class="coach-cell">
+        <p class="coach-lbl bad">Weak response to avoid</p>
+        <p class="weak" id="c-weak"></p>
+      </div>
+      <div class="coach-cell full">
+        <p class="coach-lbl neutral">Common failure modes to watch for</p>
+        <ul class="fails" id="c-fails"></ul>
+      </div>
+      <div class="coach-cell full">
+        <p class="coach-lbl good">Coach push-prompt</p>
+        <p class="push" id="c-push"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOC BRIDGE -->
+  <details class="bridge">
+    <summary><span class="lead">Bridge</span> This same rhythm later becomes HOC. <span class="car">▸</span></summary>
+    <div class="body">
+      <div class="map">
+        <div class="m"><span class="from">Acknowledge</span><span class="to">Harmonise</span></div>
+        <span class="to-arrow">→</span>
+        <div class="m"><span class="from">Connect</span><span class="to">Override</span></div>
+        <span class="to-arrow">→</span>
+        <div class="m"><span class="from">Move Forward</span><span class="to">Close</span></div>
+      </div>
+      <p class="note">Same three beats, turned up for negotiation. We'll open HOC — Harmonise, Override, Close — as its own module later. For now, stay with tone and rapport.</p>
+    </div>
+  </details>
+
+  <p class="foot">Buyer Concern Response Lab · standalone practice tool</p>
+
+</div>
+
+<script>
+  const DATA = [
+    {
+      id:"shelf",
+      chip:"Shelf space",
+      quote:"We don't really have space for another SKU.",
+      cares:"Every facing has to earn its place. They're protecting limited, high-value shelf and won't add a line that just splits existing sales. Priority: <b>shelf ROI &amp; incrementality</b>.",
+      ack:[
+        "Space is the real constraint — that's fair.",
+        "Makes sense, you can't just keep adding facings.",
+        "I get it, every line on that shelf is already fighting for its spot."
+      ],
+      con:[
+        "The way I'd look at it: does this earn its facing by bringing in new shoppers, or just split your current sales?",
+        "For me the real test is rate of sale per facing — whether it pulls its weight, not whether it fits.",
+        "I'd rather prove it's incremental to the category than ask you to give up space on a maybe."
+      ],
+      fwd:[
+        "Could we try a space-neutral trial and let the numbers decide?",
+        "Would it help if I mapped where it fits without displacing your top sellers?",
+        "Want me to come back with a facings plan based on your current range?"
+      ],
+      weak:"It won't take much space, I promise it'll sell.",
+      model:"Space is the real constraint — that's fair. That's exactly why I'd want this earning its facing by pulling in new shoppers rather than splitting your current sales. Could we try a space-neutral trial and let rate of sale decide?",
+      push:"Justin acknowledged — but did he name the buyer's real priority (incrementality / rate of sale) before jumping to the trial? Get him to make the Connect move explicit, not skip straight to a next step."
+    },
+    {
+      id:"data",
+      chip:"Stronger data",
+      quote:"Without stronger data, it's hard to justify the listing.",
+      cares:"They have to defend the decision upward, and the risk of being wrong sits with them. Priority: <b>data confidence &amp; a defensible internal case</b>.",
+      ack:[
+        "Totally fair — you need something solid to stand behind.",
+        "Agreed, a listing decision has to be defensible, not a hunch.",
+        "Yeah, you can't sign off on a gut feel."
+      ],
+      con:[
+        "Then let me hand you the numbers that make it an easy yes — category growth and how comparable launches performed.",
+        "Honestly, the point is to arm you: rate of sale, repeat rate, the kind of evidence you can take upstairs.",
+        "I'd rather you had proof you can defend than have to vouch for my word in the room."
+      ],
+      fwd:[
+        "Would a one-page data pack for your internal case help?",
+        "Could I send the comparable-launch numbers before you decide?",
+        "Want me to build the case around the metrics your team weighs most?"
+      ],
+      weak:"We've got loads of data, it's all really strong.",
+      model:"That's fair — you need something solid to stand behind. So let me arm you with the numbers that make this easy to justify: category growth, plus rate of sale from comparable launches you can take upstairs. Would a one-page data pack help?",
+      push:"Ask Justin what data actually moves Costco specifically. Did he Connect to their internal justification, or just claim 'strong data'? Make the Connect concrete and buyer-owned."
+    },
+    {
+      id:"risk",
+      chip:"New-SKU risk",
+      quote:"It's risky to add a new SKU when the current range is already tight.",
+      cares:"The range is optimised; change reads as downside with little obvious upside. Priority: <b>launch risk &amp; protecting what already works</b>.",
+      ack:[
+        "You're right to be cautious — a tight range working is a good problem.",
+        "Fair, you've got the range humming and change carries risk.",
+        "I'd be protective of that too."
+      ],
+      con:[
+        "My job here is to make sure this lowers your risk, not raises it — that it grows the basket instead of just reshuffling it.",
+        "Best way to protect that range is to start small and prove it before it goes anywhere near your core.",
+        "Think of it as a controlled test with an exit, not a full commitment you're locked into."
+      ],
+      fwd:[
+        "Could we de-risk it with a limited trial in a few stores first?",
+        "Would a phased launch make this easier to say yes to?",
+        "Want me to show you the exit criteria, so there's no downside if it underperforms?"
+      ],
+      weak:"There's really no risk, it'll be fine.",
+      model:"You're right to be cautious — a tight, working range is a good problem. So my job is to make sure this lowers your risk rather than adds to it: we start small, prove it grows the basket, and it never touches your core range until the numbers are there. Could we de-risk it with a limited trial first?",
+      push:"Justin tends to over-reassure ('no risk'). Push him to acknowledge the risk as genuinely real, then Connect by reframing HOW to de-risk — small, phased, exit criteria — rather than denying it."
+    },
+    {
+      id:"support",
+      chip:"Launch support",
+      quote:"We would need stronger support before considering this.",
+      cares:"They don't want to carry a new line alone — they want the supplier invested so it sells through. Priority: <b>launch support &amp; shared risk on sell-through</b>.",
+      ack:[
+        "Completely fair — a launch only works if we're both behind it.",
+        "Agreed, you shouldn't have to carry this alone.",
+        "That's a reasonable ask."
+      ],
+      con:[
+        "Then let me lay out what we'd actually put behind it — activation, sampling, promo — all aimed at rate of sale.",
+        "Fair, because your rate of sale is our rate of sale — we don't win unless it sells through for you.",
+        "I'd rather come to you with a real support plan than just another listing request."
+      ],
+      fwd:[
+        "Could we build a joint launch plan so the support's clear up front?",
+        "Would it help if I came back with the activation and promo calendar?",
+        "Want me to outline what we'd invest in the first eight weeks?"
+      ],
+      weak:"Sure, we can support it, whatever you need.",
+      model:"Completely fair — a launch only works if we're both behind it. So let me show you what we'd put behind it: activation, sampling and promo to drive rate of sale from week one. Could we build a joint launch plan so the support's clear up front?",
+      push:"Watch for vague over-promising ('whatever you need'). Push Justin to Connect to the buyer's real interest — sell-through — and get specific about the support instead of a blank commitment."
+    },
+    {
+      id:"approval",
+      chip:"Internal approval",
+      quote:"I'd need to justify this internally before we could move forward.",
+      cares:"They aren't the only decision-maker and need ammunition to sell it upward without looking exposed. Priority: <b>an easy internal case they can defend</b>.",
+      ack:[
+        "Of course — you've got your own stakeholders to convince.",
+        "Makes sense, this has to fly internally, not just with you.",
+        "Fair enough, the decision doesn't stop with you."
+      ],
+      con:[
+        "Then let me build that case with you — the numbers and the story your team will actually want to see.",
+        "Where I can help is handing you something clean to put in front of them, so it's not extra work.",
+        "You shouldn't have to translate this internally on your own — I'd rather give you the justification ready to go."
+      ],
+      fwd:[
+        "Would a short internal-ready summary help you take this upstairs?",
+        "Could I tailor the business case to what your team weighs most?",
+        "Want me to put together something you can forward without editing?"
+      ],
+      weak:"Okay, let me know once you've checked with them.",
+      model:"Of course — you've got your own stakeholders to convince. So let me make that case for you: the numbers and the story your team will want to see, in something clean you can put straight in front of them. Would an internal-ready summary help you take it upstairs?",
+      push:"The trap here is going passive ('let me know'). Push Justin to stay active — Connect by offering to arm the buyer's internal case, and own the next step himself rather than handing over control."
+    },
+    {
+      id:"brands",
+      chip:"Monster / Red Bull",
+      quote:"Why wouldn't we just add another Monster or Red Bull flavour?",
+      cares:"Proven brands feel safe; the newcomer has to justify the risk. Priority: <b>incrementality &amp; shopper fit — growing the category, not cannibalising the giants</b>.",
+      ack:[
+        "Fair question — they're proven, and that matters.",
+        "I get it, the safe move is always another big-brand flavour.",
+        "Makes sense to ask — why us over a sure thing."
+      ],
+      con:[
+        "Honestly? Another Monster flavour mostly moves the same shoppers around — we're here to bring in the ones they're not reaching.",
+        "That's the whole case for us: we grow the category rather than split the energy shopper you already have.",
+        "Rather than go flavour-for-flavour with them, let me show you the shopper gap we actually fill."
+      ],
+      fwd:[
+        "Could I show you the shopper segments the big brands are missing?",
+        "Would it help to see where we're incremental rather than overlapping?",
+        "Want me to bring the category data on where the growth actually is?"
+      ],
+      weak:"We're way better than Monster and Red Bull.",
+      model:"Fair question — they're proven, and that matters. The honest answer is another Monster flavour mostly moves the same shoppers around; we bring in the ones they're not reaching, so you grow the category instead of splitting it. Could I show you the shopper segments the big brands are missing?",
+      push:"Justin may get defensive or brag ('we're better'). Push him to acknowledge the brands' strength first, then Connect via incrementality — grows the category vs cannibalises. That's the buyer's actual interest."
+    }
+  ];
+
+  const CHECKS = [
+    { t:"Acknowledged before responding?", warn:false },
+    { t:"Apologising instead of acknowledging?", warn:true },
+    { t:"Too formal or scripted?", warn:true },
+    { t:"Sounds defensive?", warn:true },
+    { t:"Clear next step?", warn:false },
+    { t:"Concise enough for a buyer?", warn:false }
+  ];
+
+  const FAILS = [
+    "Jumping straight to the answer without acknowledging first",
+    "Apologising instead of acknowledging — sliding into \"sorry\"",
+    "Over-formal, scripted phrasing that kills the rapport",
+    "Getting defensive or over-reassuring (\"no risk\", \"we're better\")",
+    "Skipping Connect — answering without naming the buyer's real priority",
+    "Closing too hard, or leaving no next step at all"
+  ];
+
+  const STEP_KEY = { ack:"ack", con:"con", fwd:"fwd" };
+  let active = DATA[0];
+
+  const el = (id) => document.getElementById(id);
+
+  /* build concern chips */
+  function buildChips(){
+    const box = el("chips");
+    box.innerHTML = "";
+    DATA.forEach(d => {
+      const b = document.createElement("button");
+      b.className = "chip";
+      b.type = "button";
+      b.textContent = d.chip;
+      b.setAttribute("role","tab");
+      b.setAttribute("aria-pressed", d.id === active.id ? "true" : "false");
+      b.addEventListener("click", () => selectConcern(d.id));
+      box.appendChild(b);
+    });
+  }
+
+  /* build self-check chips */
+  function buildChecks(){
+    const box = el("checks");
+    box.innerHTML = "";
+    CHECKS.forEach(c => {
+      const b = document.createElement("button");
+      b.className = "check" + (c.warn ? " warn" : "");
+      b.type = "button";
+      b.setAttribute("aria-pressed","false");
+      b.innerHTML = '<span class="box">✓</span>' + c.t;
+      b.addEventListener("click", () => {
+        const on = b.getAttribute("aria-pressed") === "true";
+        b.setAttribute("aria-pressed", on ? "false" : "true");
+      });
+      box.appendChild(b);
+    });
+  }
+
+  /* render starter chips for a step */
+  function renderStarters(step, arr){
+    const box = el("s-" + step);
+    box.innerHTML = "";
+    arr.forEach(text => {
+      const b = document.createElement("button");
+      b.className = "starter";
+      b.type = "button";
+      b.textContent = text;
+      b.addEventListener("click", () => insertStarter(step, text, b));
+      box.appendChild(b);
+    });
+  }
+
+  /* insert or swap starter into the matching textarea */
+  function insertStarter(step, text, chip){
+    const ta = el("ta-" + step);
+    const cur = ta.value.trim();
+    const starters = active[step];
+    if (cur === "" || starters.includes(cur)) {
+      ta.value = text;                 // fill, or swap an untouched pick
+    } else {
+      ta.value = cur + " " + text;     // append once he's edited
+    }
+    ta.focus();
+    // active-state on chips in this group
+    chip.parentElement.querySelectorAll(".starter").forEach(s => s.classList.remove("active"));
+    chip.classList.add("active");
+    chip.classList.remove("pulse"); void chip.offsetWidth; chip.classList.add("pulse");
+  }
+
+  /* select a concern and repaint everything */
+  function selectConcern(id){
+    active = DATA.find(d => d.id === id) || DATA[0];
+
+    // chips pressed state
+    el("chips").querySelectorAll(".chip").forEach((c,i) => {
+      c.setAttribute("aria-pressed", DATA[i].id === active.id ? "true" : "false");
+    });
+
+    // banner
+    el("b-quote").textContent = active.quote;
+    el("b-cares").innerHTML = active.cares;
+
+    // starters
+    renderStarters("ack", active.ack);
+    renderStarters("con", active.con);
+    renderStarters("fwd", active.fwd);
+
+    // fresh workspace for a new exercise
+    ["ack","con","fwd"].forEach(s => { el("ta-" + s).value = ""; });
+    el("checks").querySelectorAll(".check").forEach(c => c.setAttribute("aria-pressed","false"));
+
+    // coach content
+    el("c-model").textContent = active.model;
+    el("c-weak").textContent = "“" + active.weak + "”";
+    el("c-push").textContent = active.push;
+  }
+
+  /* coach reveal */
+  function buildFails(){
+    const box = el("c-fails");
+    box.innerHTML = "";
+    FAILS.forEach(f => {
+      const li = document.createElement("li");
+      li.textContent = f;
+      box.appendChild(li);
+    });
+  }
+
+  el("coachBtn").addEventListener("click", () => {
+    const btn = el("coachBtn");
+    const panel = el("coach");
+    const open = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", open ? "false" : "true");
+    panel.classList.toggle("open", !open);
+    panel.setAttribute("aria-hidden", open ? "true" : "false");
+    if (!open) panel.scrollIntoView({ behavior:"smooth", block:"nearest" });
+  });
+
+  /* clear only the drafted response */
+  el("clearBtn").addEventListener("click", () => {
+    ["ack","con","fwd"].forEach(s => { el("ta-" + s).value = ""; });
+    document.querySelectorAll(".starter.active").forEach(s => s.classList.remove("active"));
+    el("ta-ack").focus();
+  });
+
+  /* init */
+  buildChips();
+  buildChecks();
+  buildFails();
+  selectConcern(DATA[0].id);
+</script>
+</body>
+</html>
