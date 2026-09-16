@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coles Buyer Presentation Prep Sheet</title>
+  <style>
+    :root {
+      --bg: #07171f;
+      --panel: #0d2530;
+      --panel-2: #102f3d;
+      --ink: #f4fbfd;
+      --muted: #b9d0d7;
+      --teal: #35d3c6;
+      --gold: #f0c766;
+      --line: rgba(255,255,255,0.12);
+      --danger: #ffb4a8;
+      --soft: rgba(53, 211, 198, 0.12);
+      --soft-gold: rgba(240, 199, 102, 0.13);
+      --radius: 18px;
+      --shadow: 0 18px 45px rgba(0,0,0,0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(53,211,198,0.16), transparent 34rem),
+        radial-gradient(circle at top right, rgba(240,199,102,0.10), transparent 28rem),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 56px 24px 28px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      margin: 0 0 18px;
+      max-width: 900px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      max-width: 820px;
+      margin: 0 0 24px;
+    }
+
+    .top-card {
+      background: linear-gradient(135deg, rgba(13,37,48,0.94), rgba(16,47,61,0.86));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-top: 26px;
+    }
+
+    .framework {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      border: 1px solid rgba(53,211,198,0.38);
+      background: rgba(53,211,198,0.1);
+      color: var(--ink);
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-weight: 750;
+      font-size: 0.92rem;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 23, 31, 0.86);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 24px;
+    }
+
+    .toolbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toolbar-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(255,255,255,0.06);
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    button:hover {
+      border-color: rgba(53,211,198,0.62);
+      background: rgba(53,211,198,0.11);
+    }
+
+    input[type="search"] {
+      width: min(360px, 100%);
+      background: rgba(255,255,255,0.07);
+      color: var(--ink);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 10px 14px;
+      outline: none;
+    }
+
+    input[type="search"]::placeholder {
+      color: rgba(244,251,253,0.56);
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 46px 0 14px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.55rem, 3vw, 2.4rem);
+      margin: 0;
+      letter-spacing: -0.035em;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    details {
+      background: rgba(13,37,48,0.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      margin: 14px 0;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.16);
+    }
+
+    details[open] {
+      border-color: rgba(53,211,198,0.34);
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-weight: 850;
+      font-size: 1.1rem;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      color: var(--teal);
+      font-size: 1.45rem;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details[open] > summary::after {
+      content: "–";
+    }
+
+    .content {
+      padding: 0 20px 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 760px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar-inner {
+        align-items: stretch;
+      }
+
+      .toolbar-buttons {
+        width: 100%;
+      }
+
+      button {
+        flex: 1;
+      }
+    }
+
+    .box {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.045);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 14px 0;
+    }
+
+    .box.anchor {
+      background: var(--soft-gold);
+      border-color: rgba(240,199,102,0.34);
+    }
+
+    .box.model {
+      background: var(--soft);
+      border-color: rgba(53,211,198,0.32);
+    }
+
+    .box.warning {
+      background: rgba(255,180,168,0.1);
+      border-color: rgba(255,180,168,0.32);
+    }
+
+    .label {
+      color: var(--gold);
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      margin-bottom: 5px;
+    }
+
+    .model .label {
+      color: var(--teal);
+    }
+
+    .warning .label {
+      color: var(--danger);
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 8px 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    p {
+      margin: 9px 0;
+    }
+
+    .quote {
+      font-size: 1.04rem;
+      color: var(--ink);
+    }
+
+    .mini {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .flow-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .flow-chip {
+      background: rgba(255,255,255,0.065);
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-weight: 750;
+      color: var(--ink);
+    }
+
+    .priority {
+      border-left: 4px solid var(--teal);
+      padding-left: 14px;
+      color: var(--muted);
+    }
+
+    .hidden-by-search {
+      display: none;
+    }
+
+    .footer-note {
+      margin-top: 48px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <input id="search" type="search" placeholder="Search blocks, questions, phrases..." />
+      <div class="toolbar-buttons">
+        <button onclick="toggleAll(true)">Expand all</button>
+        <button onclick="toggleAll(false)">Collapse all</button>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="eyebrow">Aptum · Presentation and Q&A Structure</div>
+    <h1>Coles Buyer Presentation Prep Sheet</h1>
+    <p class="subtitle">
+      A buyer-focused preparation sheet for Justin’s Coles presentation. Use the anchors to stay on track,
+      and the model language to practise the shape without memorising a full script.
+    </p>
+
+    <div class="top-card">
+      <div class="label">Purpose of this sheet</div>
+      <p>
+        This is not a script to memorise.
+      </p>
+      <p>
+        It is a training reference to help structure Justin’s Coles presentation using the Aptum Presentation and Q&A framework:
+      </p>
+      <div class="framework">
+        <span class="pill">Frame</span>
+        <span class="pill">Map</span>
+        <span class="pill">Explain</span>
+        <span class="pill">Signpost</span>
+        <span class="pill">Respond</span>
+        <span class="pill">Close</span>
+      </div>
+      <p>
+        The main goal is to help the buyer follow the commercial story clearly:
+      </p>
+      <div class="flow-line">
+        <span class="flow-chip">Where we are now</span>
+        <span class="flow-chip">Why there is opportunity</span>
+        <span class="flow-chip">What products can unlock it</span>
+        <span class="flow-chip">What support Genki can provide</span>
+        <span class="flow-chip">What we want to align on</span>
+        <span class="flow-chip">Q&A</span>
+        <span class="flow-chip">Next step</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section>
+      <div class="section-title">
+        <h2>1. Frame</h2>
+        <span>Framework role: Frame</span>
+      </div>
+
+      <details open>
+        <summary>Frame the commercial purpose</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Set the commercial reason for the presentation.</p>
+            <p>The frame should make the presentation feel buyer-focused. It should not only sound like a company introduction. It should show why this matters for Coles next year.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Coles value → next-year growth → support plan</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Today, the purpose is to show where Genki Forest can create stronger value for Coles next year — through proven brand momentum, stronger product range opportunities, and a clear support plan to drive growth.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Avoid making the opening too passive.</p>
+            <p><strong>Weaker direction:</strong></p>
+            <p>“Today I will introduce Genki Forest.”</p>
+            <p><strong>Better direction:</strong></p>
+            <p>“Today I’ll show how Genki Forest can create stronger value for Coles next year.”</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>2. Map</h2>
+        <span>Framework role: Map</span>
+      </div>
+
+      <details open>
+        <summary>Map the presentation route</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Give the buyer the route before going into detail.</p>
+            <p>The map should not mention every single block. It should give the buyer three clear buckets.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Momentum/performance → product opportunities → support/decisions</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Today I’ll cover three things: first, Genki’s brand momentum and current performance; second, the product opportunities for Coles across sparkling water, iced tea, and Alien Energy; and third, the next-year support plan and the key decisions we’d like to align on.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not turn the map into a long table of contents.</p>
+            <p><strong>Mapping = big buckets.</strong></p>
+            <p><strong>Signposting = smaller moves between blocks.</strong></p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>3. Explain</h2>
+        <span>Buyer-focused blocks</span>
+      </div>
+
+      <div class="box">
+        <p>The blocks below sit inside <strong>Explain</strong>.</p>
+        <p>The aim is not to create ten equal sections. The aim is to help Justin explain the business case clearly, one block at a time.</p>
+        <p><strong>Each block needs one job.</strong></p>
+        <p>If one block tries to do five jobs, the presentation starts to wander.</p>
+      </div>
+
+      <details>
+        <summary>Block 1 — Current Coles Situation / Baseline</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Explain why this conversation matters now.</p>
+            <p>This block should come early because it grounds the presentation in Coles’ current situation, not just Genki’s brand story.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Current range → limited visibility → next-year opportunity</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Current Coles range is limited.</li>
+              <li>Only two sparkling water flavours are listed.</li>
+              <li>Shelf visibility is not strong enough.</li>
+              <li>There is a bigger opportunity if Coles expands the range and support.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Currently, Genki Forest has two sparkling water SKUs listed in Coles. The product has potential, but the current range is still limited, and the shelf presence makes it harder for shoppers to notice the brand. So the opportunity next year is to build a stronger range, improve visibility, and support the product properly so it can perform at a higher level.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not sound like he is complaining about the current shelf position.</p>
+            <p>Frame it as an opportunity.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“Let me start with where we are now with Coles, because this explains the opportunity for next year.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 2 — Brand Story</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Explain who Genki is without getting lost in ingredients.</p>
+            <p>This block should be short. It is about the brand idea, not every product detail.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Better-for-you → strong flavour → modern brand image</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Better-for-you beverage brand.</li>
+              <li>Healthier positioning without losing taste.</li>
+              <li>Zero sugar / lower sugar / less guilt.</li>
+              <li>Bold flavour compared with traditional sparkling water.</li>
+              <li>Brand feeling: vitality, freshness, energy.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Genki Forest is a better-for-you beverage brand. The idea is simple: consumers want healthier drinks, but they still want strong flavour and enjoyment. Our products are designed to offer that balance — lower sugar or zero sugar options, bold taste, and a more modern brand image.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not over-explain ingredients here.</p>
+            <p>This block is about the brand promise and positioning.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“Before we go into the numbers, let me briefly explain what Genki Forest stands for.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 3 — Brand Momentum / Proof</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Show this is not a small untested brand.</p>
+            <p>This block gives credibility. It should prove that Genki has already built momentum before asking Coles to support a bigger plan.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Fast growth → global presence → proven appeal</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Founded in 2016.</li>
+              <li>Exported to 40 countries.</li>
+              <li>Strong China sales, around AUD 1.4 billion.</li>
+              <li>High penetration in Chinese mainstream convenience stores and hypermarkets.</li>
+              <li>Strong year-on-year growth.</li>
+              <li>Works with major retailers globally and in Australia.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Genki Forest was founded in 2016 and has grown very quickly. We now export to around 40 countries, including Australia, the US, Indonesia, Singapore, and Europe. In China, the brand has reached strong mainstream penetration and significant annual sales. This gives us confidence that the brand has already proven its appeal and can continue building momentum in Australia.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not spend too long on China.</p>
+            <p>China and global success should be used as proof, then brought back to Australia and Coles.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“Now that we’ve covered the brand idea, the next point is momentum.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 4 — Current Performance / Data</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Pull the data into one clean proof block.</p>
+            <p>This block should make the data easier to follow. In the mock presentation, the data was useful, but scattered.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Australia traction → retail proof → growth evidence</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Sparkling water launched in Woolworths, Coles, Costco, and 7-Eleven.</li>
+              <li>Around 7 million cans sold in Australia retail channel in 2025.</li>
+              <li>Expected strong double-digit growth in 2026.</li>
+              <li>Iced tea had 53.3% year-on-year growth in 2025.</li>
+              <li>Iced tea has secured permanent Costco listing.</li>
+              <li>Strongest flavours mentioned: pomelo, pineapple, mango.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“In Australia, the brand is already building strong retail traction. Our sparkling water is now available across major channels including Woolworths, Coles, Costco, and 7-Eleven, and we sold around 7 million cans through Australian retail in 2025. For 2026, we expect strong double-digit growth. We also see strong momentum from iced tea, which achieved 53.3% year-on-year growth and has secured a permanent listing in Costco.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>This needs to be clean and confident.</p>
+            <p>Avoid messy number correction during the presentation:</p>
+            <ul>
+              <li>“something like…”</li>
+              <li>“probably…”</li>
+              <li>“sorry, maybe…”</li>
+              <li>“around… actually…”</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“From there, let’s look at what we’re already seeing in the Australian market.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Product Opportunity Blocks — Core Pattern</summary>
+        <div class="content">
+          <div class="box">
+            <p>Each product should follow the same pattern:</p>
+            <p><strong>What it is → why Coles should care → next-year opportunity</strong></p>
+            <p>This is one of Justin’s biggest upgrades.</p>
+            <p>He should not only describe the product. He needs to translate the product into Coles value.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Main anchor</div>
+            <p><strong>Product → Coles value → next-year opportunity</strong></p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 5 — Sparkling Water Opportunity</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Present sparkling water as the core opportunity, not just the existing product.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Hero product → more flavours → stronger shelf presence</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Sparkling water is the hero product.</li>
+              <li>Already launched in Coles, Costco, Woolworths, and other major channels.</li>
+              <li>Coles currently has only two flavours.</li>
+              <li>Genki has a wider flavour range available.</li>
+              <li>More SKUs could improve shelf presence and shopper choice.</li>
+              <li>Possible flavour exclusivity could give Coles differentiation.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Sparkling water is our hero product and the strongest starting point for Coles. At the moment, Coles has two flavours, but we have a wider range available. Expanding to three or more SKUs would give the brand stronger shelf presence, more flavour choice, and a clearer reason for shoppers to notice and trial the range. There may also be an opportunity to discuss exclusive flavours, which could help Coles create a more differentiated offer.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coles value</div>
+            <p>More SKUs = stronger shelf block, better visibility, more shopper choice, more trial, stronger category presence.</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not just say:</p>
+            <p>“We have six or seven flavours.”</p>
+            <p>The buyer needs to hear why more flavours matter commercially.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“Let me start with sparkling water, because this is our hero product and the clearest growth opportunity for Coles.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 6 — Iced Tea Opportunity</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Position iced tea as a proven expansion opportunity, not just another product.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Costco proof → value format → Coles revenue opportunity</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Currently launched in Costco.</li>
+              <li>Strong 2025 growth.</li>
+              <li>Secured permanent Costco listing.</li>
+              <li>900ml bottle format.</li>
+              <li>Good value for shoppers.</li>
+              <li>Made with real tea leaves.</li>
+              <li>No artificial colours or preservatives.</li>
+              <li>Potential new revenue / impulse-purchase opportunity for Coles.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Iced tea is another strong opportunity for Coles. It has already performed well in Costco, with strong year-on-year growth and a permanent listing. The 900ml bottle gives shoppers good value, and the product has a clear flavour profile with real tea leaves and no artificial colours or preservatives. For Coles, this could create an additional beverage option with strong value, proven traction, and impulse-purchase potential.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coles value</div>
+            <ul>
+              <li>Costco performance gives proof.</li>
+              <li>Large format creates value perception.</li>
+              <li>Could add extra revenue without relying only on sparkling water.</li>
+              <li>Potential impulse-purchase opportunity.</li>
+            </ul>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not get trapped in flavour detail.</p>
+            <p>The buyer cares less about “peachy flavour” and more about why this range can sell in Coles.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“Moving from sparkling water, the next opportunity is iced tea, which gives Coles another proven beverage option.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 7 — Alien Energy Opportunity</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Present Alien Energy as the future-growth bet, but with controlled claims.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Growing category → modern zero-sugar option → younger adult appeal</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Next big bet.</li>
+              <li>Energy drinks category has long-term double-digit growth.</li>
+              <li>Zero sugar.</li>
+              <li>30 calories per can.</li>
+              <li>Berry and mango flavours.</li>
+              <li>Modern packaging/design.</li>
+              <li>Positioned for younger adult / Gen Z / health-conscious consumers.</li>
+              <li>Avoid saying “teenagers.”</li>
+              <li>Avoid overclaiming “healthy energy drink.”</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Alien Energy is our next big bet. The energy drink category continues to show strong growth, and this product gives Coles a more modern option in that space. It is zero sugar, only 30 calories per can, and comes in berry and mango, which are strong flavour directions for the Australian market. The opportunity is to attract younger adult and health-conscious consumers who still want energy, taste, and a more modern brand image.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coles value</div>
+            <ul>
+              <li>Gives Coles a differentiated energy option.</li>
+              <li>Targets younger adult shoppers.</li>
+              <li>Adds a modern zero-sugar alternative in a growing category.</li>
+            </ul>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>This block needs control.</p>
+            <p>Avoid:</p>
+            <ul>
+              <li>“teenagers”</li>
+              <li>“healthy energy drink”</li>
+              <li>medical-sounding claims</li>
+              <li>overexplaining ingredients</li>
+            </ul>
+            <p>Better language:</p>
+            <ul>
+              <li>“younger adults”</li>
+              <li>“Gen Z consumers”</li>
+              <li>“health-conscious consumers”</li>
+              <li>“modern zero-sugar option”</li>
+              <li>“differentiated energy option”</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“The third opportunity is Alien Energy, which gives us a different growth angle in a high-growth category.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 8 — Commercial Translation Summary</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Make the buyer hear the business case clearly.</p>
+            <p>This can come after the three product blocks, but the commercial translation should also appear inside each product block.</p>
+            <p>The main question is:</p>
+            <p><strong>What does this do for Coles?</strong></p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Product facts → Coles benefit → commercial result</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Category growth.</li>
+              <li>Incremental sales.</li>
+              <li>Better shelf presence.</li>
+              <li>More flavour choice.</li>
+              <li>Health-conscious shopper demand.</li>
+              <li>Asian aisle traffic plus mainstream beverage traffic.</li>
+              <li>Differentiation from existing beverages.</li>
+              <li>Potential profit/revenue return.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Commercially, the opportunity for Coles is not only adding more products. It is about building stronger shelf presence, increasing shopper trial, creating incremental sales, and offering a differentiated better-for-you beverage range. With the right SKU selection and support plan, Genki can help Coles grow the category rather than simply compete with existing products.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>This is where he needs to stop sounding like a product rep and start sounding like a commercial partner.</p>
+            <p>Do not only explain what the product is.</p>
+            <p>Explain what the product does for Coles.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“So commercially, what does this mean for Coles?”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Commercial Translation by Product</summary>
+        <div class="content">
+
+          <details>
+            <summary>Sparkling Water — Commercial Translation</summary>
+            <div class="content">
+              <div class="box anchor">
+                <div class="label">Anchor</div>
+                <p><strong>More flavours → stronger shelf presence → more shopper trial</strong></p>
+              </div>
+
+              <div class="grid">
+                <div class="box">
+                  <div class="label">Product facts</div>
+                  <ul>
+                    <li>Hero product.</li>
+                    <li>Already listed in major retailers.</li>
+                    <li>Only two flavours currently in Coles.</li>
+                    <li>Wider flavour range available.</li>
+                    <li>Strong Australia retail sales.</li>
+                  </ul>
+                </div>
+
+                <div class="box">
+                  <div class="label">What Coles cares about</div>
+                  <ul>
+                    <li>Shelf visibility.</li>
+                    <li>Shopper choice.</li>
+                    <li>Trial and repeat purchase.</li>
+                    <li>Better range presence.</li>
+                    <li>Category growth.</li>
+                    <li>Differentiation from standard sparkling water.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="box model">
+                <div class="label">Commercial translation</div>
+                <p class="quote">“The opportunity for Coles is to make the sparkling water range more visible and more compelling. With only two flavours, the brand is present, but it does not have enough shelf impact yet. Expanding the range gives shoppers more choice, makes the brand easier to notice, and creates a stronger chance of trial and repeat purchase.”</p>
+              </div>
+
+              <div class="box">
+                <div class="label">Simple drill shape</div>
+                <p><strong>More flavours → stronger shelf presence → more shopper trial.</strong></p>
+              </div>
+
+              <div class="box warning">
+                <div class="label">Watch out</div>
+                <p>He should not only say:</p>
+                <p>“We have six or seven flavours.”</p>
+                <p>The buyer needs to hear why flavour expansion matters commercially.</p>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>Iced Tea — Commercial Translation</summary>
+            <div class="content">
+              <div class="box anchor">
+                <div class="label">Anchor</div>
+                <p><strong>Costco proof → value format → extra Coles revenue opportunity</strong></p>
+              </div>
+
+              <div class="grid">
+                <div class="box">
+                  <div class="label">Product facts</div>
+                  <ul>
+                    <li>Currently in Costco.</li>
+                    <li>Strong year-on-year growth.</li>
+                    <li>Permanent Costco listing.</li>
+                    <li>900ml bottle.</li>
+                    <li>Real tea leaves.</li>
+                    <li>No artificial colours or preservatives.</li>
+                  </ul>
+                </div>
+
+                <div class="box">
+                  <div class="label">What Coles cares about</div>
+                  <ul>
+                    <li>Proven performance.</li>
+                    <li>Value perception.</li>
+                    <li>Impulse purchase.</li>
+                    <li>Additional beverage revenue.</li>
+                    <li>A differentiated format.</li>
+                    <li>Reduced risk because Costco has already tested it.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="box model">
+                <div class="label">Commercial translation</div>
+                <p class="quote">“For Coles, the iced tea opportunity is about adding a proven product with strong value perception. The 900ml bottle gives shoppers a clear value reason to try it, and the Costco performance gives us confidence that the product already has market traction. This could create an additional revenue opportunity beyond the sparkling water range.”</p>
+              </div>
+
+              <div class="box">
+                <div class="label">Simple drill shape</div>
+                <p><strong>Costco proof → value format → extra Coles revenue opportunity.</strong></p>
+              </div>
+
+              <div class="box warning">
+                <div class="label">Watch out</div>
+                <p>Do not spend too long on “peach flavour.”</p>
+                <p>That is product detail. The buyer wants the business case.</p>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>Alien Energy — Commercial Translation</summary>
+            <div class="content">
+              <div class="box anchor">
+                <div class="label">Anchor</div>
+                <p><strong>Growing category → modern zero-sugar option → younger adult shopper opportunity</strong></p>
+              </div>
+
+              <div class="grid">
+                <div class="box">
+                  <div class="label">Product facts</div>
+                  <ul>
+                    <li>Next big bet.</li>
+                    <li>Energy category is growing.</li>
+                    <li>Zero sugar.</li>
+                    <li>30 calories.</li>
+                    <li>Berry and mango flavours.</li>
+                    <li>Modern packaging.</li>
+                    <li>Designed for younger adult / Gen Z / health-conscious consumers.</li>
+                  </ul>
+                </div>
+
+                <div class="box">
+                  <div class="label">What Coles cares about</div>
+                  <ul>
+                    <li>High-growth category.</li>
+                    <li>Younger adult shopper appeal.</li>
+                    <li>Zero-sugar trend.</li>
+                    <li>Differentiation from traditional energy brands.</li>
+                    <li>Newness.</li>
+                    <li>Potential incremental sales.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="box model">
+                <div class="label">Commercial translation</div>
+                <p class="quote">“For Coles, Alien Energy gives us a different growth angle. The energy category is already strong, but this product brings a more modern, zero-sugar option with flavours that fit the Australian market. The opportunity is to attract younger adult and health-conscious shoppers who want energy and taste, but may be looking for something different from the traditional energy drink brands.”</p>
+              </div>
+
+              <div class="box">
+                <div class="label">Simple drill shape</div>
+                <p><strong>Growing category → modern zero-sugar option → younger adult shopper opportunity.</strong></p>
+              </div>
+
+              <div class="box warning">
+                <div class="label">Watch out</div>
+                <p>Avoid “teenagers.”</p>
+                <p>Avoid sounding like it is “healthy medicine.”</p>
+                <p>Keep it as:</p>
+                <ul>
+                  <li>modern</li>
+                  <li>zero-sugar</li>
+                  <li>differentiated</li>
+                  <li>younger adult appeal</li>
+                </ul>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </details>
+
+      <details>
+        <summary>Useful Commercial Language</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Category growth</div>
+            <p>The product helps grow the whole category, not just take share from existing products.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Incremental sales</div>
+            <p>Extra sales that Coles may not get from the current range.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Shelf presence</div>
+            <p>How visible and noticeable the brand is on shelf.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Trial and repeat purchase</div>
+            <p>First-time purchase, then customers buying again.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Value perception</div>
+            <p>Whether the shopper feels the product is worth the price.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Differentiated option</div>
+            <p>A product that gives Coles something different from existing brands.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Shopper fit</div>
+            <p>Why the product matches the customers Coles wants to attract.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Main coaching point</div>
+            <p>“Don’t just explain what the product is. Explain what the product does for Coles.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 9 — Next-Year Plan / Forecast</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Show Coles what the growth plan depends on, without pretending Justin has perfect forecast numbers.</p>
+            <p>This block matters because Coles will likely ask:</p>
+            <ul>
+              <li>What are you expecting next year?</li>
+              <li>What is the forecast based on?</li>
+              <li>Which products are priority?</li>
+              <li>What investment supports the forecast?</li>
+              <li>What return should we expect?</li>
+            </ul>
+            <p>Justin should not panic if he does not have every exact number. He needs clear forecast logic.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Current traction → growth drivers → product priorities → support needed → expected outcome</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Core pattern</div>
+            <p><strong>Current traction → growth drivers → product priorities → support needed → expected outcome</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Sparkling water is the first priority because it is already established in Coles.</li>
+              <li>Growth depends on expanding from two flavours to a stronger range.</li>
+              <li>Shelf visibility matters because current presence is too limited.</li>
+              <li>Iced tea and Alien Energy are additional growth opportunities.</li>
+              <li>Forecast should connect to SKU mix, shelf position, launch timing, marketing support, and promotion plan.</li>
+              <li>Avoid giving exact numbers unless they are confirmed.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“For next year, our forecast depends on three main drivers: the right SKU mix, stronger shelf visibility, and a clear support plan. Our first priority is to build the sparkling water range because it is already established in Coles. Then we can look at iced tea and Alien Energy as additional growth opportunities. If we align on the right products, launch timing, and support plan, we believe Genki can deliver stronger growth for Coles next year.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Stronger commercial version</div>
+            <p class="quote">“From a forecast point of view, the biggest growth driver is not only more products. It is the combination of the right SKUs, better visibility, and consistent support. If Coles expands the sparkling water range and we support it properly through promotion and trade marketing, the brand has a stronger chance to increase trial, repeat purchase, and overall category contribution next year.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">If the buyer asks for numbers</div>
+            <p class="quote">“I don’t want to give an unconfirmed number today, but the forecast would be based on current retail performance, the SKU range selected, shelf visibility, promotional support, and launch timing. Once we align on those points, we can come back with a more accurate forecast.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coles value</div>
+            <ul>
+              <li>A clearer forecast helps Coles understand the business case.</li>
+              <li>The forecast is stronger if Coles gives the product enough space, visibility, and support.</li>
+              <li>Justin can frame growth as a shared plan, not just Genki hoping for sales.</li>
+            </ul>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>This is where he may become vague:</p>
+            <ul>
+              <li>“probably”</li>
+              <li>“maybe”</li>
+              <li>“we expect good growth”</li>
+              <li>“something like”</li>
+              <li>“it depends”</li>
+            </ul>
+            <p>Better language:</p>
+            <ul>
+              <li>“Our forecast depends on…”</li>
+              <li>“The main growth drivers are…”</li>
+              <li>“The first priority is…”</li>
+              <li>“The strongest opportunity is…”</li>
+              <li>“Once we align on the range and support, we can confirm the forecast.”</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="label">Drill shape</div>
+            <p>Ask him to practise this in 45–60 seconds:</p>
+            <p><strong>What is the forecast based on?</strong></p>
+            <p>He should answer:</p>
+            <ul>
+              <li>Current performance.</li>
+              <li>SKU expansion.</li>
+              <li>Shelf visibility.</li>
+              <li>Support plan.</li>
+              <li>Launch timing.</li>
+              <li>Expected growth direction.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Main coaching point</div>
+            <p>Forecast does not need to be a random number. It needs to sound like a business plan.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“Looking ahead to next year, our forecast depends on three main drivers.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 10 — Marketing Support / Investment</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Show Genki will support the plan beyond listing.</p>
+            <p>This block should make Coles feel that Genki will not just list the product and disappear.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Beyond the shelf → targeted support → connected to visibility</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>Already invested around AUD 50,000 in Mid-Autumn Festival.</li>
+              <li>Wants to support Lunar New Year / Mid-Autumn next year.</li>
+              <li>Social media: Instagram, Red, TikTok, Facebook.</li>
+              <li>Influencers: lifestyle, foodies, avoid “prank influencers” unless relevant.</li>
+              <li>University events and sports clubs.</li>
+              <li>BTL / outdoor screen / TVC.</li>
+              <li>Trade marketing, promotion, off-location possible.</li>
+              <li>Support depends on shelf position / visibility.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“We are also prepared to support the brand beyond the shelf. This includes promotional activity, trade marketing, social media, influencer content, university events, and possible below-the-line activity such as outdoor screens. We have already invested in seasonal activity this year, and for next year we would like to build a stronger support plan with Coles. The level of investment should connect to the SKU range, visibility, and launch plan we agree on.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not promise support vaguely.</p>
+            <p>Connect investment to conditions:</p>
+            <ul>
+              <li>SKU range</li>
+              <li>shelf visibility</li>
+              <li>timing</li>
+              <li>agreed launch plan</li>
+            </ul>
+            <p>Avoid:</p>
+            <ul>
+              <li>“We can support anything.”</li>
+              <li>“We are happy to do whatever you need.”</li>
+              <li>“We can invest more maybe.”</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“To make this successful, the product plan needs to be supported properly.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Block 11 — Ask / Direction</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Framework role</div>
+            <p>Explain moving into Close</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Make clear what Justin wants Coles to consider before Q&A starts.</p>
+            <p>This is not the final close yet.</p>
+            <p>This is the moment where he tells the buyer:</p>
+            <p><strong>Here is what we want to align on.</strong></p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Range → visibility → support plan → launch timing</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Key points</div>
+            <ul>
+              <li>More sparkling water SKUs.</li>
+              <li>Stronger shelf visibility.</li>
+              <li>Possible flavour exclusivity.</li>
+              <li>Opportunity for iced tea.</li>
+              <li>Opportunity for Alien Energy.</li>
+              <li>Support plan for next year.</li>
+              <li>Launch timing.</li>
+              <li>What Coles would need from Genki to make this work.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“What we would like to discuss today is how Genki Forest can take a bigger role in Coles next year. The key areas are expanding the sparkling water range, improving shelf visibility, exploring the right opportunity for iced tea and Alien Energy, and aligning on the support plan needed to make the launch successful.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Stronger commercial version</div>
+            <p class="quote">“From our side, the biggest opportunity is to build a stronger Genki range in Coles next year. That means looking at the right sparkling water SKUs, whether iced tea or Alien Energy has a role, and what level of support would give the range the best chance to perform. So the key discussion today is not only product selection, but the range, visibility, and support plan behind it.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>This cannot be vague.</p>
+            <p>He should not say:</p>
+            <ul>
+              <li>“We are happy to discuss anything.”</li>
+              <li>“We can do whatever you need.”</li>
+              <li>“Maybe we can launch more products.”</li>
+              <li>“Just let us know what you think.”</li>
+            </ul>
+            <p>That sounds too passive.</p>
+            <p>Better idea:</p>
+            <p><strong>We have a clear proposal, and we want to align it with Coles’ priorities.</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Useful signpost</div>
+            <p>“So the key question for today is how we align on the right range and support plan.”</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>4. Signpost</h2>
+        <span>Framework role: Signpost</span>
+      </div>
+
+      <details>
+        <summary>Signposting between blocks</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Help the buyer follow the journey between blocks.</p>
+            <p>This is not about adding more content. It is about making the movement between ideas clear.</p>
+            <p>Justin’s presentation already has a lot of information. Without signposting, it can feel like:</p>
+            <p><strong>brand → data → product → product → product → marketing → ending</strong></p>
+            <p>The buyer needs to feel:</p>
+            <p><strong>I know where we are. I know why this section matters. I know where we’re going next.</strong></p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Where we are → why it matters → where we’re going next</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Core rule</div>
+            <p>Use one short sentence before each new block.</p>
+            <p>Not long. Not fancy. Just clear.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost into Current Coles Situation / Baseline</div>
+            <p>“Let me start with where we are now with Coles, because this explains the opportunity for next year.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost into Brand Story</div>
+            <p>“Before we go into the numbers, let me briefly explain what Genki Forest stands for.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost into Brand Momentum / Proof</div>
+            <p>“Now that we’ve covered the brand idea, the next point is momentum.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost into Current Performance / Data</div>
+            <p>“From there, let’s look at what we’re already seeing in the Australian market.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost into Product Opportunities</div>
+            <p>“Now I’d like to move into the product opportunities for Coles, starting with sparkling water.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost between Products</div>
+            <p><strong>Sparkling Water → Iced Tea</strong></p>
+            <p>“Moving from sparkling water, the next opportunity is iced tea, which gives Coles another proven beverage option.”</p>
+            <p><strong>Iced Tea → Alien Energy</strong></p>
+            <p>“The third opportunity is Alien Energy, which gives us a different growth angle in a high-growth category.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost into Commercial Translation</div>
+            <p>“So commercially, what does this mean for Coles?”</p>
+            <p class="mini">This is probably the most useful signpost for Justin.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost into Next-Year Plan / Forecast</div>
+            <p>“Looking ahead to next year, our forecast depends on three main drivers.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost into Marketing Support / Investment</div>
+            <p>“To make this successful, the product plan needs to be supported properly.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost into Ask / Direction</div>
+            <p>“So the key question for today is how we align on the right range and support plan.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Justin should not overuse:</p>
+            <ul>
+              <li>“So yeah…”</li>
+              <li>“And then…”</li>
+              <li>“Next one is…”</li>
+              <li>“Here is…”</li>
+              <li>“Okay, so…”</li>
+            </ul>
+            <p>Those are not terrible, but they do not guide the buyer.</p>
+            <p>Better signposts do two jobs:</p>
+            <ul>
+              <li>They tell the buyer where we are going.</li>
+              <li>They explain why that next part matters.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Main coaching point</div>
+            <p>Signposting is not decoration. It is listener control.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>5. Presentation Close / Handover to Q&A</h2>
+        <span>Framework role: Close before Respond</span>
+      </div>
+
+      <details open>
+        <summary>Close the presentation before Q&A</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Finish the presentation cleanly and invite buyer questions.</p>
+            <p>This is the close before Q&A.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Main takeaway → decision areas → invite questions</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“The main takeaway is that Genki Forest has strong momentum, and we believe there is a clear opportunity to build a bigger role with Coles next year. From here, the key areas to align on are: which SKUs are the best fit, what level of support Coles would need, and what launch plan gives us the strongest chance of success. I’m happy to discuss any questions.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Simpler version for Justin</div>
+            <p class="quote">“The main takeaway is that Genki Forest is ready to play a bigger role in Coles next year. The key things to align on are the right SKUs, the support needed, and the launch plan. I’m happy to discuss any questions.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>This should not be long.</p>
+            <p>It needs to do three things:</p>
+            <ul>
+              <li>Remind them of the main message.</li>
+              <li>Name the decision areas.</li>
+              <li>Open the Q&A.</li>
+            </ul>
+            <p>That’s it.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>6. Respond — Q&A Response Control</h2>
+        <span>Framework role: Respond</span>
+      </div>
+
+      <details open>
+        <summary>Q&A response control</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>Help Justin answer buyer questions directly, without freezing, over-explaining, or giving control away too quickly.</p>
+            <p>This is probably the highest-pressure part of the Coles meeting.</p>
+            <p>The goal is not to give perfect answers. The goal is to stay controlled when the buyer asks fast or difficult questions.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Direct answer → short support → commercial link → next step</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Core response pattern</div>
+            <p><strong>Direct answer → short support → commercial link → next step</strong></p>
+            <p>That means:</p>
+            <ul>
+              <li>Answer the question first.</li>
+              <li>Then give one reason, data point, or example.</li>
+              <li>Then connect it to Coles’ business.</li>
+              <li>Then land with what should happen next.</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="label">Why this matters for Justin</div>
+            <p>In the mock presentation, he often had the answer, but the answer came late.</p>
+            <p>The underperformance question was the clearest example. Instead of answering the backup plan first, he started with why the product should not underperform.</p>
+            <p>A stronger pattern is:</p>
+            <p>“Yes, we would have a backup plan. First, we would review performance by SKU. Then we could adjust support, review flavour mix, or discuss SKU rotation with Coles if needed.”</p>
+            <p>Then he can add confidence and data after that.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Q&A rule</div>
+            <p>Do not start with background.</p>
+            <p>Start with the answer.</p>
+            <p>Then support it.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Question Type 1 — Investment</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Buyer question</div>
+            <p>“What investment are you asking from Coles, and what investment will your company put behind it?”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Prepared to invest → level depends on range/visibility → build focused plan</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Response target</div>
+            <p>Be clear that Genki will invest, but connect the level of investment to range, visibility, timing, and support plan.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model answer</div>
+            <p class="quote">“The direct answer is that we are prepared to invest behind the brand, but the level of investment should match the range and visibility we agree on. We can support through promotion, trade marketing, social media, influencer content, and seasonal activity. If we align on the right SKUs and shelf position, we can build a more focused investment plan for next year.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <ul>
+              <li>Do not make vague promises.</li>
+              <li>Do not say “we can support anything.”</li>
+              <li>Do not blame the bottom shelf too strongly.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Question Type 2 — Forecast</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Buyer question</div>
+            <p>“What sales forecast are you expecting next year, and what is that forecast based on?”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Current performance → SKU selection → visibility/support/timing → accurate forecast later</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Response target</div>
+            <p>Use forecast logic if exact numbers are not confirmed.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model answer</div>
+            <p class="quote">“Our forecast would be based on five drivers: current retail performance, SKU selection, shelf visibility, promotional support, and launch timing. I don’t want to give an unconfirmed number today, but once we align on those points, we can come back with a more accurate forecast. Directionally, we believe the brand can grow strongly if the range and support plan are right.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <ul>
+              <li>Do not invent numbers.</li>
+              <li>Do not say only “we expect good growth.”</li>
+              <li>Explain what the forecast depends on.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Question Type 3 — Profit / Margin</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Buyer question</div>
+            <p>“What profit or margin opportunity does this create for Coles?”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Shelf presence → trial/repeat → incremental sales → supported launch</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Response target</div>
+            <p>Connect profit to sales drivers, not only margin percentage.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model answer</div>
+            <p class="quote">“The profit opportunity comes from stronger shelf presence, more shopper trial, and repeat purchase. With the right SKU mix, Genki can bring incremental sales rather than only replacing existing beverage sales. We can also support the launch with promotional and trade marketing activity, which gives the range a stronger chance to perform.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>If he does not have exact margin data, do not fake it.</p>
+            <p>Focus on profit logic:</p>
+            <ul>
+              <li>rate of sale</li>
+              <li>incremental sales</li>
+              <li>repeat purchase</li>
+              <li>support</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Question Type 4 — Shelf Space / Visibility</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Buyer question</div>
+            <p>“If we give you more space or better shelf position, what return should we expect?”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>More visibility → easier to notice → trial/repeat → return</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Response target</div>
+            <p>Show why space matters commercially.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model answer</div>
+            <p class="quote">“With more visibility, the brand has a much better chance to convert shoppers. At the moment, a limited range can make the product easy to miss. A stronger shelf block with the right flavours can increase trial, improve repeat purchase, and make the brand look more established in the category. That is where the return would come from.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not talk only about how Genki benefits.</p>
+            <p>Make it about Coles’ return.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Question Type 5 — Underperformance / Risk</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Buyer question</div>
+            <p>“If the product underperforms after launch, what is the backup plan?”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Review performance → identify issue → adjust action with Coles</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Response target</div>
+            <p>Answer the backup plan first.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model answer</div>
+            <p class="quote">“If the product underperforms, our backup plan would be to review the performance by SKU, check whether the issue is flavour, visibility, price, or support, and then agree the best action with Coles. That could mean adjusting promotion, changing the flavour mix, increasing support, or reviewing the SKU plan. We would not just list the product and leave it unsupported.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not start with:</p>
+            <p>“We don’t think that will happen.”</p>
+            <p>Confidence is fine, but the buyer asked about risk management.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Question Type 6 — Why Coles Should Support It</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Buyer question</div>
+            <p>“What is the main reason Coles should support these products next year?”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Differentiated range → proven momentum → room to grow</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Response target</div>
+            <p>Give one strong commercial reason, then support.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model answer</div>
+            <p class="quote">“The main reason is that Genki gives Coles a differentiated better-for-you beverage range with proven momentum and room to grow. Sparkling water is already established, iced tea has strong proof from Costco, and Alien Energy gives us a new growth angle. With the right range and support plan, this can help Coles grow the category and attract more shopper trial.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not give five equal reasons.</p>
+            <p>Start with the strongest reason, then group the support.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Question Type 7 — Which SKU Is Priority?</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Buyer question</div>
+            <p>“Which SKU or flavour do you believe has the strongest opportunity, and why?”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Sparkling first → strongest base → iced tea/energy as expansion</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Response target</div>
+            <p>Show hierarchy, not “everything is good.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model answer</div>
+            <p class="quote">“Our first priority would be sparkling water, because it is already established and has the clearest base to build from. Within that, we would prioritise the flavours with the strongest market demand and shopper fit. Iced tea and Alien Energy are also strong opportunities, but sparkling water is the most natural starting point for range expansion.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not make all products sound equally important.</p>
+            <p>Buyers want prioritisation.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Question Type 8 — Support Needed from Coles</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Buyer question</div>
+            <p>“What do you need from Coles to make this successful?”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>SKU range → visibility → timing → promotional support</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Response target</div>
+            <p>Be clear but not demanding.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model answer</div>
+            <p class="quote">“To make this successful, the main things we need to align on are SKU range, shelf visibility, launch timing, and promotional support. From our side, we can support with trade marketing, social media, and seasonal activity. From Coles’ side, the key is giving the range enough visibility and the right launch window to perform properly.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not say:</p>
+            <p>“We need everything.”</p>
+            <p>Name the key conditions calmly.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Recovery Phrases for Q&A</summary>
+        <div class="content">
+          <div class="box">
+            <p>These help Justin avoid freezing.</p>
+            <ul>
+              <li>“Before I answer directly, let me check one thing.”</li>
+              <li>“The direct answer is…”</li>
+              <li>“There are two parts to that.”</li>
+              <li>“From a Coles perspective, the key point is…”</li>
+              <li>“I don’t want to give an unconfirmed number today, but the forecast would be based on…”</li>
+              <li>“The practical next step would be to confirm…”</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Main coaching point</div>
+            <p>Justin should treat Q&A like controlled mini-presentations.</p>
+            <p>Each answer needs:</p>
+            <ul>
+              <li>One clear answer.</li>
+              <li>One short reason.</li>
+              <li>One Coles benefit.</li>
+              <li>One landing.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>7. Final Close / Next Step</h2>
+        <span>Framework role: Close after Respond</span>
+      </div>
+
+      <details open>
+        <summary>Close the whole meeting with action</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>End the whole meeting with action, not vague politeness.</p>
+            <p>This comes after Q&A, based on what was discussed.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Discussion → priority SKUs → support level → launch timing → final plan</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model version</div>
+            <p class="quote">“Based on today’s discussion, the next step is to confirm the priority SKUs, the support level, and the launch timing so we can build the final plan for next year.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Stronger version</div>
+            <p class="quote">“Based on today’s discussion, I suggest we confirm three things after this meeting: which SKUs Coles wants to prioritise, what level of support is needed, and the launch timing for next year. Once we have that, we can come back with a more complete plan.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not end with:</p>
+            <ul>
+              <li>“Let me know.”</li>
+              <li>“Hope that makes sense.”</li>
+              <li>“That’s everything from my side.”</li>
+              <li>“Any other questions?”</li>
+            </ul>
+            <p>Those are not terrible, but they are weak as a final landing.</p>
+            <p>The final close needs:</p>
+            <p><strong>Action + owner + next step.</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Drill shape</div>
+            <p>Practise only the last 30 seconds:</p>
+            <p><strong>Main takeaway → align on SKUs/support/timing → confirm next step</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Main coaching point</div>
+            <p>A strong close does not just finish the presentation. It tells the buyer what should happen next.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Full Framework Summary</h2>
+        <span>Use as the lesson spine</span>
+      </div>
+
+      <details>
+        <summary>Frame → Map → Explain → Signpost → Respond → Close</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Frame</div>
+            <p>Set the commercial reason for the presentation.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Map</div>
+            <p>Give the buyer the route.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Explain</div>
+            <p>Use buyer-focused blocks:</p>
+            <ul>
+              <li>Current Coles Situation / Baseline</li>
+              <li>Brand Story</li>
+              <li>Brand Momentum / Proof</li>
+              <li>Current Performance / Data</li>
+              <li>Sparkling Water Opportunity</li>
+              <li>Iced Tea Opportunity</li>
+              <li>Alien Energy Opportunity</li>
+              <li>Commercial Translation Summary</li>
+              <li>Next-Year Plan / Forecast</li>
+              <li>Marketing Support / Investment</li>
+              <li>Ask / Direction</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="label">Signpost</div>
+            <p>Guide the buyer between blocks.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Respond</div>
+            <p>Handle Q&A with:</p>
+            <p><strong>Direct answer → short support → commercial link → next step</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Close</div>
+            <p>Use two closes:</p>
+            <ul>
+              <li><strong>Presentation close / handover to Q&A</strong> before questions.</li>
+              <li><strong>Final close / next step</strong> after Q&A.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Main Training Priorities for Justin</h2>
+        <span>Coach reference</span>
+      </div>
+
+      <details>
+        <summary>Training priorities</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">1. Product blocks</div>
+            <p>He needs to stop giving only product descriptions.</p>
+            <p>Use:</p>
+            <p><strong>What it is → why Coles should care → next-year opportunity</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">2. Commercial translation</div>
+            <p>He needs to translate features into Coles value.</p>
+            <p>Not:</p>
+            <p>“This has more flavours.”</p>
+            <p>But:</p>
+            <p>“More flavours give Coles stronger shelf presence, more shopper choice, and a better chance of trial.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">3. Next-year plan / forecast</div>
+            <p>He does not need to invent numbers.</p>
+            <p>He needs clear logic:</p>
+            <ul>
+              <li>SKU mix</li>
+              <li>visibility</li>
+              <li>support</li>
+              <li>launch timing</li>
+              <li>forecast direction</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="label">4. Ask / direction</div>
+            <p>He needs to make clear what he wants Coles to discuss or agree on.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">5. Q&A response control</div>
+            <p>Answer first.</p>
+            <p>Support second.</p>
+            <p>Stop before over-explaining.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">6. Close</div>
+            <p>Do not fade out.</p>
+            <p>Land the conversation with the next step.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <div class="footer-note">
+      Aptum · Coles Buyer Presentation Prep Sheet · Use anchors for control, model language for practice, and Q&A patterns for pressure.
+    </div>
+
+  </main>
+
+  <script>
+    function toggleAll(open) {
+      document.querySelectorAll("details").forEach(d => d.open = open);
+    }
+
+    const search = document.getElementById("search");
+
+    search.addEventListener("input", function () {
+      const query = this.value.trim().toLowerCase();
+      const allDetails = document.querySelectorAll("details");
+
+      if (!query) {
+        document.querySelectorAll(".hidden-by-search").forEach(el => el.classList.remove("hidden-by-search"));
+        return;
+      }
+
+      allDetails.forEach(detail => {
+        const text = detail.innerText.toLowerCase();
+        if (text.includes(query)) {
+          detail.classList.remove("hidden-by-search");
+          detail.open = true;
+        } else {
+          detail.classList.add("hidden-by-search");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
