@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meeting Participation: Keeping the Thread in Fast Meetings</title>
+  <style>
+    :root {
+      --bg: #07171f;
+      --panel: #0d2530;
+      --panel-2: #102f3d;
+      --ink: #f4fbfd;
+      --muted: #b9d0d7;
+      --teal: #35d3c6;
+      --gold: #f0c766;
+      --purple: #b89cff;
+      --line: rgba(255,255,255,0.12);
+      --danger: #ffb4a8;
+      --soft: rgba(53, 211, 198, 0.12);
+      --soft-gold: rgba(240, 199, 102, 0.13);
+      --soft-purple: rgba(184, 156, 255, 0.13);
+      --radius: 18px;
+      --shadow: 0 18px 45px rgba(0,0,0,0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(53,211,198,0.16), transparent 34rem),
+        radial-gradient(circle at top right, rgba(240,199,102,0.10), transparent 28rem),
+        radial-gradient(circle at 60% 10%, rgba(184,156,255,0.08), transparent 30rem),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 56px 24px 28px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 23, 31, 0.86);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 24px;
+    }
+
+    .toolbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toolbar-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(255,255,255,0.06);
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    button:hover {
+      border-color: rgba(53,211,198,0.62);
+      background: rgba(53,211,198,0.11);
+    }
+
+    button.active {
+      border-color: rgba(240,199,102,0.7);
+      background: rgba(240,199,102,0.16);
+      color: var(--ink);
+    }
+
+    input[type="search"] {
+      width: min(360px, 100%);
+      background: rgba(255,255,255,0.07);
+      color: var(--ink);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 10px 14px;
+      outline: none;
+    }
+
+    input[type="search"]::placeholder {
+      color: rgba(244,251,253,0.56);
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      margin: 0 0 18px;
+      max-width: 940px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      max-width: 860px;
+      margin: 0 0 24px;
+    }
+
+    .top-card {
+      background: linear-gradient(135deg, rgba(13,37,48,0.94), rgba(16,47,61,0.86));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-top: 26px;
+    }
+
+    .framework {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      border: 1px solid rgba(53,211,198,0.38);
+      background: rgba(53,211,198,0.1);
+      color: var(--ink);
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-weight: 750;
+      font-size: 0.92rem;
+    }
+
+    .pill.gold {
+      border-color: rgba(240,199,102,0.45);
+      background: rgba(240,199,102,0.12);
+    }
+
+    .pill.purple {
+      border-color: rgba(184,156,255,0.45);
+      background: rgba(184,156,255,0.12);
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 46px 0 14px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.55rem, 3vw, 2.4rem);
+      margin: 0;
+      letter-spacing: -0.035em;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    details {
+      background: rgba(13,37,48,0.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      margin: 14px 0;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.16);
+    }
+
+    details[open] {
+      border-color: rgba(53,211,198,0.34);
+    }
+
+    details.coach-only {
+      border-color: rgba(184,156,255,0.34);
+      background: rgba(18, 24, 48, 0.92);
+    }
+
+    body.student-view details.coach-only {
+      display: none;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-weight: 850;
+      font-size: 1.1rem;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      color: var(--teal);
+      font-size: 1.45rem;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details[open] > summary::after {
+      content: "–";
+    }
+
+    details.coach-only summary::after {
+      color: var(--purple);
+    }
+
+    .content {
+      padding: 0 20px 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 900px) {
+      .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .grid,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar-inner {
+        align-items: stretch;
+      }
+
+      .toolbar-buttons {
+        width: 100%;
+      }
+
+      button {
+        flex: 1;
+      }
+    }
+
+    .box {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.045);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 14px 0;
+    }
+
+    .box.anchor {
+      background: var(--soft-gold);
+      border-color: rgba(240,199,102,0.34);
+    }
+
+    .box.model {
+      background: var(--soft);
+      border-color: rgba(53,211,198,0.32);
+    }
+
+    .box.coach {
+      background: var(--soft-purple);
+      border-color: rgba(184,156,255,0.34);
+    }
+
+    .box.warning {
+      background: rgba(255,180,168,0.1);
+      border-color: rgba(255,180,168,0.32);
+    }
+
+    .label {
+      color: var(--gold);
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      margin-bottom: 5px;
+    }
+
+    .model .label {
+      color: var(--teal);
+    }
+
+    .coach .label {
+      color: var(--purple);
+    }
+
+    .warning .label {
+      color: var(--danger);
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 8px 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    p {
+      margin: 9px 0;
+    }
+
+    .quote {
+      font-size: 1.04rem;
+      color: var(--ink);
+    }
+
+    .mini {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .flow-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .flow-chip {
+      background: rgba(255,255,255,0.065);
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-weight: 750;
+      color: var(--ink);
+    }
+
+    .priority {
+      border-left: 4px solid var(--teal);
+      padding-left: 14px;
+      color: var(--muted);
+    }
+
+    .hidden-by-search {
+      display: none;
+    }
+
+    .big-letter {
+      width: 46px;
+      height: 46px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(53,211,198,0.14);
+      border: 1px solid rgba(53,211,198,0.32);
+      color: var(--teal);
+      font-weight: 950;
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    .table th,
+    .table td {
+      text-align: left;
+      border: 1px solid var(--line);
+      padding: 12px;
+      vertical-align: top;
+    }
+
+    .table th {
+      color: var(--gold);
+      background: rgba(240,199,102,0.08);
+      font-weight: 900;
+    }
+
+    .note-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px dashed rgba(255,255,255,0.22);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color: #e8f7fa;
+      white-space: pre-line;
+    }
+
+    .footer-note {
+      margin-top: 48px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      font-size: 0.95rem;
+    }
+
+    .coach-badge {
+      color: var(--purple);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+  </style>
+</head>
+
+<body class="student-view">
+
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <input id="search" type="search" placeholder="Search sections, phrases, practice..." />
+      <div class="toolbar-buttons">
+        <button onclick="toggleCoachMode()" id="coachBtn">Coach mode</button>
+        <button onclick="toggleAll(true)">Expand all</button>
+        <button onclick="toggleAll(false)">Collapse all</button>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="eyebrow">Aptum · Meeting Participation</div>
+    <h1>Keeping the Thread in Fast Meetings</h1>
+    <p class="subtitle">
+      A personalised meeting-control lesson for Onur. The goal is not to catch every word.
+      The goal is to stay oriented, recover quickly, and participate clearly in international internal meetings.
+    </p>
+
+    <div class="top-card">
+      <div class="label">Why this lesson exists</div>
+      <p>
+        Onur’s current English use is mainly inside a global company: internal meetings, international colleague communication,
+        product/system discussions, presentations, customer-support conversations, follow-ups, and cross-cultural teamwork.
+      </p>
+      <p>
+        The key pressure pattern is not simply “I need more vocabulary.” It is:
+      </p>
+      <div class="box anchor">
+        <p class="quote">
+          “I understand sentences, but I cannot combine all the sentences in my mind. When the meeting finishes, I think: what happened in the meeting?”
+        </p>
+      </div>
+      <p>
+        This lesson trains the missing bridge between listening and speaking:
+      </p>
+      <div class="framework">
+        <span class="pill">Stay oriented</span>
+        <span class="pill">Track the topic</span>
+        <span class="pill">Catch the main point</span>
+        <span class="pill">Identify the meeting status</span>
+        <span class="pill">Recover the connection</span>
+        <span class="pill">Confirm the action</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section>
+      <div class="section-title">
+        <h2>1. The Real Problem</h2>
+        <span>Before participation comes orientation</span>
+      </div>
+
+      <details open>
+        <summary>The trap: listening word by word</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">What happens in fast meetings</div>
+            <p>
+              In a fast English meeting, it is easy to listen too closely to individual words.
+              The problem is that while you are still processing one sentence, the meeting has already moved to the next point.
+            </p>
+            <p>
+              By the end, you may remember words, phrases, and pieces of information, but not the full direction of the meeting.
+            </p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Weak strategy</div>
+            <p>Trying to understand every word before participating.</p>
+            <p>This creates pressure, slows processing, and makes it harder to follow the whole discussion.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Stronger strategy</div>
+            <p>Track what the meeting is doing.</p>
+            <p>
+              Ask yourself: What are we discussing now? What is the main point? Is this an update, problem, decision, risk, question, or action?
+              What needs to happen next?
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>The coaching target for Onur</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Main focus</div>
+            <p>
+              The main focus is keeping the thread in fast internal meetings.
+            </p>
+            <p>
+              Other meeting skills matter too — entering, contributing, challenging, and summarising — but they become much easier
+              after Onur can stay oriented in the conversation.
+            </p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Lesson direction</div>
+            <p><strong>First stay connected. Then clarify. Then contribute.</strong></p>
+          </div>
+
+          <div class="box">
+            <div class="label">Work situations this connects to</div>
+            <ul>
+              <li>Q2 evaluation meetings.</li>
+              <li>Meetings with international colleagues, including colleagues in France.</li>
+              <li>Product group discussions.</li>
+              <li>Library system and sensory test system explanations.</li>
+              <li>Customer-support discussions with the sales team.</li>
+              <li>Product samples, trials, technical communication, and follow-ups.</li>
+              <li>Future presentations about what he has done and what needs to happen next.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>2. The T-P-S-A Map</h2>
+        <span>Topic · Point · Status · Action</span>
+      </div>
+
+      <details open>
+        <summary>The four things to track</summary>
+        <div class="content">
+          <div class="grid-4">
+            <div class="box model">
+              <div class="big-letter">T</div>
+              <div class="label">Topic</div>
+              <p><strong>What are we discussing now?</strong></p>
+              <p class="mini">Example: Q2 results, customer trial, product sample, sensory test system.</p>
+            </div>
+
+            <div class="box model">
+              <div class="big-letter">P</div>
+              <div class="label">Point</div>
+              <p><strong>What is the main idea?</strong></p>
+              <p class="mini">Example: The customer needs more technical information before continuing.</p>
+            </div>
+
+            <div class="box model">
+              <div class="big-letter">S</div>
+              <div class="label">Status</div>
+              <p><strong>What kind of discussion is this?</strong></p>
+              <p class="mini">Update, problem, decision, risk, question, action, or background information.</p>
+            </div>
+
+            <div class="box model">
+              <div class="big-letter">A</div>
+              <div class="label">Action</div>
+              <p><strong>What needs to happen next?</strong></p>
+              <p class="mini">Example: Confirm the timeline, check product details, follow up with sales.</p>
+            </div>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Core idea</div>
+            <p>
+              If you can identify the Topic, Point, Status, and Action, you are still inside the meeting.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>What T-P-S-A looks like in Onur’s work</summary>
+        <div class="content">
+          <table class="table">
+            <tr>
+              <th>Meeting moment</th>
+              <th>Topic</th>
+              <th>Point</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <td>Customer trial in Manisa</td>
+              <td>Trial feedback</td>
+              <td>The feedback is positive, but the customer needs more application details.</td>
+              <td>Update + action</td>
+              <td>Check with the technical team before sending new samples.</td>
+            </tr>
+            <tr>
+              <td>Q2 evaluation</td>
+              <td>First-half results</td>
+              <td>Sales were good in some areas, but several projects were delayed.</td>
+              <td>Update + risk</td>
+              <td>Identify which projects need support or follow-up.</td>
+            </tr>
+            <tr>
+              <td>Product system training</td>
+              <td>Sensory test system</td>
+              <td>The team needs to understand how to use the system correctly.</td>
+              <td>Training + clarification</td>
+              <td>Ask for a short demo, user guide, or key steps.</td>
+            </tr>
+            <tr>
+              <td>International colleague meeting</td>
+              <td>Product group introduction</td>
+              <td>The colleague explains her focus area and how she supports the product group.</td>
+              <td>Meet and greet + information</td>
+              <td>Introduce yourself and clarify when to contact her.</td>
+            </tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Onur’s meeting notes template</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Use this during real meetings</div>
+            <p>Do not write full sentences. Use short notes only.</p>
+          </div>
+
+          <div class="note-card">Topic:
+Point:
+Status:
+Action:</div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>
+              Do not create a transcript of the meeting. If you write too much, you will stop listening.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Better note-taking target</div>
+            <p>
+              Write enough to stay oriented, not enough to capture everything.
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>3. Recovery Language</h2>
+        <span>When the thread becomes unclear</span>
+      </div>
+
+      <details open>
+        <summary>Reset the topic</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>
+              Use this when the discussion changes direction and you are not sure what topic the group is on.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model language</div>
+            <p class="quote">“Just to make sure I’m following, are we talking about the customer trial or the internal timeline?”</p>
+            <p class="quote">“Are we still discussing the Q2 results, or have we moved to the next project?”</p>
+            <p class="quote">“Can I quickly check the topic here? Is this about the library system or the sensory test system?”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Avoid</div>
+            <p>“I don’t understand.”</p>
+            <p>This is too general. It does not show which part is unclear.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Check the main point</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>
+              Use this when you understood the words, but you are not sure about the message.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model language</div>
+            <p class="quote">“So the main point is that the customer needs more technical information, right?”</p>
+            <p class="quote">“So the key issue is the approval step, not the product itself. Is that correct?”</p>
+            <p class="quote">“So we are saying the trial went well, but the next step is still unclear?”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Identify the status</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>
+              Use this when you are not sure whether the group is only sharing information or actually making a decision.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model language</div>
+            <p class="quote">“Are we discussing this as an update, or do we need to make a decision today?”</p>
+            <p class="quote">“Is this something we need to solve now, or is it just for our information?”</p>
+            <p class="quote">“Is this a risk we need to manage, or just a normal delay?”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Why this matters</div>
+            <p>
+              Technical and sales-support meetings often mix updates, problems, risks, and actions.
+              If you identify the status, the meeting becomes easier to follow.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Recover the connection</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>
+              Use this when you understood two separate points, but not how they connect.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model language</div>
+            <p class="quote">“I missed the connection between those two points. Is the delay related to the approval process?”</p>
+            <p class="quote">“Can I check how this connects to the customer trial?”</p>
+            <p class="quote">“Sorry, I understood the product issue, but I missed how it affects the timeline.”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Main phrase for Onur</div>
+            <p>
+              “I missed the connection between those two points.”
+            </p>
+            <p>
+              This directly matches the real problem: understanding sentences, but not connecting the full discussion.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Confirm the action</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>
+              Use this when the meeting is about to move on, but the responsibility or timing is unclear.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model language</div>
+            <p class="quote">“Before we move on, can we confirm the action point?”</p>
+            <p class="quote">“So the next step is for me to check the product details and send an update, correct?”</p>
+            <p class="quote">“Who will follow up with the customer after this meeting?”</p>
+            <p class="quote">“Can we confirm the owner and timing for this action?”</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>4. Practice Setup</h2>
+        <span>Student-facing instructions</span>
+      </div>
+
+      <details open>
+        <summary>How the practice works</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Student task</div>
+            <p>
+              Listen to a short meeting extract. Do not try to catch every word.
+            </p>
+            <p>
+              Track only four things:
+            </p>
+            <div class="framework">
+              <span class="pill">Topic</span>
+              <span class="pill">Point</span>
+              <span class="pill">Status</span>
+              <span class="pill">Action</span>
+            </div>
+          </div>
+
+          <div class="note-card">Topic:
+Point:
+Status:
+Action:</div>
+
+          <div class="box model">
+            <div class="label">After listening</div>
+            <p>You will practise one recovery phrase, one short contribution, or one next-step confirmation.</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Important</div>
+            <p>
+              The meeting extract is not shown first. This is listening practice, not reading practice.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Final challenge shape</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">By the end of this lesson</div>
+            <p>Onur should be able to listen to a short internal meeting update and produce:</p>
+            <ul>
+              <li>one T-P-S-A map</li>
+              <li>one focused clarification question</li>
+              <li>one short contribution</li>
+              <li>one action-confirmation phrase</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong final output</div>
+            <p class="quote">
+              “Just to make sure I’m following, we are talking about the customer trial timeline, not the internal deadline.
+              The main issue is that we need to confirm the technical details before sending the samples. Is that correct?”
+            </p>
+            <p class="quote">
+              “Before we move on, can we confirm the next step? I will check the product version with the technical team,
+              and then we can update the sales colleague.”
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>5. Coach Practice Cards</h2>
+        <span class="coach-badge">Hidden in student view</span>
+      </div>
+
+      <details class="coach-only" open>
+        <summary>Coach note: how to run this section</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Delivery</div>
+            <p>
+              Keep the page visible for the framework and language. When it is time to practise, stop sharing or switch to student view.
+              Read the extract aloud. Do not let Onur read the extract first.
+            </p>
+          </div>
+
+          <div class="box coach">
+            <div class="label">Correction focus</div>
+            <p>
+              Do not correct every grammar point. Correct only what affects meeting control:
+              unclear topic, vague point, wrong status, missing action, or unfocused clarification.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 1 — Customer trial in Manisa</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “Okay, regarding the customer trial in Manisa, the first feedback was positive, but the customer asked for more details about the application process.
+              I think before we send new samples, we should check with the technical team and make sure we are using the right product version.”
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">Ask Onur</div>
+            <ul>
+              <li>What is the topic?</li>
+              <li>What is the main point?</li>
+              <li>Is this an update, problem, decision, risk, question, or action?</li>
+              <li>What is the next step?</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Expected answer</div>
+            <p><strong>Topic:</strong> Customer trial in Manisa.</p>
+            <p><strong>Point:</strong> Feedback was positive, but the customer needs more application details.</p>
+            <p><strong>Status:</strong> Update + action.</p>
+            <p><strong>Action:</strong> Check with the technical team before sending new samples.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong student response</div>
+            <p class="quote">
+              “Just to make sure I’m following, the customer feedback was positive, but before sending new samples,
+              we need to confirm the correct product version with the technical team. Is that right?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 2 — Q2 evaluation and project delay</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “The sales numbers for Q2 were strong overall, especially in some regions. But for the dairy projects,
+              we had some delays because the approval process took longer than expected. That may affect the timing for the next customer trials.”
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">Task</div>
+            <p>Ask Onur to map T-P-S-A, then ask one recovery question.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong recovery question</div>
+            <p class="quote">
+              “I missed the connection between the approval process and the next customer trials.
+              Is the delay affecting when we can start the trials?”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Alternative answer</div>
+            <p class="quote">
+              “Can I quickly check my understanding? The sales results were strong, but some dairy projects are delayed because of approval timing. Is that correct?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 3 — Sudden opinion question</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “Onur, what do you think? Should we send the samples this week or wait until we confirm the application details?”
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">Task</div>
+            <p>Buy time, then answer with one clear point and one reason.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong answer</div>
+            <p class="quote">
+              “Let me take a second to think about that. My first thought is that we should confirm the application details first,
+              because if we send the wrong sample or incomplete information, it may create confusion for the customer.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Shorter answer</div>
+            <p class="quote">
+              “I think we should confirm the application details first. Then we can send the samples with the correct explanation.”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 4 — Meeting going in circles</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “We need to move quickly.”<br>
+              “Yes, but we don’t have the full technical details.”<br>
+              “The customer is waiting.”<br>
+              “Exactly, so maybe we should send something today.”<br>
+              “But if we send it too early, we may need to correct it later.”
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">Task</div>
+            <p>Summarise the situation and move the meeting forward.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong answer</div>
+            <p class="quote">
+              “It sounds like we agree on the goal: we need to respond to the customer quickly.
+              But the open point is whether the technical details are ready.
+              Before we move on, can we confirm who will check the details and when we can reply?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 5 — International colleague meet and greet</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “Hi Onur, it’s nice to finally meet you. I’m based in France and I mainly support this product group from the technical side.
+              If you have questions about customer applications or product version details, I can usually help, but for pricing or commercial decisions,
+              it’s better to check with the sales manager.”
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">Task</div>
+            <p>Track the T-P-S-A, then ask one useful follow-up question.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong follow-up</div>
+            <p class="quote">
+              “Great, thank you. Just to make sure I understand, I should contact you for technical application questions,
+              but check with the sales manager for pricing or commercial decisions. Is that right?”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Useful relationship-building question</div>
+            <p class="quote">
+              “Could you tell me the best way to contact you if I have a technical question after a customer meeting?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 6 — Sensory test system training</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “For the sensory test system, the main thing is to enter the correct sample information before the test starts.
+              If the sample code or product version is wrong, the results may not be useful later.
+              So before using the system with a real customer project, please check the sample details carefully.”
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">Task</div>
+            <p>Ask Onur to identify the warning and action.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong answer</div>
+            <p class="quote">
+              “So the main point is that the sample information must be correct before the test starts.
+              If the sample code or product version is wrong, the results may not be useful.
+              The action is to check the sample details carefully before using the system for a real customer project.”
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>6. Final Work Simulation</h2>
+        <span>Combine tracking + language</span>
+      </div>
+
+      <details open>
+        <summary>Student-facing final task</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Your task</div>
+            <p>Listen to the internal meeting update. Then produce four things:</p>
+            <ul>
+              <li>T-P-S-A notes</li>
+              <li>one clarification question</li>
+              <li>one short contribution</li>
+              <li>one next-step confirmation</li>
+            </ul>
+          </div>
+
+          <div class="note-card">Topic:
+Point:
+Status:
+Action:
+
+Clarification question:
+Short contribution:
+Next-step confirmation:</div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Coach-only final simulation extract</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “For the next customer project, the sales team wants to move quickly because the customer is waiting for sample options.
+              But before we send anything, we need to confirm the correct product version and application details with the technical team.
+              The main risk is sending the wrong sample too early and then creating confusion later.
+              So I think we need one person to check the technical details today, and then we can update the customer tomorrow.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong target answer</div>
+            <p><strong>Topic:</strong> Next customer project / sample options.</p>
+            <p><strong>Point:</strong> The team wants to move quickly, but technical details must be confirmed first.</p>
+            <p><strong>Status:</strong> Problem + risk + action.</p>
+            <p><strong>Action:</strong> One person should check technical details today; update the customer tomorrow.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong spoken response</div>
+            <p class="quote">
+              “Can I quickly check my understanding? The sales team wants to respond quickly, but the technical details need to be confirmed before sending samples.
+              My main point is that we should avoid sending the wrong product version too early.
+              Before we move on, can we confirm who will check the details today?”
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>7. Homework</h2>
+        <span>Use it in one real meeting</span>
+      </div>
+
+      <details open>
+        <summary>Real meeting practice</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Before the meeting</div>
+            <p>Predict three likely topics.</p>
+            <ul>
+              <li>Q2 results</li>
+              <li>project update</li>
+              <li>product system</li>
+              <li>customer trial</li>
+              <li>sample request</li>
+              <li>technical follow-up</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="label">During the meeting</div>
+            <p>Use the T-P-S-A notes template.</p>
+            <div class="note-card">Topic:
+Point:
+Status:
+Action:</div>
+          </div>
+
+          <div class="box">
+            <div class="label">After the meeting</div>
+            <p>Write a short summary using this shape:</p>
+            <div class="note-card">Today we discussed...
+The main point was...
+The open question is...
+The next step is...</div>
+          </div>
+
+          <div class="box model">
+            <div class="label">Example</div>
+            <p class="quote">
+              “Today we discussed the customer trial and the application process.
+              The main point was that the customer needs more technical information before receiving new samples.
+              The open question is which product version is best.
+              The next step is to check with the technical team and follow up with the sales colleague.”
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>8. Core Language Bank</h2>
+        <span>Recommended meeting language</span>
+      </div>
+
+      <details open>
+        <summary>Best phrases for Onur</summary>
+        <div class="content">
+          <div class="box model">
+            <div class="label">Follow the meeting</div>
+            <p class="quote">“Just to make sure I’m following...”</p>
+            <p class="quote">“Can I quickly check my understanding?”</p>
+            <p class="quote">“Are we still discussing..., or have we moved to...?”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Recover the connection</div>
+            <p class="quote">“I missed the connection between those two points.”</p>
+            <p class="quote">“Can I check how this connects to the customer trial?”</p>
+            <p class="quote">“I understood the product issue, but I missed how it affects the timeline.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Clarify the status</div>
+            <p class="quote">“Are we discussing this as an update, or do we need to make a decision today?”</p>
+            <p class="quote">“Is this something we need to solve now, or is it just for our information?”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Contribute clearly</div>
+            <p class="quote">“The main point I’d add is...”</p>
+            <p class="quote">“Building on what you said...”</p>
+            <p class="quote">“My first thought is...”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Confirm action</div>
+            <p class="quote">“Before we move on, can we confirm the action point?”</p>
+            <p class="quote">“Can we confirm the owner and timing?”</p>
+            <p class="quote">“So the next step is..., correct?”</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <div class="footer-note">
+      Aptum · Meeting Participation · Custom lesson for Onur.
+      Student view hides coach-only practice cards. Use coach mode when preparing or when screen sharing is off.
+    </div>
+
+  </main>
+
+  <script>
+    const searchInput = document.getElementById("search");
+    const coachBtn = document.getElementById("coachBtn");
+
+    function toggleAll(open) {
+      document.querySelectorAll("details").forEach((d) => {
+        if (!document.body.classList.contains("student-view") || !d.classList.contains("coach-only")) {
+          d.open = open;
+        }
+      });
+    }
+
+    function toggleCoachMode() {
+      document.body.classList.toggle("student-view");
+      const isStudent = document.body.classList.contains("student-view");
+      coachBtn.textContent = isStudent ? "Coach mode" : "Student view";
+      coachBtn.classList.toggle("active", !isStudent);
+    }
+
+    searchInput.addEventListener("input", function () {
+      const query = this.value.trim().toLowerCase();
+      const blocks = document.querySelectorAll("details");
+
+      blocks.forEach((block) => {
+        const text = block.innerText.toLowerCase();
+        const match = !query || text.includes(query);
+
+        block.classList.toggle("hidden-by-search", !match);
+
+        if (query && match) {
+          block.open = true;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
