@@ -52,13 +52,12 @@
         var(--bg);
       color: var(--ink);
       line-height: 1.6;
-      transition: background 0.25s ease, color 0.25s ease;
     }
 
     .toolbar {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 50;
       backdrop-filter: blur(16px);
       background: color-mix(in srgb, var(--bg) 86%, transparent);
       border-bottom: 1px solid var(--line);
@@ -88,7 +87,7 @@
       padding: 9px 13px;
       background: color-mix(in srgb, var(--panel) 86%, transparent);
       color: var(--ink);
-      font-weight: 800;
+      font-weight: 850;
     }
 
     button:hover {
@@ -97,7 +96,7 @@
     }
 
     input[type="search"] {
-      width: min(390px, 100%);
+      width: min(410px, 100%);
       background: color-mix(in srgb, var(--panel) 86%, transparent);
       color: var(--ink);
       border: 1px solid var(--line);
@@ -144,7 +143,8 @@
       margin: 0 0 24px;
     }
 
-    .top-card, details {
+    .top-card,
+    details {
       background: linear-gradient(135deg, color-mix(in srgb, var(--panel) 95%, transparent), color-mix(in srgb, var(--panel-2) 88%, transparent));
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -156,20 +156,22 @@
       margin-top: 26px;
     }
 
-    .framework, .flow-line {
+    .framework,
+    .flow-line {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 16px;
     }
 
-    .pill, .flow-chip {
+    .pill,
+    .flow-chip {
       border: 1px solid color-mix(in srgb, var(--teal) 45%, transparent);
       background: var(--soft);
       color: var(--ink);
       padding: 8px 13px;
       border-radius: 999px;
-      font-weight: 800;
+      font-weight: 850;
       font-size: 0.92rem;
     }
 
@@ -307,6 +309,22 @@
       font-size: 0.95rem;
     }
 
+    .term-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
     .hidden-by-search { display: none; }
 
     .highlight {
@@ -327,10 +345,11 @@
 <body>
   <div class="toolbar">
     <div class="toolbar-inner">
-      <input id="search" type="search" placeholder="Search terms, drills, phrases..." />
+      <input id="search" type="search" placeholder="Search terms, drills, slang, phrases..." />
       <div class="toolbar-buttons">
         <button onclick="toggleAll(true)">Expand all</button>
         <button onclick="toggleAll(false)">Collapse all</button>
+        <button onclick="randomTerm()">Random term</button>
         <button onclick="randomDrill()">Random drill</button>
         <button id="themeBtn" onclick="toggleTheme()">Day mode</button>
       </div>
@@ -341,19 +360,14 @@
     <div class="eyebrow">Aptum · Fluency Under Pressure</div>
     <h1>Buyer Question Recovery Lab</h1>
     <p class="subtitle">
-      A practice lab for fast buyer questions, FMCG terminology, clarification, and closing the loop.
-      Use it when Justin catches only part of a buyer’s question and needs to recover without guessing.
+      Use this when an Australian buyer speaks quickly, uses retail or FMCG terminology, or asks a question you only partly understand.
+      The goal is to recover calmly, clarify the real issue, answer the right point, and close the loop with a clear next step.
     </p>
 
     <div class="top-card">
       <div class="label">Purpose of this lab</div>
-      <p>
-        This is not a vocabulary dictionary.
-      </p>
-      <p>
-        It is a speaking practice tool for the moment when a buyer speaks quickly, uses commercial terminology,
-        or gives a requirement that needs a clear follow-up.
-      </p>
+      <p>This is not a general vocabulary list.</p>
+      <p>This is a speaking practice tool for fast buyer conversations in Australian FMCG and retail.</p>
 
       <div class="framework">
         <span class="pill">Catch</span>
@@ -362,10 +376,6 @@
         <span class="pill">Answer</span>
         <span class="pill">Close the Loop</span>
       </div>
-
-      <p>
-        Main training goal:
-      </p>
 
       <div class="flow-line">
         <span class="flow-chip">Catch the keyword</span>
@@ -381,43 +391,7 @@
 
     <section>
       <div class="section-title">
-        <h2>1. How to Use This Lab</h2>
-        <span>Practice control panel</span>
-      </div>
-
-      <details open>
-        <summary>Lesson routine</summary>
-        <div class="content">
-          <div class="box anchor">
-            <div class="label">Core practice pattern</div>
-            <p><strong>Buyer comment → Justin recovers → coach corrects one thing → Justin repeats cleaner</strong></p>
-          </div>
-
-          <div class="grid">
-            <div class="box">
-              <div class="label">Round 1</div>
-              <p>Choose one fast buyer comment.</p>
-              <p>Justin responds using the recovery pattern.</p>
-            </div>
-
-            <div class="box">
-              <div class="label">Round 2</div>
-              <p>Add one FMCG term.</p>
-              <p>Justin clarifies, answers, and closes the loop.</p>
-            </div>
-          </div>
-
-          <div class="box model">
-            <div class="label">Coach rule</div>
-            <p>Do not correct everything. Correct one thing per round: clarification, direct answer, timeline, or commercial wording.</p>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <section>
-      <div class="section-title">
-        <h2>2. Recovery Pattern</h2>
+        <h2>1. Recovery Pattern</h2>
         <span>Fast buyer questions</span>
       </div>
 
@@ -428,25 +402,25 @@
             <div class="box">
               <div class="label">Catch</div>
               <p>Listen for the key commercial word or concern.</p>
-              <p class="mini">Example: forecast gap, USPW, rate of sale, support plan, incremental sales.</p>
+              <p class="mini">Example: relay, rate of sale, sell-through, scanback, space-to-sales, range reset.</p>
             </div>
 
             <div class="box">
               <div class="label">Clarify</div>
               <p>Slow the moment down instead of guessing.</p>
-              <p class="mini">“Can I check what you mean by the gap?”</p>
+              <p class="mini">“Can I check what you mean by the range reset?”</p>
             </div>
 
             <div class="box">
               <div class="label">Confirm</div>
               <p>Repeat the issue back in cleaner language.</p>
-              <p class="mini">“So your concern is whether the forecast is realistic.”</p>
+              <p class="mini">“So the concern is whether the product justifies the space.”</p>
             </div>
 
             <div class="box">
               <div class="label">Answer</div>
               <p>Give the direct answer first.</p>
-              <p class="mini">Then add one reason or data point.</p>
+              <p class="mini">Then add one reason, data point, or commercial link.</p>
             </div>
 
             <div class="box">
@@ -458,8 +432,8 @@
 
           <div class="box model">
             <div class="label">Model recovery</div>
-            <p class="quote">“Let me make sure I’ve understood. Your concern is whether the forecast is realistic compared with the current rate of sale. Is that right?”</p>
-            <p class="quote">“Okay, that makes sense. We’ll review the numbers and come back with a revised forecast by Friday.”</p>
+            <p class="quote">“Let me make sure I’ve understood. Your concern is whether the product can justify the shelf space based on current rate of sale. Is that right?”</p>
+            <p class="quote">“Okay, that makes sense. We’ll review the sell-through and come back with a clearer commercial case by Friday.”</p>
           </div>
 
           <div class="box warning">
@@ -473,12 +447,12 @@
 
     <section>
       <div class="section-title">
-        <h2>3. Clarification Phrase Bank</h2>
+        <h2>2. Clarification Phrase Bank</h2>
         <span>Recovery language</span>
       </div>
 
       <details open>
-        <summary>When Justin only catches part of the question</summary>
+        <summary>When you only catch part of the question</summary>
         <div class="content">
           <div class="grid">
             <div class="box model">
@@ -493,22 +467,22 @@
 
             <div class="box model">
               <div class="label">Unclear concern</div>
-              <p class="quote">“Are you mainly concerned about the forecast, the support plan, or the SKU selection?”</p>
+              <p class="quote">“Are you mainly concerned about the forecast, the support plan, or the shelf space?”</p>
             </div>
 
             <div class="box model">
-              <div class="label">Forecast gap</div>
-              <p class="quote">“Let me make sure I’ve understood the gap.”</p>
-            </div>
-
-            <div class="box model">
-              <div class="label">Specific word missed</div>
-              <p class="quote">“Sorry, I missed that one term — could you say it again?”</p>
+              <div class="label">Unknown retail term</div>
+              <p class="quote">“Sorry, I missed that term — could you say it again?”</p>
             </div>
 
             <div class="box model">
               <div class="label">Before answering</div>
               <p class="quote">“Before I answer directly, let me check I’m answering the right point.”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Commercial clarification</div>
+              <p class="quote">“Is the main issue performance, space, or timing?”</p>
             </div>
           </div>
 
@@ -522,22 +496,17 @@
 
     <section>
       <div class="section-title">
-        <h2>4. Close the Loop</h2>
-        <span>Boss feedback</span>
+        <h2>3. Close the Loop</h2>
+        <span>Action + timeline</span>
       </div>
 
       <details open>
-        <summary>Action + owner + timeline</summary>
+        <summary>Request → action → owner → timeline</summary>
         <div class="content">
           <div class="box">
             <div class="label">Purpose</div>
-            <p>
-              When the buyer gives a request, requirement, or concern, the meeting should not end with:
-              “Okay, we’ll check.”
-            </p>
-            <p>
-              Justin needs to confirm what happens next, who owns it, and when it is due.
-            </p>
+            <p>When the buyer gives a request, requirement, or concern, the meeting should not end with: “Okay, we’ll check.”</p>
+            <p>Close the loop by confirming what happens next, who owns it, and when it is due.</p>
           </div>
 
           <div class="box anchor">
@@ -553,7 +522,7 @@
 
             <div class="box model">
               <div class="label">Stronger</div>
-              <p class="quote">“Okay, we’ll review the forecast and come back by Friday with a revised number and support plan.”</p>
+              <p class="quote">“Okay, we’ll review the sell-through and come back by Friday with a clearer commercial case.”</p>
             </div>
           </div>
 
@@ -579,202 +548,91 @@
 
     <section>
       <div class="section-title">
-        <h2>5. FMCG Term Builder</h2>
-        <span>Mnemonic + chunk + use</span>
+        <h2>4. Australian FMCG Term Bank</h2>
+        <span>Industry language</span>
       </div>
 
       <details open>
-        <summary>How to learn a term</summary>
+        <summary>How to use the term bank</summary>
         <div class="content">
           <div class="box anchor">
             <div class="label">Learning cycle</div>
-            <p><strong>Meaning → phrase/chunk → mnemonic → Genki sentence → buyer-response sentence</strong></p>
+            <p><strong>Meaning → useful chunk → memory hook → buyer question → your response</strong></p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Do not learn everything at once</div>
+            <p>Start with one meaning that is useful in Australian FMCG buyer conversations.</p>
+            <p>The goal is not to memorise a dictionary. The goal is to recognise the word quickly when a buyer says it fast.</p>
+          </div>
+        </div>
+      </details>
+
+      <div id="termBank"></div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>5. Australian Buyer Language</h2>
+        <span>Soft slang + natural phrases</span>
+      </div>
+
+      <details open>
+        <summary>Common phrases you may hear</summary>
+        <div class="content">
+          <div class="grid">
+            <div class="box">
+              <div class="label">“A bit light-on”</div>
+              <p>Not strong enough, not detailed enough, or missing support.</p>
+              <p class="quote">“The support plan feels a bit light-on at the moment.”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">“Not quite there yet”</div>
+              <p>Not ready or not convincing enough yet.</p>
+              <p class="quote">“The commercial case is not quite there yet.”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">“Worth a look”</div>
+              <p>Potentially interesting, but not a commitment.</p>
+              <p class="quote">“The mango flavour could be worth a look.”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">“Flat out”</div>
+              <p>Very busy.</p>
+              <p class="quote">“We’re flat out with range review at the moment.”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">“Heaps of”</div>
+              <p>A lot of. Common in casual Australian English.</p>
+              <p class="quote">“There’s heaps of pressure on shelf space.”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">“Let’s park that”</div>
+              <p>Leave that topic for later.</p>
+              <p class="quote">“Let’s park that for now and come back to the support plan.”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">“Too easy”</div>
+              <p>No problem / that’s fine. Casual, friendly Australian response.</p>
+              <p class="quote">“Too easy, we can send that through after the meeting.”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">“No dramas”</div>
+              <p>No problem. Casual and relaxed.</p>
+              <p class="quote">“No dramas, we’ll update the forecast and send it through.”</p>
+            </div>
           </div>
 
           <div class="box warning">
             <div class="label">Watch out</div>
-            <p>Do not learn every possible meaning first.</p>
-            <p>Start with the meaning Justin is most likely to hear or use in FMCG buyer conversations.</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Range rationalisation</summary>
-        <div class="content">
-          <div class="box">
-            <div class="label">Meaning</div>
-            <p>Cutting SKUs from the range to simplify the shelf, improve performance, or make space for stronger products.</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Chunk</div>
-            <p><strong>risk of range rationalisation</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Mnemonic hook</div>
-            <p>A rational buyer with scissors cuts weak SKUs from the shelf.</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Genki sentence</div>
-            <p class="quote">“If Coles is going through range rationalisation, every SKU needs a clear commercial reason to stay.”</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Buyer-response sentence</div>
-            <p class="quote">“I understand. If range rationalisation is a focus, we need to show which SKUs can deliver incremental value.”</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Rate of sale</summary>
-        <div class="content">
-          <div class="box">
-            <div class="label">Meaning</div>
-            <p>How quickly a product sells in store.</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Chunk</div>
-            <p><strong>current rate of sale</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Mnemonic hook</div>
-            <p>A cash register racing down the shelf because the product sells fast.</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Genki sentence</div>
-            <p class="quote">“The current rate of sale is still early, but it gives us a starting point for the forecast.”</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Buyer-response sentence</div>
-            <p class="quote">“Are you concerned that the proposed USPW is too high compared with the current rate of sale?”</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Sell-through</summary>
-        <div class="content">
-          <div class="box">
-            <div class="label">Meaning</div>
-            <p>How much product actually sells through to shoppers, not just how much is shipped into the retailer.</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Chunk</div>
-            <p><strong>strong sell-through</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Mnemonic hook</div>
-            <p>A can travelling through the shelf, through the checkout, and into the shopper’s bag.</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Genki sentence</div>
-            <p class="quote">“We need to review sell-through before we overcommit to a wider rollout.”</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Buyer-response sentence</div>
-            <p class="quote">“That makes sense. We can come back with sell-through data and a clearer view of repeat purchase.”</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Incremental sales</summary>
-        <div class="content">
-          <div class="box">
-            <div class="label">Meaning</div>
-            <p>Extra sales that would not have happened without the product, range expansion, promotion, or support.</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Chunk</div>
-            <p><strong>create incremental sales</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Mnemonic hook</div>
-            <p>A shelf grows an extra step upward: that extra step is incremental sales.</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Genki sentence</div>
-            <p class="quote">“The goal is to create incremental sales, not simply move sales from one SKU to another.”</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Buyer-response sentence</div>
-            <p class="quote">“Your question is whether the extra SKUs would create incremental sales or just add shelf pressure. Is that right?”</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Cannibalisation</summary>
-        <div class="content">
-          <div class="box">
-            <div class="label">Meaning</div>
-            <p>When one product takes sales from another product in the same range instead of creating new growth.</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Chunk</div>
-            <p><strong>risk of cannibalisation</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Mnemonic hook</div>
-            <p>One Genki can eats another Genki can’s sales.</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Genki sentence</div>
-            <p class="quote">“We need to choose flavours carefully to reduce the risk of cannibalisation.”</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Buyer-response sentence</div>
-            <p class="quote">“I understand the concern. The key is choosing SKUs that grow the range rather than cannibalise the existing flavours.”</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Commercial case</summary>
-        <div class="content">
-          <div class="box">
-            <div class="label">Meaning</div>
-            <p>The business reason for listing, supporting, expanding, or keeping a product.</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Chunk</div>
-            <p><strong>build a stronger commercial case</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Mnemonic hook</div>
-            <p>A briefcase full of sales data, margin, support plans, and buyer reasons.</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Genki sentence</div>
-            <p class="quote">“We need a stronger commercial case for each SKU before asking for more space.”</p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Buyer-response sentence</div>
-            <p class="quote">“That’s fair. We can build a clearer commercial case around rate of sale, support, and expected return.”</p>
+            <p>Use casual phrases lightly. In buyer meetings, keep the main message professional and use casual language only for rapport or soft transitions.</p>
           </div>
         </div>
       </details>
@@ -786,167 +644,13 @@
         <span>Core practice</span>
       </div>
 
-      <details class="drill" open>
-        <summary>Drill 1 — Forecast gap</summary>
-        <div class="content">
-          <div class="box warning">
-            <div class="label">Buyer says</div>
-            <p class="quote">“The USPW looks higher than what we’re seeing in the current rate of sale.”</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Catch</div>
-            <p><strong>USPW → current rate of sale → forecast gap</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Strong recovery response</div>
-            <p class="quote">“Let me make sure I’ve understood. Are you saying the proposed USPW feels too high compared with the current rate of sale?”</p>
-            <p class="quote">“That makes sense. We can review the forecast and come back with a revised number by Friday.”</p>
-          </div>
-
-          <div class="box">
-            <div class="label">Coach push</div>
-            <p>Make Justin clarify the gap before defending the forecast.</p>
-          </div>
-        </div>
-      </details>
-
-      <details class="drill">
-        <summary>Drill 2 — Incremental sales vs shelf pressure</summary>
-        <div class="content">
-          <div class="box warning">
-            <div class="label">Buyer says</div>
-            <p class="quote">“If we add more SKUs, we need to understand whether this creates incremental sales or just puts more pressure on shelf space.”</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Catch</div>
-            <p><strong>more SKUs → incremental sales → shelf pressure</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Strong recovery response</div>
-            <p class="quote">“Let me check I’ve understood. Your concern is whether the extra SKUs would grow the category, or simply add pressure to limited shelf space. Is that right?”</p>
-            <p class="quote">“The way we would address that is by prioritising the SKUs with the clearest shopper fit and strongest support plan.”</p>
-          </div>
-
-          <div class="box">
-            <div class="label">Coach push</div>
-            <p>Do not let him say only “we have many flavours.” Push the commercial meaning.</p>
-          </div>
-        </div>
-      </details>
-
-      <details class="drill">
-        <summary>Drill 3 — Sell-through proof</summary>
-        <div class="content">
-          <div class="box warning">
-            <div class="label">Buyer says</div>
-            <p class="quote">“Before we commit to support, we need a clearer view of sell-through and repeat purchase.”</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Catch</div>
-            <p><strong>support → sell-through → repeat purchase</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Strong recovery response</div>
-            <p class="quote">“Understood. You need more confidence that shoppers are not only trying the product, but buying it again.”</p>
-            <p class="quote">“We’ll review the latest sell-through and come back with a clearer read on repeat purchase and support options.”</p>
-          </div>
-
-          <div class="box">
-            <div class="label">Coach push</div>
-            <p>Make him paraphrase the buyer’s concern before promising action.</p>
-          </div>
-        </div>
-      </details>
-
-      <details class="drill">
-        <summary>Drill 4 — Range rationalisation risk</summary>
-        <div class="content">
-          <div class="box warning">
-            <div class="label">Buyer says</div>
-            <p class="quote">“We’re going through range rationalisation, so any additional SKU needs a very clear reason to be there.”</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Catch</div>
-            <p><strong>range rationalisation → fewer SKUs → clear commercial reason</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Strong recovery response</div>
-            <p class="quote">“That makes sense. If Coles is rationalising the range, every SKU needs to justify its place.”</p>
-            <p class="quote">“Our focus would be to show which Genki SKUs bring the clearest incremental value, shopper fit, and support plan.”</p>
-          </div>
-
-          <div class="box">
-            <div class="label">Coach push</div>
-            <p>Make him avoid sounding defensive. Acknowledge the commercial logic first.</p>
-          </div>
-        </div>
-      </details>
-
-      <details class="drill">
-        <summary>Drill 5 — Need a timeline</summary>
-        <div class="content">
-          <div class="box warning">
-            <div class="label">Buyer says</div>
-            <p class="quote">“We’ll need more clarity on the support plan before we can take this further.”</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Catch</div>
-            <p><strong>support plan → more clarity → next step</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Strong recovery response</div>
-            <p class="quote">“Absolutely. What would you like us to come back with — trade support, launch timing, or the full support calendar?”</p>
-            <p class="quote">“And when would you need that finalised by?”</p>
-          </div>
-
-          <div class="box">
-            <div class="label">Coach push</div>
-            <p>This is the boss-feedback drill. Do not let the response end without a timeline.</p>
-          </div>
-        </div>
-      </details>
-
-      <details class="drill">
-        <summary>Drill 6 — Buyer speaks too fast</summary>
-        <div class="content">
-          <div class="box warning">
-            <div class="label">Buyer says</div>
-            <p class="quote">“The support looks okay directionally, but if the forecast is built off assumptions rather than actual sell-through, it’s harder for us to justify more space.”</p>
-          </div>
-
-          <div class="box anchor">
-            <div class="label">Catch</div>
-            <p><strong>support okay → forecast assumptions → sell-through → justify space</strong></p>
-          </div>
-
-          <div class="box model">
-            <div class="label">Strong recovery response</div>
-            <p class="quote">“I caught the main point, but can I check one detail?”</p>
-            <p class="quote">“Is your main concern that the forecast needs stronger sell-through evidence before Coles can justify more space?”</p>
-          </div>
-
-          <div class="box">
-            <div class="label">Coach push</div>
-            <p>Train him to recover calmly instead of panicking when he misses part of the sentence.</p>
-          </div>
-        </div>
-      </details>
+      <div id="drillBank"></div>
     </section>
 
     <section>
       <div class="section-title">
         <h2>7. Practice Routine</h2>
-        <span>Use in class</span>
+        <span>Use in class or solo practice</span>
       </div>
 
       <details open>
@@ -955,71 +659,53 @@
           <div class="grid three">
             <div class="box">
               <div class="label">Step 1</div>
-              <p>Choose one drill card.</p>
-              <p>Read the buyer line quickly.</p>
+              <p>Choose one buyer comment.</p>
+              <p>Read it quickly once.</p>
             </div>
 
             <div class="box">
               <div class="label">Step 2</div>
-              <p>Justin catches keywords and clarifies.</p>
+              <p>Catch the keywords and clarify.</p>
               <p>No full answer yet.</p>
             </div>
 
             <div class="box">
               <div class="label">Step 3</div>
-              <p>Justin answers and closes the loop with action + timeline.</p>
+              <p>Answer the point and close the loop with action + timeline.</p>
             </div>
           </div>
 
           <div class="box model">
             <div class="label">Success condition</div>
-            <p>Justin does not need perfect English. He needs control:</p>
+            <p>You do not need perfect English. You need control:</p>
             <p><strong>“Let me make sure I’ve understood…” → clarify → answer → action/timeline.</strong></p>
           </div>
         </div>
       </details>
-    </section>
-
-    <section>
-      <div class="section-title">
-        <h2>Coach Notes</h2>
-        <span>Private lesson guidance</span>
-      </div>
 
       <details>
-        <summary>How to coach this without overbuilding</summary>
+        <summary>Solo practice method</summary>
         <div class="content">
           <div class="box">
-            <div class="label">Main focus</div>
-            <p>This is not a theory lesson. It is a pressure-recovery drill.</p>
+            <div class="label">Method</div>
+            <p>Pick one term and one drill. Read the buyer sentence once. Close the card. Then respond out loud.</p>
           </div>
 
-          <div class="box">
-            <div class="label">Best correction type</div>
-            <p>Correct the recovery move, not every grammar issue.</p>
-            <p>Examples: clarify earlier, paraphrase cleaner, close the loop, add timeline.</p>
-          </div>
-
-          <div class="box warning">
-            <div class="label">Avoid</div>
-            <ul>
-              <li>Turning the lesson into a general FMCG dictionary.</li>
-              <li>Explaining memory theory for too long.</li>
-              <li>Letting Justin answer before clarifying.</li>
-              <li>Letting “we’ll check” pass as a final answer.</li>
-            </ul>
+          <div class="box anchor">
+            <div class="label">Your target</div>
+            <p><strong>Do not memorise the whole answer. Memorise the recovery move.</strong></p>
           </div>
 
           <div class="box model">
-            <div class="label">Main coaching point</div>
-            <p>Buyer recovery is not about understanding every word. It is about catching enough, checking the meaning, and landing the next step.</p>
+            <div class="label">Practice reminder</div>
+            <p class="quote">“I don’t need to understand every word. I need to catch the key point, check the meaning, and land the next step.”</p>
           </div>
         </div>
       </details>
     </section>
 
     <div class="footer-note">
-      Aptum · Buyer Question Recovery Lab · Built for Justin’s FMCG buyer communication practice.
+      Aptum · Buyer Question Recovery Lab · Australian FMCG buyer communication practice.
     </div>
   </main>
 
@@ -1047,6 +733,427 @@
       });
     }
 
+    const terms = [
+      {
+        category: "Range Review",
+        term: "Ranged nationally",
+        tags: ["Coles/Woolworths", "range", "listing"],
+        meaning: "The product is listed across the retailer’s national store network, not just in selected stores.",
+        chunk: "ranged nationally across Coles",
+        hook: "Think: the product has permission to sit on shelves across the country.",
+        buyer: "Are you expecting this to be ranged nationally or only in selected stores?",
+        response: "Let me check I’ve understood. Are you asking whether the launch would be national or limited to selected stores first?"
+      },
+      {
+        category: "Range Review",
+        term: "Ranging window",
+        tags: ["timing", "buyer calendar", "range review"],
+        meaning: "The period when the retailer decides which products can be added, removed, or changed.",
+        chunk: "fit within the ranging window",
+        hook: "A window opens for new products, then closes until the next review.",
+        buyer: "If this misses the ranging window, we probably can’t look at it again until the next reset.",
+        response: "Understood. So timing is the key issue. When would you need the final information to fit within this ranging window?"
+      },
+      {
+        category: "Range Review",
+        term: "Range reset",
+        tags: ["Australian retail", "shelf change", "category"],
+        meaning: "A planned update to the product range, shelf layout, and space allocation.",
+        chunk: "ahead of the next range reset",
+        hook: "The shelf gets reset like a chessboard: products move, leave, or enter.",
+        buyer: "We’re reviewing this ahead of the next range reset.",
+        response: "Got it. So the decision needs to be made before the range reset. What information would help you assess the opportunity?"
+      },
+      {
+        category: "Range Review",
+        term: "Range rationalisation",
+        tags: ["range review", "cuts", "space pressure"],
+        meaning: "Cutting products from the range to simplify the shelf or improve performance.",
+        chunk: "risk of range rationalisation",
+        hook: "A rational buyer with scissors cuts weak products from the shelf.",
+        buyer: "We’re going through range rationalisation, so every additional SKU needs to justify its place.",
+        response: "That makes sense. If range rationalisation is a focus, we need to show which products bring the clearest incremental value."
+      },
+      {
+        category: "Shelf / Merchandising",
+        term: "Planogram / POG",
+        tags: ["shelf layout", "retail execution", "space"],
+        meaning: "The official shelf layout showing where each product sits and how much space it gets.",
+        chunk: "fit within the planogram",
+        hook: "A planogram is the shelf map.",
+        buyer: "We’d need to see how this fits within the POG.",
+        response: "Let me check I’ve understood. You want to see how the range would fit within the current shelf layout, not only the product proposal."
+      },
+      {
+        category: "Shelf / Merchandising",
+        term: "Relay",
+        tags: ["Australian retail", "planogram", "store execution"],
+        meaning: "A shelf change where stores update products and layout according to a new planogram.",
+        chunk: "during the next relay",
+        hook: "The shelf team relays the shelf into a new layout.",
+        buyer: "That would probably need to wait until the next relay.",
+        response: "Understood. So the timing depends on the next shelf relay. When is that likely to happen?"
+      },
+      {
+        category: "Shelf / Merchandising",
+        term: "Space-to-sales",
+        tags: ["shelf space", "performance", "commercial"],
+        meaning: "Whether the amount of shelf space a product gets is justified by its sales performance.",
+        chunk: "justify the space-to-sales",
+        hook: "Shelf space has to earn its rent through sales.",
+        buyer: "The concern is space-to-sales. The product needs to justify the space.",
+        response: "So your concern is whether the product can deliver enough sales for the amount of shelf space required. Is that right?"
+      },
+      {
+        category: "Performance Data",
+        term: "Rate of sale / ROS",
+        tags: ["sales velocity", "performance", "forecast"],
+        meaning: "How quickly a product sells over time, often used to judge performance.",
+        chunk: "current rate of sale",
+        hook: "Rate of sale is the product’s selling speed.",
+        buyer: "The forecast looks high compared with the current ROS.",
+        response: "Are you saying the proposed forecast feels too high compared with the current rate of sale?"
+      },
+      {
+        category: "Performance Data",
+        term: "USPW",
+        tags: ["units", "store performance", "forecast"],
+        meaning: "Units per store per week. A common way to discuss average weekly store-level sales.",
+        chunk: "proposed USPW",
+        hook: "One store, one week, how many units move?",
+        buyer: "The USPW assumption feels ambitious.",
+        response: "Let me check I’ve understood. Is the main concern that the proposed units per store per week are too ambitious at this stage?"
+      },
+      {
+        category: "Performance Data",
+        term: "Sell-through",
+        tags: ["shopper sales", "stock movement", "performance"],
+        meaning: "How much product actually sells through to shoppers, not just how much is shipped to the retailer.",
+        chunk: "strong sell-through",
+        hook: "The product goes through the shelf, through checkout, into the shopper’s bag.",
+        buyer: "Before we support more space, we need a clearer view of sell-through.",
+        response: "Understood. You need more confidence that the product is actually selling through to shoppers before expanding the space."
+      },
+      {
+        category: "Performance Data",
+        term: "Baseline sales",
+        tags: ["normal sales", "promo comparison", "analytics"],
+        meaning: "Normal sales without extra promotion, display, or unusual support.",
+        chunk: "baseline sales outside promotion",
+        hook: "Baseline is the normal floor before promotions lift it.",
+        buyer: "What are the baseline sales outside promo?",
+        response: "You’re asking what the product sells normally without promotional activity. We can separate baseline sales from promo uplift."
+      },
+      {
+        category: "Performance Data",
+        term: "Uplift",
+        tags: ["promo", "incremental", "performance"],
+        meaning: "Extra sales generated by a promotion, display, price reduction, or campaign.",
+        chunk: "promo uplift",
+        hook: "The promotion lifts sales above the baseline.",
+        buyer: "What uplift are you expecting from the promo mechanic?",
+        response: "Let me check. You’re asking how much additional sales we expect the promotion to generate above baseline."
+      },
+      {
+        category: "Performance Data",
+        term: "Incremental sales",
+        tags: ["growth", "category", "commercial case"],
+        meaning: "Sales that are genuinely additional, not just taken from another product.",
+        chunk: "create incremental sales",
+        hook: "An extra step added to the shelf, not just moving from one step to another.",
+        buyer: "Will this create incremental sales, or just shift sales from another product?",
+        response: "That’s the key question. We need to show whether the additional product creates new sales rather than simply shifting sales within the range."
+      },
+      {
+        category: "Performance Data",
+        term: "Cannibalisation",
+        tags: ["range risk", "flavour mix", "sales shift"],
+        meaning: "When one product takes sales from another product in the same range instead of creating new growth.",
+        chunk: "risk of cannibalisation",
+        hook: "One can eats another can’s sales.",
+        buyer: "How do we know the new flavour won’t cannibalise the existing ones?",
+        response: "That’s a fair concern. The key is choosing flavours that attract different shopper occasions rather than taking sales from the current range."
+      },
+      {
+        category: "Promotion / Trade",
+        term: "Promo mechanic",
+        tags: ["promotion", "pricing", "retail"],
+        meaning: "The structure of the promotion, such as price drop, multibuy, half price, or bundle.",
+        chunk: "the right promo mechanic",
+        hook: "Mechanic means the engine of the promotion: how the offer works.",
+        buyer: "What promo mechanic are you proposing?",
+        response: "Are you asking which promotional structure we would recommend — for example price drop, multibuy, or another mechanic?"
+      },
+      {
+        category: "Promotion / Trade",
+        term: "TPR",
+        tags: ["temporary price reduction", "discount", "promo"],
+        meaning: "Temporary Price Reduction. A short-term discount used to drive trial or volume.",
+        chunk: "run a TPR",
+        hook: "Temporary price reduction: the price drops, then returns.",
+        buyer: "Would you support a TPR for launch?",
+        response: "Yes, we can explore a temporary price reduction as part of the launch support. The level would depend on timing and the agreed range."
+      },
+      {
+        category: "Promotion / Trade",
+        term: "Scanback",
+        tags: ["Australian retail", "supplier funding", "promo"],
+        meaning: "A supplier-funded rebate paid back based on scanned sales during a promotion.",
+        chunk: "scanback support",
+        hook: "The register scans the sale, then the funding backs it.",
+        buyer: "Would there be scanback support for that activity?",
+        response: "Let me check I’ve understood. You’re asking whether Genki would fund the promotion through scanback support."
+      },
+      {
+        category: "Promotion / Trade",
+        term: "Trade spend",
+        tags: ["budget", "retailer support", "promotion"],
+        meaning: "Money used to support retailer activity such as discounts, promotions, displays, or trade marketing.",
+        chunk: "allocate trade spend",
+        hook: "Trade spend is the money used to help the product move in retail.",
+        buyer: "How much trade spend sits behind this plan?",
+        response: "We can outline the trade spend once we align on the range, timing, and promotional plan."
+      },
+      {
+        category: "In-Store Execution",
+        term: "Gondola end",
+        tags: ["Australian retail", "display", "aisle end"],
+        meaning: "A promotional display at the end of an aisle. Common Australian retail term.",
+        chunk: "secure a gondola end",
+        hook: "The aisle end is the stage; the product gets seen before shoppers turn the corner.",
+        buyer: "Are you asking for gondola end support?",
+        response: "A gondola end would be ideal for visibility, but we can also discuss other off-location options depending on availability and investment."
+      },
+      {
+        category: "In-Store Execution",
+        term: "Off-location display",
+        tags: ["display", "secondary location", "visibility"],
+        meaning: "A product display away from the normal shelf, often used to drive impulse purchase or promotional visibility.",
+        chunk: "off-location display support",
+        hook: "The product gets a second home away from its normal shelf.",
+        buyer: "Would you support an off-location display?",
+        response: "Yes, if we align on the right timing and range, off-location display could help drive trial and visibility."
+      },
+      {
+        category: "Supply / Operations",
+        term: "Fill rate",
+        tags: ["supply", "operations", "availability"],
+        meaning: "The percentage of orders that can be supplied in full and on time.",
+        chunk: "maintain a strong fill rate",
+        hook: "The order asks for 100 cases; fill rate is how much you actually fill.",
+        buyer: "Can you maintain the fill rate if we expand the range?",
+        response: "That’s an important point. We would need to confirm supply capacity and lead time before committing to the expanded range."
+      },
+      {
+        category: "Supply / Operations",
+        term: "OOS / Out of stock",
+        tags: ["availability", "supply risk", "shelf"],
+        meaning: "When the product is unavailable on shelf.",
+        chunk: "avoid OOS risk",
+        hook: "OOS means the shopper wants it, but the shelf is empty.",
+        buyer: "We don’t want to drive demand and then have OOS issues.",
+        response: "Absolutely. If we support the launch strongly, we also need to make sure supply can keep up and avoid out-of-stock risk."
+      },
+      {
+        category: "Marketing / Retail Media",
+        term: "Retail media",
+        tags: ["Coles", "shopper marketing", "media"],
+        meaning: "Advertising through the retailer’s own media channels, such as app, website, email, loyalty data, or in-store screens.",
+        chunk: "retail media support",
+        hook: "The retailer becomes the media channel.",
+        buyer: "Would there be any retail media support behind launch?",
+        response: "Yes, we can look at retail media options as part of the broader support plan, depending on timing, budget, and the agreed range."
+      },
+      {
+        category: "Marketing / Retail Media",
+        term: "EDM",
+        tags: ["email", "retail media", "shopper communication"],
+        meaning: "Electronic Direct Mail. Promotional email sent to shoppers or customers.",
+        chunk: "EDM support",
+        hook: "Email Direct Message to shoppers.",
+        buyer: "Could you support this with EDM or social?",
+        response: "Yes, EDM could be one part of the support plan, alongside social media and in-store activation."
+      },
+      {
+        category: "Marketing / Retail Media",
+        term: "Flybuys activation",
+        tags: ["Coles", "loyalty", "shopper targeting"],
+        meaning: "Promotion or targeting through Coles’ Flybuys loyalty program.",
+        chunk: "Flybuys activation",
+        hook: "Flybuys data helps target the right shoppers.",
+        buyer: "Would Flybuys activation be part of the launch plan?",
+        response: "That could be a strong option. We would need to assess the cost and how it fits with the launch timing and target shopper."
+      }
+    ];
+
+    const drills = [
+      {
+        title: "Drill 1 — Ranging window",
+        buyer: "If this misses the ranging window, we probably can’t look at it again until the next reset.",
+        catchWords: "ranging window → timing → next reset",
+        response: "Understood. So timing is the key issue. When would you need the final information to fit within this ranging window?",
+        focus: "Do not only say “okay.” Ask for the decision timeline."
+      },
+      {
+        title: "Drill 2 — Space-to-sales",
+        buyer: "The concern is space-to-sales. The product needs to justify the amount of shelf space.",
+        catchWords: "space-to-sales → shelf space → performance",
+        response: "Let me make sure I’ve understood. Your concern is whether the product can deliver enough sales for the space it needs. Is that right?",
+        focus: "Clarify the commercial concern before defending the product."
+      },
+      {
+        title: "Drill 3 — POG / planogram",
+        buyer: "We’d need to see how this fits within the current POG before we talk about extra flavours.",
+        catchWords: "POG → shelf layout → extra flavours",
+        response: "Got it. You want to understand how the range would fit within the current shelf layout before considering more flavours.",
+        focus: "Translate the retail term into plain meaning."
+      },
+      {
+        title: "Drill 4 — Relay timing",
+        buyer: "That probably can’t happen until the next relay.",
+        catchWords: "relay → shelf change → timing",
+        response: "Understood. So the timing depends on the next shelf relay. When is that likely to happen?",
+        focus: "Use the term, then ask for timing."
+      },
+      {
+        title: "Drill 5 — Sell-through proof",
+        buyer: "Before we commit to support, we need a clearer view of sell-through and repeat purchase.",
+        catchWords: "support → sell-through → repeat purchase",
+        response: "Understood. You need more confidence that shoppers are not only trying the product, but buying it again. We can review the latest sell-through and come back with a clearer read.",
+        focus: "Paraphrase the concern before promising action."
+      },
+      {
+        title: "Drill 6 — Incremental sales",
+        buyer: "If we add more SKUs, we need to know whether this is genuinely incremental or just more pressure on shelf space.",
+        catchWords: "more SKUs → incremental sales → shelf pressure",
+        response: "Let me check I’ve understood. Your concern is whether the extra SKUs would create new sales, rather than just adding pressure to limited shelf space.",
+        focus: "Do not talk only about flavour choice. Explain the commercial value."
+      },
+      {
+        title: "Drill 7 — Cannibalisation",
+        buyer: "How do we know the new flavour won’t just cannibalise the existing ones?",
+        catchWords: "new flavour → cannibalisation → existing range",
+        response: "That’s a fair concern. The key is selecting flavours that bring in different shopper occasions rather than taking sales from the current range.",
+        focus: "Acknowledge the risk first. Then explain the selection logic."
+      },
+      {
+        title: "Drill 8 — Promo mechanic",
+        buyer: "The product might be worth a look, but we’d need a sharper promo mechanic for launch.",
+        catchWords: "worth a look → promo mechanic → launch",
+        response: "Understood. You see potential, but the launch needs a stronger promotional structure. Would you prefer us to come back with a price-drop option, multibuy option, or broader support plan?",
+        focus: "Turn soft interest into a specific next step."
+      },
+      {
+        title: "Drill 9 — Scanback",
+        buyer: "Would there be scanback support if we ran that activity?",
+        catchWords: "scanback → supplier funding → promo activity",
+        response: "Let me check I’ve understood. You’re asking whether Genki would fund the promotion through scanback support. We can review that based on the activity, timing, and expected volume.",
+        focus: "Show you understand the funding mechanism."
+      },
+      {
+        title: "Drill 10 — Gondola end",
+        buyer: "A gondola end would help, but we’d need to understand the investment behind it.",
+        catchWords: "gondola end → visibility → investment",
+        response: "Absolutely. A gondola end could help drive visibility, and we can come back with the investment level and support plan required.",
+        focus: "Connect display to visibility and investment."
+      },
+      {
+        title: "Drill 11 — Fill rate",
+        buyer: "If we expand the range, can you maintain fill rate across the network?",
+        catchWords: "expand range → fill rate → supply risk",
+        response: "That’s an important point. Before committing, we would confirm supply capacity, lead time, and our ability to maintain fill rate across the network.",
+        focus: "Do not overpromise. Confirm the operational check."
+      },
+      {
+        title: "Drill 12 — Light-on support plan",
+        buyer: "The range is interesting, but the support plan feels a bit light-on at the moment.",
+        catchWords: "interesting range → light-on → support plan",
+        response: "Understood. You see potential in the range, but the support plan needs to be stronger. What would you need to see — trade spend, retail media, display support, or a clearer launch calendar?",
+        focus: "Recognise soft Australian wording. “Light-on” means not strong enough."
+      }
+    ];
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderTerms() {
+      const container = document.getElementById("termBank");
+      container.innerHTML = terms.map((item, index) => `
+        <details class="term-card" data-category="${escapeHtml(item.category)}">
+          <summary>${escapeHtml(item.term)} <span class="mini">${escapeHtml(item.category)}</span></summary>
+          <div class="content">
+            <div class="term-meta">
+              ${item.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
+            </div>
+
+            <div class="box">
+              <div class="label">Meaning</div>
+              <p>${escapeHtml(item.meaning)}</p>
+            </div>
+
+            <div class="box anchor">
+              <div class="label">Useful chunk</div>
+              <p><strong>${escapeHtml(item.chunk)}</strong></p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Memory hook</div>
+              <p>${escapeHtml(item.hook)}</p>
+            </div>
+
+            <div class="box warning">
+              <div class="label">Buyer might say</div>
+              <p class="quote">“${escapeHtml(item.buyer)}”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">You can respond</div>
+              <p class="quote">“${escapeHtml(item.response)}”</p>
+            </div>
+          </div>
+        </details>
+      `).join("");
+    }
+
+    function renderDrills() {
+      const container = document.getElementById("drillBank");
+      container.innerHTML = drills.map((item, index) => `
+        <details class="drill" ${index === 0 ? "open" : ""}>
+          <summary>${escapeHtml(item.title)}</summary>
+          <div class="content">
+            <div class="box warning">
+              <div class="label">Buyer says</div>
+              <p class="quote">“${escapeHtml(item.buyer)}”</p>
+            </div>
+
+            <div class="box anchor">
+              <div class="label">Catch</div>
+              <p><strong>${escapeHtml(item.catchWords)}</strong></p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Strong recovery response</div>
+              <p class="quote">“${escapeHtml(item.response)}”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Practice focus</div>
+              <p>${escapeHtml(item.focus)}</p>
+            </div>
+          </div>
+        </details>
+      `).join("");
+    }
+
+    renderTerms();
+    renderDrills();
+
     const search = document.getElementById("search");
 
     search.addEventListener("input", () => {
@@ -1063,18 +1170,27 @@
       });
     });
 
+    function randomTerm() {
+      const cards = Array.from(document.querySelectorAll("details.term-card"));
+      jumpToRandom(cards);
+    }
+
     function randomDrill() {
-      const drills = Array.from(document.querySelectorAll("details.drill"));
-      if (!drills.length) return;
+      const cards = Array.from(document.querySelectorAll("details.drill"));
+      jumpToRandom(cards);
+    }
+
+    function jumpToRandom(cards) {
+      if (!cards.length) return;
 
       document.querySelectorAll(".highlight").forEach(el => el.classList.remove("highlight"));
 
-      const drill = drills[Math.floor(Math.random() * drills.length)];
-      drill.open = true;
-      drill.classList.add("highlight");
-      drill.scrollIntoView({ behavior: "smooth", block: "center" });
+      const card = cards[Math.floor(Math.random() * cards.length)];
+      card.open = true;
+      card.classList.add("highlight");
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
 
-      setTimeout(() => drill.classList.remove("highlight"), 1800);
+      setTimeout(() => card.classList.remove("highlight"), 1800);
     }
   </script>
 </body>
