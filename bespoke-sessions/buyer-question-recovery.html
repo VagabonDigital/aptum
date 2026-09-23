@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buyer Question Recovery Lab</title>
+
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8cmVjdCB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcng9IjU2IiBmaWxsPSIjMTMxYTMxIi8+CiAgPHBhdGggZD0iTSA5NCA1MiBDIDcyIDk2IDQ2IDE1MiAzMiAxOTYgQyA1NiAxNjggOTIgMTUyIDE0MiAxNTIgTCAxMzQgMTM0IEMgMTAwIDEzNCA3NCAxNDQgNTggMTYyIEMgNzYgMTIyIDkyIDg0IDk0IDUyIFoiIGZpbGw9IiNmZmZmZmYiLz4KICA8cGF0aCBkPSJNIDk0IDUyIEwgMTM0IDEzNCBMIDExNiAxNDIgWiIgZmlsbD0iI2ZmZmZmZiIvPgogIDxwYXRoIGQ9Ik0gMTI2IDE1MiBDIDE2NCAxNTIgMTk2IDE2OCAxOTYgMTkwIEMgMTk2IDIxMiAxNjQgMjIwIDEzNiAyMTYgQyAxMTYgMjEyIDEwMCAxOTggOTIgMTg2IEwgMTEwIDE2OCBDIDExOCAxNzggMTMwIDE4NCAxNDIgMTg4IEMgMTYwIDE5MiAxNzAgMTg0IDE3MCAxNzYgQyAxNzAgMTY2IDE1NiAxNjIgMTQyIDE2MiBDIDEzNCAxNjIgMTI4IDE2MiAxMjQgMTU0IFoiIGZpbGw9IiMyNmMxYjMiLz4KICA8cGF0aCBkPSJNIDExOCA5NCBDIDEzMCA3NCAxNjYgNzAgMTg2IDk0IEMgMjAwIDExNCAxODIgMTM0IDE3MCAxMzggTCAxNTYgMTE4IEMgMTY4IDExNCAxNzQgMTA0IDE2NiA5NiBDIDE1OCA4OCAxNDIgOTAgMTM0IDEwMiBaIiBmaWxsPSIjMjZjMWIzIi8+Cjwvc3ZnPg=='>
+
+  <style>
+    :root {
+      --bg: #07171f;
+      --panel: #0d2530;
+      --panel-2: #102f3d;
+      --ink: #f4fbfd;
+      --muted: #b9d0d7;
+      --teal: #35d3c6;
+      --gold: #f0c766;
+      --line: rgba(255,255,255,0.12);
+      --danger: #ffb4a8;
+      --soft: rgba(53,211,198,0.12);
+      --soft-gold: rgba(240,199,102,0.13);
+      --soft-red: rgba(255,180,168,0.11);
+      --shadow: 0 18px 45px rgba(0,0,0,0.28);
+      --radius: 18px;
+    }
+
+    html[data-theme="day"] {
+      --bg: #f4f8fa;
+      --panel: #ffffff;
+      --panel-2: #eef6f8;
+      --ink: #102230;
+      --muted: #516672;
+      --teal: #158d86;
+      --gold: #b58219;
+      --line: rgba(16,34,48,0.14);
+      --danger: #b54a3c;
+      --soft: rgba(21,141,134,0.10);
+      --soft-gold: rgba(181,130,25,0.12);
+      --soft-red: rgba(181,74,60,0.10);
+      --shadow: 0 14px 34px rgba(16,34,48,0.13);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(53,211,198,0.16), transparent 34rem),
+        radial-gradient(circle at top right, rgba(240,199,102,0.10), transparent 28rem),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 24px;
+    }
+
+    .toolbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toolbar-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: color-mix(in srgb, var(--panel) 86%, transparent);
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    button:hover {
+      border-color: color-mix(in srgb, var(--teal) 70%, transparent);
+      background: var(--soft);
+    }
+
+    input[type="search"] {
+      width: min(390px, 100%);
+      background: color-mix(in srgb, var(--panel) 86%, transparent);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      outline: none;
+    }
+
+    input::placeholder { color: var(--muted); }
+
+    header {
+      padding: 56px 24px 28px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 4.7rem);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      margin: 0 0 18px;
+      max-width: 900px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      max-width: 850px;
+      margin: 0 0 24px;
+    }
+
+    .top-card, details {
+      background: linear-gradient(135deg, color-mix(in srgb, var(--panel) 95%, transparent), color-mix(in srgb, var(--panel-2) 88%, transparent));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .top-card {
+      padding: 24px;
+      margin-top: 26px;
+    }
+
+    .framework, .flow-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .pill, .flow-chip {
+      border: 1px solid color-mix(in srgb, var(--teal) 45%, transparent);
+      background: var(--soft);
+      color: var(--ink);
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .flow-chip {
+      border-color: var(--line);
+      background: color-mix(in srgb, var(--panel) 84%, transparent);
+      border-radius: 12px;
+    }
+
+    section { margin-top: 28px; }
+
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 46px 0 14px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      margin: 0;
+      letter-spacing: -0.035em;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    details {
+      margin: 14px 0;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+    }
+
+    details[open] {
+      border-color: color-mix(in srgb, var(--teal) 45%, transparent);
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-weight: 900;
+      font-size: 1.08rem;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: "+";
+      color: var(--teal);
+      font-size: 1.45rem;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details[open] > summary::after { content: "–"; }
+
+    .content {
+      padding: 0 20px 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 820px) {
+      .grid, .three { grid-template-columns: 1fr; }
+      .toolbar-inner { align-items: stretch; }
+      .toolbar-buttons { width: 100%; }
+      button { flex: 1; }
+      .section-title { display: block; }
+      .section-title span { display: block; margin-top: 4px; }
+    }
+
+    .box {
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel) 75%, transparent);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 14px 0;
+    }
+
+    .box.anchor {
+      background: var(--soft-gold);
+      border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+    }
+
+    .box.model {
+      background: var(--soft);
+      border-color: color-mix(in srgb, var(--teal) 42%, transparent);
+    }
+
+    .box.warning {
+      background: var(--soft-red);
+      border-color: color-mix(in srgb, var(--danger) 38%, transparent);
+    }
+
+    .label {
+      color: var(--gold);
+      font-weight: 950;
+      letter-spacing: 0.02em;
+      margin-bottom: 5px;
+    }
+
+    .model .label { color: var(--teal); }
+    .warning .label { color: var(--danger); }
+
+    p { margin: 9px 0; }
+    ul { padding-left: 1.2rem; margin: 8px 0; }
+    li { margin: 5px 0; }
+
+    .quote {
+      font-size: 1.03rem;
+      color: var(--ink);
+    }
+
+    .mini {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hidden-by-search { display: none; }
+
+    .highlight {
+      outline: 3px solid color-mix(in srgb, var(--gold) 60%, transparent);
+      outline-offset: 3px;
+    }
+
+    .footer-note {
+      margin-top: 48px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <input id="search" type="search" placeholder="Search terms, drills, phrases..." />
+      <div class="toolbar-buttons">
+        <button onclick="toggleAll(true)">Expand all</button>
+        <button onclick="toggleAll(false)">Collapse all</button>
+        <button onclick="randomDrill()">Random drill</button>
+        <button id="themeBtn" onclick="toggleTheme()">Day mode</button>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="eyebrow">Aptum · Fluency Under Pressure</div>
+    <h1>Buyer Question Recovery Lab</h1>
+    <p class="subtitle">
+      A practice lab for fast buyer questions, FMCG terminology, clarification, and closing the loop.
+      Use it when Justin catches only part of a buyer’s question and needs to recover without guessing.
+    </p>
+
+    <div class="top-card">
+      <div class="label">Purpose of this lab</div>
+      <p>
+        This is not a vocabulary dictionary.
+      </p>
+      <p>
+        It is a speaking practice tool for the moment when a buyer speaks quickly, uses commercial terminology,
+        or gives a requirement that needs a clear follow-up.
+      </p>
+
+      <div class="framework">
+        <span class="pill">Catch</span>
+        <span class="pill">Clarify</span>
+        <span class="pill">Confirm</span>
+        <span class="pill">Answer</span>
+        <span class="pill">Close the Loop</span>
+      </div>
+
+      <p>
+        Main training goal:
+      </p>
+
+      <div class="flow-line">
+        <span class="flow-chip">Catch the keyword</span>
+        <span class="flow-chip">Clarify the issue</span>
+        <span class="flow-chip">Confirm the meaning</span>
+        <span class="flow-chip">Answer directly</span>
+        <span class="flow-chip">Action + owner + timeline</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section>
+      <div class="section-title">
+        <h2>1. How to Use This Lab</h2>
+        <span>Practice control panel</span>
+      </div>
+
+      <details open>
+        <summary>Lesson routine</summary>
+        <div class="content">
+          <div class="box anchor">
+            <div class="label">Core practice pattern</div>
+            <p><strong>Buyer comment → Justin recovers → coach corrects one thing → Justin repeats cleaner</strong></p>
+          </div>
+
+          <div class="grid">
+            <div class="box">
+              <div class="label">Round 1</div>
+              <p>Choose one fast buyer comment.</p>
+              <p>Justin responds using the recovery pattern.</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Round 2</div>
+              <p>Add one FMCG term.</p>
+              <p>Justin clarifies, answers, and closes the loop.</p>
+            </div>
+          </div>
+
+          <div class="box model">
+            <div class="label">Coach rule</div>
+            <p>Do not correct everything. Correct one thing per round: clarification, direct answer, timeline, or commercial wording.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>2. Recovery Pattern</h2>
+        <span>Fast buyer questions</span>
+      </div>
+
+      <details open>
+        <summary>Catch → Clarify → Confirm → Answer → Close</summary>
+        <div class="content">
+          <div class="grid">
+            <div class="box">
+              <div class="label">Catch</div>
+              <p>Listen for the key commercial word or concern.</p>
+              <p class="mini">Example: forecast gap, USPW, rate of sale, support plan, incremental sales.</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Clarify</div>
+              <p>Slow the moment down instead of guessing.</p>
+              <p class="mini">“Can I check what you mean by the gap?”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Confirm</div>
+              <p>Repeat the issue back in cleaner language.</p>
+              <p class="mini">“So your concern is whether the forecast is realistic.”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Answer</div>
+              <p>Give the direct answer first.</p>
+              <p class="mini">Then add one reason or data point.</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Close</div>
+              <p>Confirm action, owner, and timeline.</p>
+              <p class="mini">“We’ll come back by Friday with revised numbers.”</p>
+            </div>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model recovery</div>
+            <p class="quote">“Let me make sure I’ve understood. Your concern is whether the forecast is realistic compared with the current rate of sale. Is that right?”</p>
+            <p class="quote">“Okay, that makes sense. We’ll review the numbers and come back with a revised forecast by Friday.”</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not half-understand the question and then answer the wrong thing confidently.</p>
+            <p>In buyer meetings, clarification is not weakness. It is control.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>3. Clarification Phrase Bank</h2>
+        <span>Recovery language</span>
+      </div>
+
+      <details open>
+        <summary>When Justin only catches part of the question</summary>
+        <div class="content">
+          <div class="grid">
+            <div class="box model">
+              <div class="label">Partial understanding</div>
+              <p class="quote">“I caught the main point, but can I check one detail?”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Fast speech</div>
+              <p class="quote">“Could you rephrase that last part?”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Unclear concern</div>
+              <p class="quote">“Are you mainly concerned about the forecast, the support plan, or the SKU selection?”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Forecast gap</div>
+              <p class="quote">“Let me make sure I’ve understood the gap.”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Specific word missed</div>
+              <p class="quote">“Sorry, I missed that one term — could you say it again?”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Before answering</div>
+              <p class="quote">“Before I answer directly, let me check I’m answering the right point.”</p>
+            </div>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Pause → check → answer the real question</strong></p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>4. Close the Loop</h2>
+        <span>Boss feedback</span>
+      </div>
+
+      <details open>
+        <summary>Action + owner + timeline</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>
+              When the buyer gives a request, requirement, or concern, the meeting should not end with:
+              “Okay, we’ll check.”
+            </p>
+            <p>
+              Justin needs to confirm what happens next, who owns it, and when it is due.
+            </p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Anchor</div>
+            <p><strong>Request → action → owner → timeline</strong></p>
+          </div>
+
+          <div class="grid">
+            <div class="box warning">
+              <div class="label">Weak</div>
+              <p class="quote">“Okay, we’ll check.”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Stronger</div>
+              <p class="quote">“Okay, we’ll review the forecast and come back by Friday with a revised number and support plan.”</p>
+            </div>
+          </div>
+
+          <div class="grid three">
+            <div class="box model">
+              <div class="label">Timeline</div>
+              <p class="quote">“When would you need this finalised by?”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Deliverable</div>
+              <p class="quote">“What would you like us to come back with — revised numbers, launch timing, or support options?”</p>
+            </div>
+
+            <div class="box model">
+              <div class="label">Commitment</div>
+              <p class="quote">“We’ll come back to you by Friday with the revised forecast and support plan.”</p>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>5. FMCG Term Builder</h2>
+        <span>Mnemonic + chunk + use</span>
+      </div>
+
+      <details open>
+        <summary>How to learn a term</summary>
+        <div class="content">
+          <div class="box anchor">
+            <div class="label">Learning cycle</div>
+            <p><strong>Meaning → phrase/chunk → mnemonic → Genki sentence → buyer-response sentence</strong></p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Watch out</div>
+            <p>Do not learn every possible meaning first.</p>
+            <p>Start with the meaning Justin is most likely to hear or use in FMCG buyer conversations.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Range rationalisation</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Meaning</div>
+            <p>Cutting SKUs from the range to simplify the shelf, improve performance, or make space for stronger products.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Chunk</div>
+            <p><strong>risk of range rationalisation</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Mnemonic hook</div>
+            <p>A rational buyer with scissors cuts weak SKUs from the shelf.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Genki sentence</div>
+            <p class="quote">“If Coles is going through range rationalisation, every SKU needs a clear commercial reason to stay.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Buyer-response sentence</div>
+            <p class="quote">“I understand. If range rationalisation is a focus, we need to show which SKUs can deliver incremental value.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Rate of sale</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Meaning</div>
+            <p>How quickly a product sells in store.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Chunk</div>
+            <p><strong>current rate of sale</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Mnemonic hook</div>
+            <p>A cash register racing down the shelf because the product sells fast.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Genki sentence</div>
+            <p class="quote">“The current rate of sale is still early, but it gives us a starting point for the forecast.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Buyer-response sentence</div>
+            <p class="quote">“Are you concerned that the proposed USPW is too high compared with the current rate of sale?”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Sell-through</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Meaning</div>
+            <p>How much product actually sells through to shoppers, not just how much is shipped into the retailer.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Chunk</div>
+            <p><strong>strong sell-through</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Mnemonic hook</div>
+            <p>A can travelling through the shelf, through the checkout, and into the shopper’s bag.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Genki sentence</div>
+            <p class="quote">“We need to review sell-through before we overcommit to a wider rollout.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Buyer-response sentence</div>
+            <p class="quote">“That makes sense. We can come back with sell-through data and a clearer view of repeat purchase.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Incremental sales</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Meaning</div>
+            <p>Extra sales that would not have happened without the product, range expansion, promotion, or support.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Chunk</div>
+            <p><strong>create incremental sales</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Mnemonic hook</div>
+            <p>A shelf grows an extra step upward: that extra step is incremental sales.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Genki sentence</div>
+            <p class="quote">“The goal is to create incremental sales, not simply move sales from one SKU to another.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Buyer-response sentence</div>
+            <p class="quote">“Your question is whether the extra SKUs would create incremental sales or just add shelf pressure. Is that right?”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Cannibalisation</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Meaning</div>
+            <p>When one product takes sales from another product in the same range instead of creating new growth.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Chunk</div>
+            <p><strong>risk of cannibalisation</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Mnemonic hook</div>
+            <p>One Genki can eats another Genki can’s sales.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Genki sentence</div>
+            <p class="quote">“We need to choose flavours carefully to reduce the risk of cannibalisation.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Buyer-response sentence</div>
+            <p class="quote">“I understand the concern. The key is choosing SKUs that grow the range rather than cannibalise the existing flavours.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Commercial case</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Meaning</div>
+            <p>The business reason for listing, supporting, expanding, or keeping a product.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Chunk</div>
+            <p><strong>build a stronger commercial case</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Mnemonic hook</div>
+            <p>A briefcase full of sales data, margin, support plans, and buyer reasons.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Genki sentence</div>
+            <p class="quote">“We need a stronger commercial case for each SKU before asking for more space.”</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Buyer-response sentence</div>
+            <p class="quote">“That’s fair. We can build a clearer commercial case around rate of sale, support, and expected return.”</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>6. Fast Buyer Comment Drills</h2>
+        <span>Core practice</span>
+      </div>
+
+      <details class="drill" open>
+        <summary>Drill 1 — Forecast gap</summary>
+        <div class="content">
+          <div class="box warning">
+            <div class="label">Buyer says</div>
+            <p class="quote">“The USPW looks higher than what we’re seeing in the current rate of sale.”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Catch</div>
+            <p><strong>USPW → current rate of sale → forecast gap</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong recovery response</div>
+            <p class="quote">“Let me make sure I’ve understood. Are you saying the proposed USPW feels too high compared with the current rate of sale?”</p>
+            <p class="quote">“That makes sense. We can review the forecast and come back with a revised number by Friday.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coach push</div>
+            <p>Make Justin clarify the gap before defending the forecast.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="drill">
+        <summary>Drill 2 — Incremental sales vs shelf pressure</summary>
+        <div class="content">
+          <div class="box warning">
+            <div class="label">Buyer says</div>
+            <p class="quote">“If we add more SKUs, we need to understand whether this creates incremental sales or just puts more pressure on shelf space.”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Catch</div>
+            <p><strong>more SKUs → incremental sales → shelf pressure</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong recovery response</div>
+            <p class="quote">“Let me check I’ve understood. Your concern is whether the extra SKUs would grow the category, or simply add pressure to limited shelf space. Is that right?”</p>
+            <p class="quote">“The way we would address that is by prioritising the SKUs with the clearest shopper fit and strongest support plan.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coach push</div>
+            <p>Do not let him say only “we have many flavours.” Push the commercial meaning.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="drill">
+        <summary>Drill 3 — Sell-through proof</summary>
+        <div class="content">
+          <div class="box warning">
+            <div class="label">Buyer says</div>
+            <p class="quote">“Before we commit to support, we need a clearer view of sell-through and repeat purchase.”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Catch</div>
+            <p><strong>support → sell-through → repeat purchase</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong recovery response</div>
+            <p class="quote">“Understood. You need more confidence that shoppers are not only trying the product, but buying it again.”</p>
+            <p class="quote">“We’ll review the latest sell-through and come back with a clearer read on repeat purchase and support options.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coach push</div>
+            <p>Make him paraphrase the buyer’s concern before promising action.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="drill">
+        <summary>Drill 4 — Range rationalisation risk</summary>
+        <div class="content">
+          <div class="box warning">
+            <div class="label">Buyer says</div>
+            <p class="quote">“We’re going through range rationalisation, so any additional SKU needs a very clear reason to be there.”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Catch</div>
+            <p><strong>range rationalisation → fewer SKUs → clear commercial reason</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong recovery response</div>
+            <p class="quote">“That makes sense. If Coles is rationalising the range, every SKU needs to justify its place.”</p>
+            <p class="quote">“Our focus would be to show which Genki SKUs bring the clearest incremental value, shopper fit, and support plan.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coach push</div>
+            <p>Make him avoid sounding defensive. Acknowledge the commercial logic first.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="drill">
+        <summary>Drill 5 — Need a timeline</summary>
+        <div class="content">
+          <div class="box warning">
+            <div class="label">Buyer says</div>
+            <p class="quote">“We’ll need more clarity on the support plan before we can take this further.”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Catch</div>
+            <p><strong>support plan → more clarity → next step</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong recovery response</div>
+            <p class="quote">“Absolutely. What would you like us to come back with — trade support, launch timing, or the full support calendar?”</p>
+            <p class="quote">“And when would you need that finalised by?”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coach push</div>
+            <p>This is the boss-feedback drill. Do not let the response end without a timeline.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="drill">
+        <summary>Drill 6 — Buyer speaks too fast</summary>
+        <div class="content">
+          <div class="box warning">
+            <div class="label">Buyer says</div>
+            <p class="quote">“The support looks okay directionally, but if the forecast is built off assumptions rather than actual sell-through, it’s harder for us to justify more space.”</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Catch</div>
+            <p><strong>support okay → forecast assumptions → sell-through → justify space</strong></p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong recovery response</div>
+            <p class="quote">“I caught the main point, but can I check one detail?”</p>
+            <p class="quote">“Is your main concern that the forecast needs stronger sell-through evidence before Coles can justify more space?”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Coach push</div>
+            <p>Train him to recover calmly instead of panicking when he misses part of the sentence.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>7. Practice Routine</h2>
+        <span>Use in class</span>
+      </div>
+
+      <details open>
+        <summary>15-minute drill format</summary>
+        <div class="content">
+          <div class="grid three">
+            <div class="box">
+              <div class="label">Step 1</div>
+              <p>Choose one drill card.</p>
+              <p>Read the buyer line quickly.</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Step 2</div>
+              <p>Justin catches keywords and clarifies.</p>
+              <p>No full answer yet.</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Step 3</div>
+              <p>Justin answers and closes the loop with action + timeline.</p>
+            </div>
+          </div>
+
+          <div class="box model">
+            <div class="label">Success condition</div>
+            <p>Justin does not need perfect English. He needs control:</p>
+            <p><strong>“Let me make sure I’ve understood…” → clarify → answer → action/timeline.</strong></p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Coach Notes</h2>
+        <span>Private lesson guidance</span>
+      </div>
+
+      <details>
+        <summary>How to coach this without overbuilding</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Main focus</div>
+            <p>This is not a theory lesson. It is a pressure-recovery drill.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Best correction type</div>
+            <p>Correct the recovery move, not every grammar issue.</p>
+            <p>Examples: clarify earlier, paraphrase cleaner, close the loop, add timeline.</p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Avoid</div>
+            <ul>
+              <li>Turning the lesson into a general FMCG dictionary.</li>
+              <li>Explaining memory theory for too long.</li>
+              <li>Letting Justin answer before clarifying.</li>
+              <li>Letting “we’ll check” pass as a final answer.</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Main coaching point</div>
+            <p>Buyer recovery is not about understanding every word. It is about catching enough, checking the meaning, and landing the next step.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <div class="footer-note">
+      Aptum · Buyer Question Recovery Lab · Built for Justin’s FMCG buyer communication practice.
+    </div>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+    const savedTheme = localStorage.getItem("aptum-recovery-theme");
+
+    function applyTheme(theme) {
+      root.setAttribute("data-theme", theme);
+      localStorage.setItem("aptum-recovery-theme", theme);
+      themeBtn.textContent = theme === "night" ? "Day mode" : "Night mode";
+    }
+
+    function toggleTheme() {
+      const current = root.getAttribute("data-theme") || "night";
+      applyTheme(current === "night" ? "day" : "night");
+    }
+
+    applyTheme(savedTheme || "night");
+
+    function toggleAll(open) {
+      document.querySelectorAll("details").forEach(detail => {
+        detail.open = open;
+      });
+    }
+
+    const search = document.getElementById("search");
+
+    search.addEventListener("input", () => {
+      const query = search.value.toLowerCase().trim();
+
+      document.querySelectorAll("details").forEach(detail => {
+        const text = detail.innerText.toLowerCase();
+        const match = !query || text.includes(query);
+        detail.classList.toggle("hidden-by-search", !match);
+
+        if (query && match) {
+          detail.open = true;
+        }
+      });
+    });
+
+    function randomDrill() {
+      const drills = Array.from(document.querySelectorAll("details.drill"));
+      if (!drills.length) return;
+
+      document.querySelectorAll(".highlight").forEach(el => el.classList.remove("highlight"));
+
+      const drill = drills[Math.floor(Math.random() * drills.length)];
+      drill.open = true;
+      drill.classList.add("highlight");
+      drill.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      setTimeout(() => drill.classList.remove("highlight"), 1800);
+    }
+  </script>
+</body>
+</html>
