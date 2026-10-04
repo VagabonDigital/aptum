@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meeting Participation: Understanding Project Updates & Regional Business Reviews</title>
+
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --panel: #ffffff;
+      --panel-2: #f1eee6;
+      --ink: #17242b;
+      --muted: #5f7078;
+      --teal: #168b86;
+      --gold: #b98719;
+      --purple: #6f55c8;
+      --line: rgba(23,36,43,0.13);
+      --danger: #b84a3a;
+      --soft: rgba(22, 139, 134, 0.09);
+      --soft-gold: rgba(185, 135, 25, 0.12);
+      --soft-purple: rgba(111, 85, 200, 0.10);
+      --radius: 18px;
+      --shadow: 0 18px 45px rgba(47, 40, 25, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(22,139,134,0.11), transparent 34rem),
+        radial-gradient(circle at top right, rgba(185,135,25,0.11), transparent 28rem),
+        radial-gradient(circle at 60% 10%, rgba(111,85,200,0.07), transparent 30rem),
+        linear-gradient(180deg, #fbf8f1 0%, #f6f3ec 54%, #efe9dc 100%);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 56px 24px 28px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(251, 248, 241, 0.86);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 8px 28px rgba(47, 40, 25, 0.06);
+      padding: 12px 24px;
+    }
+
+    .toolbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toolbar-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid rgba(23,36,43,0.13);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(255,255,255,0.72);
+      color: var(--ink);
+      font-weight: 750;
+      box-shadow: 0 3px 12px rgba(47, 40, 25, 0.05);
+    }
+
+    button:hover {
+      border-color: rgba(22,139,134,0.48);
+      background: rgba(22,139,134,0.08);
+    }
+
+    button.active {
+      border-color: rgba(185,135,25,0.54);
+      background: rgba(185,135,25,0.13);
+      color: var(--ink);
+    }
+
+    input[type="search"] {
+      width: min(360px, 100%);
+      background: rgba(255,255,255,0.78);
+      color: var(--ink);
+      border: 1px solid rgba(23,36,43,0.14);
+      border-radius: 999px;
+      padding: 10px 14px;
+      outline: none;
+      box-shadow: 0 3px 12px rgba(47, 40, 25, 0.05);
+    }
+
+    input[type="search"]::placeholder {
+      color: rgba(23,36,43,0.45);
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      margin: 0 0 18px;
+      max-width: 980px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      max-width: 880px;
+      margin: 0 0 24px;
+    }
+
+    .top-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.94), rgba(244,240,229,0.92));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-top: 26px;
+    }
+
+    .framework {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+      justify-content: center;
+    }
+
+    .pill {
+      border: 1px solid rgba(22,139,134,0.32);
+      background: rgba(22,139,134,0.08);
+      color: var(--ink);
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-weight: 750;
+      font-size: 0.88rem;
+      white-space: nowrap;
+    }
+
+    .pill.gold {
+      border-color: rgba(185,135,25,0.32);
+      background: rgba(185,135,25,0.10);
+    }
+
+    .pill.purple {
+      border-color: rgba(111,85,200,0.30);
+      background: rgba(111,85,200,0.08);
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 46px 0 14px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.55rem, 3vw, 2.4rem);
+      margin: 0;
+      letter-spacing: -0.035em;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    details {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      margin: 14px 0;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(47, 40, 25, 0.07);
+    }
+
+    details[open] {
+      border-color: rgba(22,139,134,0.28);
+    }
+
+    details.coach-only {
+      background: rgba(250,247,255,0.92);
+      border-color: rgba(111,85,200,0.26);
+    }
+
+    body.student-view details.coach-only {
+      display: none;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-weight: 850;
+      font-size: 1.1rem;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      color: var(--teal);
+      font-size: 1.45rem;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details[open] > summary::after {
+      content: "–";
+    }
+
+    details.coach-only summary::after {
+      color: var(--purple);
+    }
+
+    .content {
+      padding: 0 20px 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    @media (max-width: 900px) {
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .grid,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar-inner {
+        align-items: stretch;
+      }
+
+      .toolbar-buttons {
+        width: 100%;
+      }
+
+      button {
+        flex: 1;
+      }
+    }
+
+    .box {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.68);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 14px 0;
+    }
+
+    .box.anchor {
+      background: var(--soft-gold);
+      border-color: rgba(185,135,25,0.28);
+    }
+
+    .box.model {
+      background: var(--soft);
+      border-color: rgba(22,139,134,0.26);
+    }
+
+    .box.coach {
+      background: var(--soft-purple);
+      border-color: rgba(111,85,200,0.26);
+    }
+
+    .box.warning {
+      background: rgba(184,74,58,0.08);
+      border-color: rgba(184,74,58,0.25);
+    }
+
+    .label {
+      color: var(--gold);
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      margin-bottom: 5px;
+    }
+
+    .model .label {
+      color: var(--teal);
+    }
+
+    .coach .label {
+      color: var(--purple);
+    }
+
+    .warning .label {
+      color: var(--danger);
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 8px 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    p {
+      margin: 9px 0;
+    }
+
+    .quote {
+      font-size: 1.04rem;
+      color: var(--ink);
+    }
+
+    .mini {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hidden-by-search {
+      display: none;
+    }
+
+    .big-letter {
+      width: 46px;
+      height: 46px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(22,139,134,0.10);
+      border: 1px solid rgba(22,139,134,0.25);
+      color: var(--teal);
+      font-weight: 950;
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    .table th,
+    .table td {
+      text-align: left;
+      border: 1px solid var(--line);
+      padding: 12px;
+      vertical-align: top;
+    }
+
+    .table th {
+      color: var(--gold);
+      background: rgba(185,135,25,0.09);
+      font-weight: 900;
+    }
+
+    .note-card {
+      background: rgba(255,255,255,0.72);
+      border: 1px dashed rgba(23,36,43,0.25);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color: #24343b;
+      white-space: pre-line;
+    }
+
+    .footer-note {
+      margin-top: 48px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      font-size: 0.95rem;
+    }
+
+    .coach-badge {
+      color: var(--purple);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+  </style>
+
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4KICA8cmVjdCB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgcng9IjU2IiBmaWxsPSIjMTMxYTMxIi8+CiAgPHBhdGggZD0iTSA5NCA1MiBDIDcyIDk2IDQ2IDE1MiAzMiAxOTYgQyA1NiAxNjggOTIgMTUyIDE0MiAxNTIgTCAxMzQgMTM0IEMgMTAwIDEzNCA3NCAxNDQgNTggMTYyIEMgNzYgMTIyIDkyIDg0IDk0IDUyIFoiIGZpbGw9IiNmZmZmZmYiLz4KICA8cGF0aCBkPSJNIDk0IDUyIEwgMTM0IDEzNCBMIDExNiAxNDIgWiIgZmlsbD0iI2ZmZmZmZiIvPgogIDxwYXRoIGQ9Ik0gMTI2IDE1MiBDIDE2NCAxNTIgMTk2IDE2OCAxOTYgMTkwIEMgMTk2IDIxMiAxNjQgMjIwIDEzNiAyMTYgQyAxMTYgMjEyIDEwMCAxOTggOTIgMTg2IEwgMTEwIDE2OCBDIDExOCAxNzggMTMwIDE4NCAxNDIgMTg4IEMgMTYwIDE5MiAxNzAgMTg0IDE3MCAxNzYgQyAxNzAgMTY2IDE1NiAxNjIgMTQyIDE2MiBDIDEzNCAxNjIgMTI4IDE2MiAxMjQgMTU0IFoiIGZpbGw9IiMyNmMxYjMiLz4KICA8cGF0aCBkPSJNIDExOCA5NCBDIDEzMCA3NCAxNjYgNzAgMTg2IDk0IEMgMjAwIDExNCAxODIgMTM0IDE3MCAxMzggTCAxNTYgMTE4IEMgMTY4IDExNCAxNzQgMTA0IDE2NiA5NiBDIDE1OCA4OCAxNDIgOTAgMTM0IDEwMiBaIiBmaWxsPSIjMjZjMWIzIi8+Cjwvc3ZnPg=='>
+</head>
+
+<body class="student-view">
+
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <input id="search" type="search" placeholder="Search sections, phrases, practice..." />
+      <div class="toolbar-buttons">
+        <button onclick="toggleCoachMode()" id="coachBtn">Coach mode</button>
+        <button onclick="toggleAll(true)">Expand all</button>
+        <button onclick="toggleAll(false)">Collapse all</button>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="eyebrow">Aptum · Meeting Participation · Compass Territory</div>
+    <h1>Understanding Project Updates & Regional Business Reviews</h1>
+    <p class="subtitle">
+      A personalised meeting-comprehension lesson for Onur. The goal is not to memorise a long vocabulary list.
+      The goal is to recognise the meeting logic, catch the key signals, and respond clearly in project updates,
+      regional business reviews, and international colleague communication.
+    </p>
+
+    <div class="top-card">
+      <div class="label">Why this lesson exists</div>
+      <p>
+        Onur chose this territory because it connects directly to his real work: project updates, regional business reviews,
+        and communication with international colleagues.
+      </p>
+
+      <p>
+        The key pressure pattern is not simply “I need more English.” It is:
+      </p>
+
+      <div class="box anchor">
+        <p class="quote">
+          “When the topic is familiar, I can follow the meeting much more easily. When the topic is unfamiliar, fast, technical, or spoken with different accents, it becomes much harder to understand the meeting the first time.”
+        </p>
+      </div>
+
+      <p>
+        This lesson trains first-pass comprehension through one recurring work territory:
+      </p>
+
+      <div class="framework">
+        <span class="pill">Project status</span>
+        <span class="pill">Regional results</span>
+        <span class="pill">Risks and delays</span>
+        <span class="pill">Owners and support</span>
+        <span class="pill">Next actions</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section>
+      <div class="section-title">
+        <h2>1. The Real Target</h2>
+        <span>Understand faster the first time</span>
+      </div>
+
+      <details open>
+        <summary>What we are really training</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Main focus</div>
+            <p>
+              The main focus is understanding fast project and regional update meetings more efficiently the first time.
+            </p>
+            <p>
+              This is not a general vocabulary lesson. It is a meeting-comprehension lesson using one real work territory.
+            </p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Weak strategy</div>
+            <p>
+              Trying to catch every word, then rewatching the whole meeting afterward to fill in the gaps.
+            </p>
+            <p>
+              This doubles the time cost and can make meetings feel heavier than they need to be.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Stronger strategy</div>
+            <p>
+              Listen for the meeting signals: project status, result, delay, risk, owner, support needed, and next action.
+            </p>
+            <p>
+              If you catch these signals, you do not need every word to understand the business direction.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>What this connects to in Onur’s work</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Professional context</div>
+            <p>
+              Onur works as a food engineer in a global company, supporting sales with product samples, trials,
+              client meetings, technical communication, and follow-ups.
+            </p>
+          </div>
+
+          <div class="grid">
+            <div class="box">
+              <div class="label">Project-update side</div>
+              <ul>
+                <li>Customer trials and samples.</li>
+                <li>Delayed projects or approval steps.</li>
+                <li>Technical follow-ups with sales.</li>
+                <li>Support needed from product or technical teams.</li>
+                <li>Next steps, owners, and timelines.</li>
+              </ul>
+            </div>
+
+            <div class="box">
+              <div class="label">Regional-review side</div>
+              <ul>
+                <li>Results by region or market.</li>
+                <li>Strong or weak performance areas.</li>
+                <li>Risks, delays, and priorities.</li>
+                <li>Business review language.</li>
+                <li>International colleagues giving updates.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Lesson direction</div>
+            <p><strong>Recognise the meeting pattern first. Then catch the key words. Then respond briefly.</strong></p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>What we will not do</summary>
+        <div class="content">
+          <div class="box warning">
+            <div class="label">Avoid overload</div>
+            <p>
+              We will not study 50 technical words at once.
+            </p>
+            <p>
+              Too much vocabulary can make the meeting feel even more complicated.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Better approach</div>
+            <p>
+              We will work with a small number of high-value words and phrases that help Onur recognise what kind of meeting moment he is hearing.
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>2. The Meeting Logic Map</h2>
+        <span>What project updates usually do</span>
+      </div>
+
+      <details open>
+        <summary>The four things to catch</summary>
+        <div class="content">
+          <div class="grid-4">
+            <div class="box model">
+              <div class="big-letter">T</div>
+              <div class="label">Topic</div>
+              <p><strong>Which project, region, customer, or area are we discussing?</strong></p>
+              <p class="mini">Example: Turkey region, dairy project, customer trial, product sample, technical support.</p>
+            </div>
+
+            <div class="box model">
+              <div class="big-letter">P</div>
+              <div class="label">Point</div>
+              <p><strong>What is the main message?</strong></p>
+              <p class="mini">Example: Sales are strong, but the project is delayed because approval is still pending.</p>
+            </div>
+
+            <div class="box model">
+              <div class="big-letter">S</div>
+              <div class="label">Status</div>
+              <p><strong>What kind of situation is this?</strong></p>
+              <p class="mini">On track, delayed, blocked, at risk, pending, completed, improving, under review.</p>
+            </div>
+
+            <div class="box model">
+              <div class="big-letter">A</div>
+              <div class="label">Action</div>
+              <p><strong>What needs to happen next?</strong></p>
+              <p class="mini">Confirm details, contact a colleague, update sales, follow up with the customer.</p>
+            </div>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Core idea</div>
+            <p>
+              In project updates and business reviews, the most important word is often the status word:
+              on track, delayed, blocked, pending, at risk, or completed.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>The normal flow of a project update</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Typical project-update flow</div>
+            <p>
+              Most project updates follow a predictable business logic:
+            </p>
+
+            <div class="framework">
+              <span class="pill">Context</span>
+              <span class="pill">Progress</span>
+              <span class="pill">Problem</span>
+              <span class="pill">Risk</span>
+              <span class="pill">Support needed</span>
+              <span class="pill">Next step</span>
+            </div>
+          </div>
+
+          <div class="box model">
+            <div class="label">Example</div>
+            <p class="quote">
+              “For the dairy trial, the initial customer feedback was positive. However, we are still waiting for confirmation from the technical team.
+              This may affect the timeline, so the next step is to check the product version and update sales by Friday.”
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">T-P-S-A map</div>
+            <p><strong>Topic:</strong> dairy trial</p>
+            <p><strong>Point:</strong> feedback is positive, but technical confirmation is still missing</p>
+            <p><strong>Status:</strong> update + risk</p>
+            <p><strong>Action:</strong> check product version and update sales by Friday</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>The normal flow of a regional business review</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Typical regional-review flow</div>
+            <p>
+              Regional business reviews usually compare performance, explain changes, highlight risks, and agree priorities.
+            </p>
+
+            <div class="framework">
+              <span class="pill">Results</span>
+              <span class="pill">Comparison</span>
+              <span class="pill">Reason</span>
+              <span class="pill">Risk</span>
+              <span class="pill">Priority</span>
+              <span class="pill">Action</span>
+            </div>
+          </div>
+
+          <div class="box model">
+            <div class="label">Example</div>
+            <p class="quote">
+              “The region performed well overall this quarter, especially in Turkey. However, some projects in the Middle East are behind schedule because customer approvals took longer than expected.
+              Our priority next month is to support the delayed projects and protect the timeline.”
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">T-P-S-A map</div>
+            <p><strong>Topic:</strong> regional performance</p>
+            <p><strong>Point:</strong> Turkey is strong, but some Middle East projects are delayed</p>
+            <p><strong>Status:</strong> positive result + risk</p>
+            <p><strong>Action:</strong> support delayed projects and protect timeline</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>3. Core Recognition Language</h2>
+        <span>Small set, high value</span>
+      </div>
+
+      <details open>
+        <summary>Status words</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Purpose</div>
+            <p>
+              These words help Onur quickly understand the condition of a project or region.
+            </p>
+          </div>
+
+          <table class="table">
+            <tr>
+              <th>Word / phrase</th>
+              <th>Meaning in a meeting</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td>On track</td>
+              <td>The project is moving as expected.</td>
+              <td>“The customer trial is still on track for next week.”</td>
+            </tr>
+            <tr>
+              <td>Delayed / behind schedule</td>
+              <td>The timing is later than planned.</td>
+              <td>“The dairy project is delayed because approval is still pending.”</td>
+            </tr>
+            <tr>
+              <td>Blocked</td>
+              <td>The project cannot move forward until something is solved.</td>
+              <td>“The project is blocked until we receive the technical confirmation.”</td>
+            </tr>
+            <tr>
+              <td>Pending</td>
+              <td>Still waiting for a decision, answer, or confirmation.</td>
+              <td>“The customer approval is still pending.”</td>
+            </tr>
+            <tr>
+              <td>At risk</td>
+              <td>There is a possible problem that may affect the result.</td>
+              <td>“The timeline is at risk if we do not confirm the product version this week.”</td>
+            </tr>
+            <tr>
+              <td>Completed</td>
+              <td>The task or project step is finished.</td>
+              <td>“The first trial has been completed.”</td>
+            </tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Business review words</summary>
+        <div class="content">
+          <table class="table">
+            <tr>
+              <th>Word / phrase</th>
+              <th>Meaning in a meeting</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td>Performance</td>
+              <td>How well a region, product, or project is doing.</td>
+              <td>“Regional performance was strong this quarter.”</td>
+            </tr>
+            <tr>
+              <td>Growth</td>
+              <td>An increase in sales, activity, or results.</td>
+              <td>“We saw growth in the Turkey market.”</td>
+            </tr>
+            <tr>
+              <td>Forecast</td>
+              <td>An expectation about future results.</td>
+              <td>“The forecast for next quarter is positive.”</td>
+            </tr>
+            <tr>
+              <td>Target</td>
+              <td>The result the team wants to reach.</td>
+              <td>“We are still below target for this product group.”</td>
+            </tr>
+            <tr>
+              <td>Priority</td>
+              <td>The most important focus area.</td>
+              <td>“Our priority is to support the delayed customer trials.”</td>
+            </tr>
+            <tr>
+              <td>Pipeline</td>
+              <td>Future opportunities or projects being developed.</td>
+              <td>“There are several new opportunities in the project pipeline.”</td>
+            </tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Owner, support, and next-step words</summary>
+        <div class="content">
+          <table class="table">
+            <tr>
+              <th>Word / phrase</th>
+              <th>Meaning in a meeting</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td>Owner</td>
+              <td>The person responsible for an action.</td>
+              <td>“Who is the owner for this follow-up?”</td>
+            </tr>
+            <tr>
+              <td>Follow up</td>
+              <td>Contact someone again or continue an action after the meeting.</td>
+              <td>“I’ll follow up with the sales team after the meeting.”</td>
+            </tr>
+            <tr>
+              <td>Alignment</td>
+              <td>Agreement between people or teams.</td>
+              <td>“We need alignment between sales and the technical team.”</td>
+            </tr>
+            <tr>
+              <td>Support needed</td>
+              <td>Help required from another person or team.</td>
+              <td>“Support is needed from the France product group.”</td>
+            </tr>
+            <tr>
+              <td>Deadline</td>
+              <td>The final date for completing something.</td>
+              <td>“The deadline for the customer update is Friday.”</td>
+            </tr>
+            <tr>
+              <td>Action point</td>
+              <td>A specific task agreed during the meeting.</td>
+              <td>“Let’s confirm the action points before we finish.”</td>
+            </tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Important: recognition before production</summary>
+        <div class="content">
+          <div class="box anchor">
+            <div class="label">Do not memorise everything</div>
+            <p>
+              The first goal is to recognise these words when other people say them.
+            </p>
+            <p>
+              Speaking them naturally comes later. Recognition reduces listening pressure first.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Coach note for student</div>
+            <p>
+              If you hear “blocked,” “pending,” “at risk,” or “behind schedule,” the meeting is probably talking about a problem or delay.
+              If you hear “owner,” “deadline,” “follow up,” or “action point,” the meeting is probably moving toward next steps.
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>4. Listening Signals</h2>
+        <span>What to listen for in fast meetings</span>
+      </div>
+
+      <details open>
+        <summary>Signals for progress</summary>
+        <div class="content">
+          <div class="box model">
+            <div class="label">Common phrases</div>
+            <p class="quote">“So far, the project is on track.”</p>
+            <p class="quote">“The initial feedback has been positive.”</p>
+            <p class="quote">“We have completed the first step.”</p>
+            <p class="quote">“The results are in line with expectations.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">What this usually means</div>
+            <p>
+              The speaker is giving a positive update or confirming that things are moving normally.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Signals for delay or risk</summary>
+        <div class="content">
+          <div class="box model">
+            <div class="label">Common phrases</div>
+            <p class="quote">“However, we are still waiting for approval.”</p>
+            <p class="quote">“The main concern is the timeline.”</p>
+            <p class="quote">“This may affect the next customer trial.”</p>
+            <p class="quote">“There is a risk that we cannot complete this before Friday.”</p>
+            <p class="quote">“The project is currently blocked by the technical confirmation.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">What this usually means</div>
+            <p>
+              The speaker is warning the group about a problem, delay, or dependency.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Signals for action</summary>
+        <div class="content">
+          <div class="box model">
+            <div class="label">Common phrases</div>
+            <p class="quote">“The next step is to confirm the product version.”</p>
+            <p class="quote">“We need someone to follow up with sales.”</p>
+            <p class="quote">“Can we agree who owns this action?”</p>
+            <p class="quote">“Let’s update the customer after we receive confirmation.”</p>
+            <p class="quote">“We should close this point before the next review.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">What this usually means</div>
+            <p>
+              The speaker is moving from discussion to responsibility, timing, and follow-up.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Signals for international colleague communication</summary>
+        <div class="content">
+          <div class="box model">
+            <div class="label">Common phrases</div>
+            <p class="quote">“Could you clarify who is responsible for this area?”</p>
+            <p class="quote">“What is the best way to contact your team?”</p>
+            <p class="quote">“Should I contact you directly, or should I go through the sales manager?”</p>
+            <p class="quote">“Could you help us confirm the technical details?”</p>
+            <p class="quote">“I’ll share the customer context first, then we can discuss the technical question.”</p>
+          </div>
+
+          <div class="box">
+            <div class="label">What this usually means</div>
+            <p>
+              The speaker is clarifying roles, responsibilities, communication channels, or support expectations.
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>5. Short Response Moves</h2>
+        <span>Clear, useful, not over-talking</span>
+      </div>
+
+      <details open>
+        <summary>Check your understanding</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Use when</div>
+            <p>
+              You understood most of the update, but you want to confirm the main point.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model phrases</div>
+            <p class="quote">“Can I quickly check my understanding?”</p>
+            <p class="quote">“So the main point is that the project is delayed because approval is still pending, correct?”</p>
+            <p class="quote">“So we are on track with the sample, but the customer feedback is still open?”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Clarify the status</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Use when</div>
+            <p>
+              You are not sure if the speaker is giving an update, warning about a risk, or asking for a decision.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model phrases</div>
+            <p class="quote">“Are we discussing this as an update, or do we need to make a decision today?”</p>
+            <p class="quote">“Is this project currently blocked, or just slightly delayed?”</p>
+            <p class="quote">“Is the main risk the timeline or the technical confirmation?”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Confirm owner and timing</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Use when</div>
+            <p>
+              The next action is not clear, or several people are involved.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model phrases</div>
+            <p class="quote">“Can we confirm the owner and timing for this action?”</p>
+            <p class="quote">“Who will follow up with the customer after this meeting?”</p>
+            <p class="quote">“Should I check this with the technical team, or will sales handle it?”</p>
+            <p class="quote">“So my action is to confirm the product details and send an update by Friday, correct?”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Ask international colleagues for support</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Use when</div>
+            <p>
+              You need help from another team, region, or technical colleague.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Model phrases</div>
+            <p class="quote">“Could you help me confirm the technical details for this customer request?”</p>
+            <p class="quote">“Could you point me to the right person for this topic?”</p>
+            <p class="quote">“What information do you need from me before you can check this?”</p>
+            <p class="quote">“I can share the customer context first, then we can decide the next step.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Give a short update</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Use when</div>
+            <p>
+              Someone asks Onur to give a quick project or customer update.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Simple update structure</div>
+            <p><strong>1. Current status</strong> — where things are now.</p>
+            <p><strong>2. Main issue</strong> — what is important or difficult.</p>
+            <p><strong>3. Next action</strong> — what happens next.</p>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Model answer</div>
+            <p class="quote">
+              “The customer trial is currently on track. The main open point is the application detail, so I need to confirm the product version with the technical team.
+              After that, I’ll update the sales colleague.”
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>6. Micro-Drills</h2>
+        <span>Recognition before production</span>
+      </div>
+
+      <details open>
+        <summary>Drill 1 — Identify the status</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Task</div>
+            <p>
+              Read each sentence and identify the status: on track, delayed, blocked, pending, at risk, or completed.
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">Sentence 1</div>
+            <p class="quote">“We are still waiting for the customer’s confirmation before we send the next sample.”</p>
+            <p><strong>Status:</strong> pending.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Sentence 2</div>
+            <p class="quote">“The technical team cannot continue until the product version is confirmed.”</p>
+            <p><strong>Status:</strong> blocked.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Sentence 3</div>
+            <p class="quote">“The first trial has finished, and the customer feedback was positive.”</p>
+            <p><strong>Status:</strong> completed / positive update.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Sentence 4</div>
+            <p class="quote">“If we do not receive approval this week, the next customer meeting may move to next month.”</p>
+            <p><strong>Status:</strong> at risk.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Drill 2 — Find the action</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Task</div>
+            <p>
+              For each update, identify the action and owner if possible.
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="label">Update 1</div>
+            <p class="quote">
+              “The customer is asking for more details about the application process, so Onur will check with the technical team and update sales tomorrow.”
+            </p>
+            <p><strong>Action:</strong> Onur checks with the technical team and updates sales tomorrow.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Update 2</div>
+            <p class="quote">
+              “The project is delayed because the customer has not approved the next trial date. Sales will follow up this week.”
+            </p>
+            <p><strong>Action:</strong> Sales follows up this week.</p>
+          </div>
+
+          <div class="box">
+            <div class="label">Update 3</div>
+            <p class="quote">
+              “We need input from France before we reply to the customer.”
+            </p>
+            <p><strong>Action:</strong> Someone needs to contact France, but the owner is unclear.</p>
+            <p><strong>Useful response:</strong> “Can we confirm who will contact the France team?”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Drill 3 — Turn notes into a short update</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Student task</div>
+            <p>
+              Use the notes to produce a short spoken update.
+            </p>
+          </div>
+
+          <div class="note-card">Topic: customer trial
+Status: on track
+Open point: product version
+Action: check technical team, update sales by Friday</div>
+
+          <div class="box model">
+            <div class="label">Strong answer</div>
+            <p class="quote">
+              “The customer trial is on track. The only open point is the product version, so I’ll check with the technical team and update sales by Friday.”
+            </p>
+          </div>
+
+          <div class="note-card">Topic: regional review
+Status: good results in Turkey, delays in some projects
+Risk: timeline
+Action: identify delayed projects and support owners</div>
+
+          <div class="box model">
+            <div class="label">Strong answer</div>
+            <p class="quote">
+              “The regional results are strong in Turkey, but some projects are delayed. The main risk is the timeline, so the next step is to identify which projects need support.”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Drill 4 — Ask the right follow-up question</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Task</div>
+            <p>
+              Choose the best follow-up question for the missing information.
+            </p>
+          </div>
+
+          <div class="grid">
+            <div class="box">
+              <div class="label">Missing owner</div>
+              <p class="quote">“Can we confirm who owns this action?”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Missing timing</div>
+              <p class="quote">“What is the expected timeline for this?”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Missing status</div>
+              <p class="quote">“Is this currently blocked, or just delayed?”</p>
+            </div>
+
+            <div class="box">
+              <div class="label">Missing support</div>
+              <p class="quote">“What support do you need from our side?”</p>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>7. Practice Setup</h2>
+        <span>Student-facing instructions</span>
+      </div>
+
+      <details open>
+        <summary>How the practice works</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Student task</div>
+            <p>
+              Listen to a short project update or regional review moment. Do not try to catch every word.
+            </p>
+            <p>
+              Track only four things:
+            </p>
+
+            <div class="framework">
+              <span class="pill">Topic</span>
+              <span class="pill">Point</span>
+              <span class="pill">Status</span>
+              <span class="pill">Action</span>
+            </div>
+          </div>
+
+          <div class="note-card">Topic:
+Point:
+Status:
+Action:</div>
+
+          <div class="box model">
+            <div class="label">After listening</div>
+            <p>
+              You will produce one short response: a clarification question, a status check, or an action confirmation.
+            </p>
+          </div>
+
+          <div class="box warning">
+            <div class="label">Important</div>
+            <p>
+              The meeting extract is not shown first. This is listening practice, not reading practice.
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Final challenge shape</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">By the end of this lesson</div>
+            <p>Onur should be able to listen to a short update and produce:</p>
+            <ul>
+              <li>one T-P-S-A map</li>
+              <li>one status word</li>
+              <li>one owner/timing question</li>
+              <li>one short spoken update</li>
+            </ul>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong final output</div>
+            <p class="quote">
+              “The project is delayed because customer approval is still pending. The main risk is the timeline.
+              Can we confirm who will follow up with the customer and when?”
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>8. Coach Practice Cards</h2>
+        <span class="coach-badge">Hidden in student view</span>
+      </div>
+
+      <details class="coach-only" open>
+        <summary>Coach note: how to run this section</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Delivery</div>
+            <p>
+              Keep the student-facing map visible. When practising, stop screen sharing or stay in student view.
+              Read each extract aloud. Do not let Onur read first.
+            </p>
+          </div>
+
+          <div class="box coach">
+            <div class="label">Correction focus</div>
+            <p>
+              Correct only what affects comprehension and meeting control:
+              wrong topic, unclear point, missed status, missing owner, missing action, or overlong response.
+            </p>
+          </div>
+
+          <div class="box coach">
+            <div class="label">Prompt sequence</div>
+            <ul>
+              <li>What did you catch?</li>
+              <li>What is the topic?</li>
+              <li>What is the status?</li>
+              <li>What is the action?</li>
+              <li>What short response would you give?</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 1 — Regional business review</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “Overall, the Turkey region performed well this quarter, especially in dairy applications.
+              However, a few customer projects are behind schedule because approval took longer than expected.
+              The priority for next month is to support those delayed projects and protect the customer timeline.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Expected T-P-S-A</div>
+            <p><strong>Topic:</strong> Turkey regional performance / dairy applications.</p>
+            <p><strong>Point:</strong> Results are good, but some customer projects are delayed.</p>
+            <p><strong>Status:</strong> positive result + delay / risk.</p>
+            <p><strong>Action:</strong> support delayed projects and protect timeline.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong student response</div>
+            <p class="quote">
+              “So the regional results are strong, but the main risk is the delay in customer projects. Is that correct?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 2 — Project update with pending approval</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “The sample request is ready from our side, but we are still waiting for the customer’s final approval.
+              If we do not receive confirmation this week, the next trial may need to move to the following month.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Expected answer</div>
+            <p><strong>Topic:</strong> sample request / customer trial.</p>
+            <p><strong>Point:</strong> the team is ready, but customer approval is pending.</p>
+            <p><strong>Status:</strong> pending + timeline risk.</p>
+            <p><strong>Action:</strong> follow up with customer / confirm approval.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong response</div>
+            <p class="quote">
+              “Can we confirm who will follow up with the customer about the approval?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 3 — International colleague support</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “For this customer request, we may need support from the France product group.
+              They have more experience with this application, so before we reply to the customer, we should confirm the technical details with them.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Expected answer</div>
+            <p><strong>Topic:</strong> customer request / France product group support.</p>
+            <p><strong>Point:</strong> France has relevant technical experience.</p>
+            <p><strong>Status:</strong> support needed + clarification.</p>
+            <p><strong>Action:</strong> confirm technical details with France before replying.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong response</div>
+            <p class="quote">
+              “Could you point me to the right person in the France product group for this application?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 4 — Unclear owner</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “The customer needs a technical explanation before they can continue with the next trial.
+              Sales will need support, and the product version should be checked before anything is sent.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Expected answer</div>
+            <p><strong>Topic:</strong> customer technical explanation / next trial.</p>
+            <p><strong>Point:</strong> sales needs support and product version must be checked.</p>
+            <p><strong>Status:</strong> action needed, owner unclear.</p>
+            <p><strong>Action:</strong> confirm who checks product version and supports sales.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong response</div>
+            <p class="quote">
+              “Can we confirm who will check the product version and who will support sales with the explanation?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 5 — Business review with mixed results</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “The region is above target overall, but the performance is not balanced.
+              Turkey is ahead of forecast, while some Middle East projects are still below target.
+              We should understand whether the issue is customer timing, pricing, or technical support.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Expected answer</div>
+            <p><strong>Topic:</strong> regional business performance.</p>
+            <p><strong>Point:</strong> overall result is good, but performance differs by area.</p>
+            <p><strong>Status:</strong> mixed results + analysis needed.</p>
+            <p><strong>Action:</strong> understand whether issue is timing, pricing, or technical support.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong response</div>
+            <p class="quote">
+              “So the region is above target overall, but we need to understand why some projects are below target. Is that right?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 6 — Fast multi-speaker style update</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “The trial is finished.”<br>
+              “Yes, but the customer has not confirmed the next step.”<br>
+              “Sales wants to move quickly.”<br>
+              “The risk is that we send the wrong information too early.”<br>
+              “Okay, then we need technical confirmation before the customer follow-up.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Expected answer</div>
+            <p><strong>Topic:</strong> completed trial / customer follow-up.</p>
+            <p><strong>Point:</strong> trial is done, but next step is not confirmed.</p>
+            <p><strong>Status:</strong> completed + risk + action.</p>
+            <p><strong>Action:</strong> get technical confirmation before customer follow-up.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong response</div>
+            <p class="quote">
+              “So before sales follows up with the customer, we need technical confirmation. Correct?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 7 — International colleague role clarity</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “My team can support technical questions related to product application and troubleshooting.
+              For pricing or commercial terms, you should contact the sales manager.
+              If the question is about customer feedback after a trial, please send us the trial details first.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Expected answer</div>
+            <p><strong>Topic:</strong> colleague role / support area.</p>
+            <p><strong>Point:</strong> technical team handles application/troubleshooting, sales handles pricing.</p>
+            <p><strong>Status:</strong> role clarification.</p>
+            <p><strong>Action:</strong> send trial details before asking about customer feedback.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong response</div>
+            <p class="quote">
+              “Just to confirm, I should contact your team for technical application questions, but contact sales for pricing. Is that correct?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Practice 8 — Priority decision</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “We have two priorities this week. First, we need to close the customer follow-up for the sample request.
+              Second, we need to prepare the regional update for next week’s review.
+              If we cannot finish both, the customer follow-up should come first.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Expected answer</div>
+            <p><strong>Topic:</strong> weekly priorities.</p>
+            <p><strong>Point:</strong> customer follow-up and regional update are both important.</p>
+            <p><strong>Status:</strong> prioritisation / decision.</p>
+            <p><strong>Action:</strong> prioritise customer follow-up if time is limited.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong response</div>
+            <p class="quote">
+              “So if we cannot complete both tasks this week, the customer follow-up is the priority. Correct?”
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>9. Final Work Simulation</h2>
+        <span>Project update + regional review + international coordination</span>
+      </div>
+
+      <details open>
+        <summary>Student-facing final task</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Your task</div>
+            <p>Listen to the full meeting update. Then produce:</p>
+            <ul>
+              <li>T-P-S-A notes</li>
+              <li>one status word</li>
+              <li>one clarification or confirmation question</li>
+              <li>one short spoken summary</li>
+            </ul>
+          </div>
+
+          <div class="note-card">Topic:
+Point:
+Status:
+Action:
+
+Status word:
+Clarification / confirmation question:
+Short spoken summary:</div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Coach-only final simulation extract</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “For the regional review next week, the Turkey results look strong, especially in dairy applications.
+              However, two customer projects are behind schedule because we are still waiting for technical confirmation from the product group.
+              The main risk is the customer timeline. Sales wants to move quickly, but we should not send the wrong product information too early.
+              The next step is for Onur to collect the customer context, contact the technical colleague in France, and update the sales team before Friday.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong target answer</div>
+            <p><strong>Topic:</strong> regional review / Turkey results / delayed customer projects.</p>
+            <p><strong>Point:</strong> Turkey is strong, but two projects are delayed because technical confirmation is still missing.</p>
+            <p><strong>Status:</strong> strong result + delay + timeline risk.</p>
+            <p><strong>Action:</strong> Onur collects customer context, contacts France, and updates sales before Friday.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong clarification / confirmation question</div>
+            <p class="quote">
+              “So my action is to collect the customer context, contact the France technical colleague, and update sales before Friday, correct?”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong spoken summary</div>
+            <p class="quote">
+              “The regional results are strong, but two customer projects are delayed because technical confirmation is still pending.
+              The main risk is the customer timeline. My next step is to contact France with the customer context and update sales before Friday.”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details class="coach-only">
+        <summary>Harder final simulation — mixed accents / fast business review</summary>
+        <div class="content">
+          <div class="box coach">
+            <div class="label">Read aloud</div>
+            <p class="quote">
+              “Let’s quickly review the regional pipeline. Turkey is ahead of forecast, which is positive, but we still have a few open risks.
+              The first risk is timing: some customer trials may move into next month. The second risk is support: sales needs clearer technical input before customer follow-up.
+              For next week, we need to decide which projects need regional support and who will contact the product group.”
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong target answer</div>
+            <p><strong>Topic:</strong> regional pipeline.</p>
+            <p><strong>Point:</strong> Turkey is ahead of forecast, but there are risks around timing and support.</p>
+            <p><strong>Status:</strong> positive result + open risks.</p>
+            <p><strong>Action:</strong> decide which projects need support and who contacts the product group.</p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Strong response</div>
+            <p class="quote">
+              “Can I quickly check my understanding? Turkey is ahead of forecast, but the open risks are customer-trial timing and technical support for sales. Correct?”
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>10. Homework</h2>
+        <span>Use it in one real meeting</span>
+      </div>
+
+      <details open>
+        <summary>Before the next meeting</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Prepare three prediction words</div>
+            <p>
+              Before a project update or regional review, predict three words you may hear.
+            </p>
+
+            <div class="framework">
+              <span class="pill">Delayed</span>
+              <span class="pill">Pending</span>
+              <span class="pill">At risk</span>
+              <span class="pill">Owner</span>
+              <span class="pill">Follow up</span>
+              <span class="pill">Target</span>
+              <span class="pill">Forecast</span>
+              <span class="pill">Support needed</span>
+            </div>
+          </div>
+
+          <div class="box">
+            <div class="label">Prepare your notes template</div>
+            <div class="note-card">Topic:
+Point:
+Status:
+Action:</div>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>During the meeting</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Listen for status first</div>
+            <p>
+              Do not try to write full sentences. Catch status words and action words.
+            </p>
+          </div>
+
+          <div class="note-card">Status words I heard:
+Action words I heard:
+Owner:
+Timing:</div>
+
+          <div class="box model">
+            <div class="label">Useful meeting question</div>
+            <p class="quote">
+              “Can we confirm the owner and timing for this action?”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>After the meeting</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Write a 4-line recap</div>
+            <p>
+              This is faster than rewatching the whole meeting first.
+            </p>
+
+            <div class="note-card">Today we discussed...
+The main point was...
+The status is...
+The next step is...</div>
+          </div>
+
+          <div class="box model">
+            <div class="label">Example</div>
+            <p class="quote">
+              “Today we discussed the regional project pipeline. The main point was that Turkey is ahead of forecast, but some customer trials are delayed.
+              The status is positive overall, with some timing risks. The next step is to identify which projects need support.”
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Optional challenge</summary>
+        <div class="content">
+          <div class="box">
+            <div class="label">Use Copilot more efficiently</div>
+            <p>
+              Instead of rewatching the full meeting, compare your T-P-S-A notes with the Copilot summary.
+            </p>
+          </div>
+
+          <div class="box model">
+            <div class="label">Reflection template</div>
+            <div class="note-card">My notes:
+Topic:
+Point:
+Status:
+Action:
+
+Copilot added:
+I missed:
+Useful word / phrase to remember:</div>
+          </div>
+
+          <div class="box anchor">
+            <div class="label">Goal</div>
+            <p>
+              Use the recap to check your understanding, not to replace your listening.
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>11. Core Language Bank</h2>
+        <span>Project updates, reviews, and colleague coordination</span>
+      </div>
+
+      <details open>
+        <summary>Project status language</summary>
+        <div class="content">
+          <div class="box model">
+            <div class="label">Useful phrases</div>
+            <p class="quote">“The project is on track.”</p>
+            <p class="quote">“The project is currently delayed because...”</p>
+            <p class="quote">“We are still waiting for...”</p>
+            <p class="quote">“The main open point is...”</p>
+            <p class="quote">“The timeline may be affected by...”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Regional business review language</summary>
+        <div class="content">
+          <div class="box model">
+            <div class="label">Useful phrases</div>
+            <p class="quote">“The region performed well overall.”</p>
+            <p class="quote">“Turkey is ahead of forecast.”</p>
+            <p class="quote">“Some projects are still below target.”</p>
+            <p class="quote">“The main risk for next month is...”</p>
+            <p class="quote">“Our priority is to support...”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>International colleague communication</summary>
+        <div class="content">
+          <div class="box model">
+            <div class="label">Useful phrases</div>
+            <p class="quote">“Could you point me to the right person for this topic?”</p>
+            <p class="quote">“Could you help me confirm the technical details?”</p>
+            <p class="quote">“What information do you need from me?”</p>
+            <p class="quote">“Should I contact you directly for this, or go through the sales manager?”</p>
+            <p class="quote">“I’ll share the customer context first.”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Clarifying owner, timing, and action</summary>
+        <div class="content">
+          <div class="box model">
+            <div class="label">Useful phrases</div>
+            <p class="quote">“Can we confirm the owner and timing?”</p>
+            <p class="quote">“Who will follow up after this meeting?”</p>
+            <p class="quote">“What is the expected timeline?”</p>
+            <p class="quote">“So my action is to..., correct?”</p>
+            <p class="quote">“Before we move on, can we confirm the next step?”</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Top five phrases to practise first</summary>
+        <div class="content">
+          <div class="box anchor">
+            <div class="label">Priority phrases</div>
+            <p class="quote">“Can I quickly check my understanding?”</p>
+            <p class="quote">“So the main point is..., correct?”</p>
+            <p class="quote">“Is this project currently blocked, or just delayed?”</p>
+            <p class="quote">“Can we confirm the owner and timing?”</p>
+            <p class="quote">“Could you point me to the right person for this topic?”</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <div class="footer-note">
+      Aptum · Meeting Participation · Compass territory lesson for Onur.
+      Student view hides coach-only practice cards. Use coach mode when preparing or when screen sharing is off.
+    </div>
+
+  </main>
+
+  <script>
+    const searchInput = document.getElementById("search");
+    const coachBtn = document.getElementById("coachBtn");
+
+    function toggleAll(open) {
+      document.querySelectorAll("details").forEach((d) => {
+        if (!document.body.classList.contains("student-view") || !d.classList.contains("coach-only")) {
+          d.open = open;
+        }
+      });
+    }
+
+    function toggleCoachMode() {
+      document.body.classList.toggle("student-view");
+      const isStudent = document.body.classList.contains("student-view");
+      coachBtn.textContent = isStudent ? "Coach mode" : "Student view";
+      coachBtn.classList.toggle("active", !isStudent);
+    }
+
+    searchInput.addEventListener("input", function () {
+      const query = this.value.trim().toLowerCase();
+      const blocks = document.querySelectorAll("details");
+
+      blocks.forEach((block) => {
+        const text = block.innerText.toLowerCase();
+        const match = !query || text.includes(query);
+
+        block.classList.toggle("hidden-by-search", !match);
+
+        if (query && match) {
+          block.open = true;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
